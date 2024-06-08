@@ -46,6 +46,7 @@ C:/Users/aanrr/drone/build/esp-idf/tcp_transport/libtcp_transport.a
 C:/Users/aanrr/drone/build/esp-idf/esp_http_client/libesp_http_client.a
 C:/Users/aanrr/drone/build/esp-idf/esp_http_server/libesp_http_server.a
 C:/Users/aanrr/drone/build/esp-idf/esp_https_ota/libesp_https_ota.a
+C:/Users/aanrr/drone/build/esp-idf/esp_psram/libesp_psram.a
 C:/Users/aanrr/drone/build/esp-idf/esp_lcd/libesp_lcd.a
 C:/Users/aanrr/drone/build/esp-idf/protobuf-c/libprotobuf-c.a
 C:/Users/aanrr/drone/build/esp-idf/protocomm/libprotocomm.a
@@ -62,6 +63,7 @@ C:/Users/aanrr/drone/build/esp-idf/touch_element/libtouch_element.a
 C:/Users/aanrr/drone/build/esp-idf/ulp/libulp.a
 C:/Users/aanrr/drone/build/esp-idf/usb/libusb.a
 C:/Users/aanrr/drone/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
+C:/Users/aanrr/drone/build/esp-idf/espressif__esp32-camera/libespressif__esp32-camera.a
 C:/Users/aanrr/drone/build/esp-idf/main/libmain.a
 C:/Users/aanrr/drone/build/esp-idf/chmorgan__esp-libhelix-mp3/libchmorgan__esp-libhelix-mp3.a
 C:/Users/aanrr/drone/build/esp-idf/espressif__mdns/libespressif__mdns.a
@@ -81,3 +83,6 @@ C:/Users/aanrr/drone/build/esp-idf/espressif__esp_rainmaker/libespressif__esp_ra
 C:/Users/aanrr/drone/build/esp-idf/espressif__qrcode/libespressif__qrcode.a
 C:/Users/aanrr/drone/build/esp-idf/joltwallet__littlefs/libjoltwallet__littlefs.a
 C:/Users/aanrr/drone/build/esp-idf/arduino/libarduino.a
+C:/Users/aanrr/drone/build/esp-idf/camera/libcamera.a
+C:/Users/aanrr/drone/build/esp-idf/controller/libcontroller.a
+C:/Users/aanrr/drone/build/esp-idf/drone_server/libdrone_server.a
