@@ -6,8 +6,6 @@
 #include "WiFi.h"
 #include "nvs_flash.h"
 #include "Arduino.h"
-#include <lwip/sockets.h>
-#include <lwip/netdb.h>
 #include "ai_camera.h"
 
 #define PART_BOUNDARY "123456789000000000000987654321"
@@ -15,7 +13,7 @@ static const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" 
 static const char* _STREAM_BOUNDARY = "\r\n--" PART_BOUNDARY "\r\n";
 static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
 
-#define UDP_PORT 12345
+WiFiServer wifiServer(3333);
 
 esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
     camera_fb_t * fb = NULL;
@@ -80,48 +78,28 @@ esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
     return res;
 }
 
-void udp_task(void *pvParameters) {
-    Serial.println("Starting UDP task");
+void wifi_server_task(void *pvParameters) {
+    Serial.println("Starting Wi-Fi server task...");
 
-    // Create a UDP socket
-    int sock = socket(AF_INET, SOCK_DGRAM, 0);
-    
-    if (sock < 0) {
-        Serial.println("Failed to create socket");
-        vTaskDelete(NULL);
-    }
-
-    // Bind the socket to any IP address and UDP_PORT
-    struct sockaddr_in server_addr;
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_addr.sin_port = htons(UDP_PORT);
-
-    if (bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-        Serial.println("Failed to bind socket");
-        close(sock);
-        vTaskDelete(NULL);
-    }
-
-    char buffer[1024];
-    struct sockaddr_in source_addr;
-    socklen_t source_addr_len = sizeof(source_addr);
+    wifiServer.begin();
     
     while (true) {
-        int len = recvfrom(sock, buffer, sizeof(buffer) - 1, 0, (struct sockaddr *)&source_addr, &source_addr_len);
-        if (len < 0) {
-            Serial.println("Failed to receive data");
-            continue;
+        WiFiClient client = wifiServer.available();
+        if (client) {
+            Serial.println("New client connected");
+            while (client.connected()) {
+                if (client.available()) {
+                    String line = client.readStringUntil('\n');
+                    float x1, y1, x2, y2;
+                    sscanf(line.c_str(), "%f %f %f %f", &x1, &y1, &x2, &y2);
+                    processJoystickData(x1, y1, x2, y2);
+                }
+            }
+            client.stop();
+            Serial.println("Client disconnected");
         }
-        buffer[len] = '\0';
-        float x1, y1, x2, y2;
-        sscanf(buffer, "%f %f %f %f", &x1, &y1, &x2, &y2);
-
-        processJoystickData(x1, y1, x2, y2);
+        delay(10);
     }
-
-    close(sock);
-    vTaskDelete(NULL);
 }
 
 httpd_handle_t server = NULL;
@@ -181,8 +159,8 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     startWiFiServer();
     Serial.println("Wi-Fi server started.");
 
-    // Start UDP task to receive joystick data
-    xTaskCreatePinnedToCore(udp_task, "udpTask", 4096, NULL, 1, NULL, 0);
+    // Start Wi-Fi server task to handle client connections
+    xTaskCreatePinnedToCore(wifi_server_task, "wifiServerTask", 8192, NULL, 1, NULL, 0);
 
     return ESP_OK;
 }
