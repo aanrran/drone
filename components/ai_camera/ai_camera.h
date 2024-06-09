@@ -1,8 +1,9 @@
-#ifndef AICAMERA_H
-#define AICAMERA_H
+#ifndef AI_CAMERA_H
+#define AI_CAMERA_H
+
 #include "esp_err.h"
 
-
+// Function to initialize the camera
 esp_err_t ai_camera_init();
 
-#endif // CAMERA_H
+#endif // AI_CAMERA_H

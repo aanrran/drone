@@ -7,10 +7,12 @@
 // Define a queue to communicate joystick data between tasks
 QueueHandle_t joystickQueue;
 
+// Placeholder PID control function
 void PID_control(float x1, float y1, float x2, float y2) {
     Serial.printf("PID Control: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", x1, y1, x2, y2);
 }
 
+// Controller task function
 void controller_task(void *pvParameters) {
     Serial.println("Controller task started on core 2");
 
@@ -24,6 +26,7 @@ void controller_task(void *pvParameters) {
     }
 }
 
+// Function to start the controller task
 void startControllerTask() {
     // Create a queue to hold joystick data
     joystickQueue = xQueueCreate(10, sizeof(float[4]));
@@ -32,6 +35,7 @@ void startControllerTask() {
     xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 1);
 }
 
+// Function to process joystick data
 void processJoystickData(float x1, float y1, float x2, float y2) {
     // Send joystick data to the queue
     float joystickData[4] = {x1, y1, x2, y2};

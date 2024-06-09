@@ -4,21 +4,9 @@
 #include "WiFi.h"
 #include "nvs_flash.h"
 
+// Wi-Fi credentials
 const char* ssid = "acer1664";
 const char* password = "sdys3.14";
-
-void wifi_task(void *pvParameters) {
-    Serial.println("Starting Wi-Fi task...");
-
-    if (wifi_server_init(ssid, password) != ESP_OK) {
-        Serial.println("Wi-Fi server init failed");
-        vTaskDelete(NULL);  // Delete this task if initialization fails
-    }
-
-    while (true) {
-        delay(10000);
-    }
-}
 
 extern "C" {
     void app_main(void);
@@ -28,10 +16,12 @@ void app_main(void) {
     Serial.begin(115200);
     Serial.println("Starting setup...");
 
-    xTaskCreatePinnedToCore(wifi_task, "wifiTask", 8192, NULL, 1, NULL, 0);  // Create Wi-Fi task on core 0
-    startControllerTask();  // Start the controller task on core 2
+    // Start Wi-Fi task on core 0
+    xTaskCreatePinnedToCore(wifi_task, "wifiTask", 8192, NULL, 1, NULL, 0);
+    // Start the controller task on core 1
+    startControllerTask();
 
     while (true) {
-        delay(10000);
+        delay(10000);  // Keep the main task alive
     }
 }

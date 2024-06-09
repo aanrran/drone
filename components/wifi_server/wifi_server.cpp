@@ -1,7 +1,7 @@
+#include "wifi_server.h"
 #include "esp_http_server.h"
 #include "esp_timer.h"
 #include "esp_camera.h"
-#include "wifi_server.h"
 #include "controller_module.h"
 #include "WiFi.h"
 #include "nvs_flash.h"
@@ -10,13 +10,34 @@
 #include <lwip/netdb.h>
 #include "ai_camera.h"
 
+// HTTP server handle
+httpd_handle_t server = NULL;
+
+// HTTP server configuration
 #define PART_BOUNDARY "123456789000000000000987654321"
 static const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;
 static const char* _STREAM_BOUNDARY = "\r\n--" PART_BOUNDARY "\r\n";
 static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
 
+// TCP server port for receiving joystick data
 #define TCP_PORT 3333
 
+// Wi-Fi task function
+void wifi_task(void *pvParameters) {
+    Serial.println("Starting Wi-Fi task...");
+
+    // Initialize Wi-Fi server
+    if (wifi_server_init("acer1664", "sdys3.14") != ESP_OK) {
+        Serial.println("Wi-Fi server init failed");
+        vTaskDelete(NULL);  // Delete this task if initialization fails
+    }
+
+    while (true) {
+        delay(10000);
+    }
+}
+
+// HTTP handler for streaming JPEG frames
 esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
     camera_fb_t * fb = NULL;
     esp_err_t res = ESP_OK;
@@ -80,6 +101,7 @@ esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
     return res;
 }
 
+// TCP task function to receive joystick data
 void tcp_task(void *pvParameters) {
     Serial.println("Starting TCP task");
 
@@ -116,12 +138,12 @@ void tcp_task(void *pvParameters) {
         vTaskDelete(NULL);
     }
 
-    char buffer[1024];
+    char buffer[128];
     while (true) {
         int len = recv(client_sock, buffer, sizeof(buffer) - 1, 0);
         if (len < 0) {
             Serial.println("Failed to receive data");
-            continue;
+            break;
         }
         buffer[len] = '\0';
         float x1, y1, x2, y2;
@@ -135,8 +157,7 @@ void tcp_task(void *pvParameters) {
     vTaskDelete(NULL);
 }
 
-httpd_handle_t server = NULL;
-
+// Function to start the HTTP server for streaming
 void startWiFiServer() {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.stack_size = 8192;
@@ -162,6 +183,7 @@ void startWiFiServer() {
     }
 }
 
+// Function to initialize the Wi-Fi server
 esp_err_t wifi_server_init(const char* ssid, const char* password) {
     Serial.println("Starting Wi-Fi server...");
 
@@ -173,11 +195,13 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     }
     ESP_ERROR_CHECK(ret);
 
+    // Initialize the camera
     if (ai_camera_init() != ESP_OK) {
         Serial.println("Camera init failed");
         return ESP_FAIL;
     }
 
+    // Connect to Wi-Fi
     Serial.println("Connecting to Wi-Fi...");
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
@@ -189,6 +213,7 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
 
+    // Start the HTTP server
     startWiFiServer();
     Serial.println("Wi-Fi server started.");
 

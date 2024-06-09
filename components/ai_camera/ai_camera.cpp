@@ -3,6 +3,7 @@
 #include "ai_camera.h"
 #include "driver/i2c.h"  // Include the header for I2C
 
+// Camera pin configuration for ESP32-S3
 #define PWDN_GPIO_NUM    -1
 #define RESET_GPIO_NUM   -1
 #define XCLK_GPIO_NUM    15
@@ -20,6 +21,7 @@
 #define HREF_GPIO_NUM    7
 #define PCLK_GPIO_NUM    13
 
+// Camera configuration structure
 static camera_config_t camera_config = {
     .pin_pwdn = PWDN_GPIO_NUM,
     .pin_reset = RESET_GPIO_NUM,
@@ -49,14 +51,17 @@ static camera_config_t camera_config = {
     .sccb_i2c_port = I2C_NUM_0
 };
 
+// Function to initialize the camera
 esp_err_t ai_camera_init() {
     Serial.println("Initializing camera...");
 
+    // Power up the camera if needed
     if (PWDN_GPIO_NUM != -1) {
         pinMode(PWDN_GPIO_NUM, OUTPUT);
         digitalWrite(PWDN_GPIO_NUM, LOW);
     }
 
+    // Initialize the camera with the configuration
     esp_err_t err = esp_camera_init(&camera_config);
     if (err != ESP_OK) {
         Serial.printf("Camera Init Failed with error 0x%x", err);
