@@ -7,5 +7,5 @@ cmake_minimum_required(VERSION 3.16)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(drone)
 set(EXTRA_COMPONENT_DIRS components)
-# set(PARTITION_TABLE_CUSTOM rzo_partitions.csv)
+set(PARTITION_TABLE_CUSTOM rzo_partitions.csv)
 

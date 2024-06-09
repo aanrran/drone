@@ -22,7 +22,12 @@ static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %
 // TCP server port for receiving joystick data
 #define TCP_PORT 3333
 
-// Wi-Fi task function
+/**
+ * @brief Wi-Fi task function
+ * Initializes the Wi-Fi server and keeps the task alive.
+ * 
+ * @param pvParameters Task parameters (not used).
+ */
 void wifi_task(void *pvParameters) {
     Serial.println("Starting Wi-Fi task...");
 
@@ -37,8 +42,15 @@ void wifi_task(void *pvParameters) {
     }
 }
 
-// HTTP handler for streaming JPEG frames
-esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
+/**
+ * @brief HTTP handler for streaming JPEG frames
+ * Streams the camera feed as a series of JPEG images.
+ * 
+ * @param req Pointer to the HTTP request.
+ * 
+ * @return esp_err_t Returns ESP_OK on success, otherwise returns an error code.
+ */
+esp_err_t IRAM_ATTR  jpg_stream_httpd_handler(httpd_req_t *req) {
     camera_fb_t * fb = NULL;
     esp_err_t res = ESP_OK;
     size_t _jpg_buf_len;
@@ -101,8 +113,13 @@ esp_err_t jpg_stream_httpd_handler(httpd_req_t *req) {
     return res;
 }
 
-// TCP task function to receive joystick data
-void tcp_task(void *pvParameters) {
+/**
+ * @brief TCP task function to receive joystick data
+ * Sets up a TCP server to receive joystick data and processes it.
+ * 
+ * @param pvParameters Task parameters (not used).
+ */
+void IRAM_ATTR tcp_task(void *pvParameters) {
     Serial.println("Starting TCP task");
 
     // Create a TCP socket
@@ -157,7 +174,10 @@ void tcp_task(void *pvParameters) {
     vTaskDelete(NULL);
 }
 
-// Function to start the HTTP server for streaming
+/**
+ * @brief Function to start the HTTP server for streaming
+ * Configures and starts the HTTP server to stream JPEG frames from the camera.
+ */
 void startWiFiServer() {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.stack_size = 8192;
@@ -183,7 +203,15 @@ void startWiFiServer() {
     }
 }
 
-// Function to initialize the Wi-Fi server
+/**
+ * @brief Function to initialize the Wi-Fi server
+ * Initializes the Wi-Fi connection, camera, and starts the HTTP and TCP servers.
+ * 
+ * @param ssid Wi-Fi SSID.
+ * @param password Wi-Fi password.
+ * 
+ * @return esp_err_t Returns ESP_OK on success, otherwise returns an error code.
+ */
 esp_err_t wifi_server_init(const char* ssid, const char* password) {
     Serial.println("Starting Wi-Fi server...");
 

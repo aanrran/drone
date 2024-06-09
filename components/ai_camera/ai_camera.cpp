@@ -39,19 +39,34 @@ static camera_config_t camera_config = {
     .pin_vsync = VSYNC_GPIO_NUM,
     .pin_href = HREF_GPIO_NUM,
     .pin_pclk = PCLK_GPIO_NUM,
-    .xclk_freq_hz = 20000000,
+    .xclk_freq_hz = 5000000,
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
     .pixel_format = PIXFORMAT_JPEG,
     .frame_size = FRAMESIZE_VGA,  // Lower the resolution to VGA
-    .jpeg_quality = 20,  // Increase JPEG quality to reduce the size
-    .fb_count = 2,
+    /*
+    The frame size can be set to one of these options:
+        FRAMESIZE_UXGA (1600 x 1200)
+        FRAMESIZE_QVGA (320 x 240)
+        FRAMESIZE_CIF (352 x 288)
+        FRAMESIZE_VGA (640 x 480)
+        FRAMESIZE_SVGA (800 x 600)
+        FRAMESIZE_XGA (1024 x 768)
+        FRAMESIZE_SXGA (1280 x 1024)
+    */
+    .jpeg_quality = 30,  // Increase JPEG quality to reduce the size
+    .fb_count = 4,
     .fb_location = CAMERA_FB_IN_PSRAM,
     .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
     .sccb_i2c_port = I2C_NUM_0
 };
 
-// Function to initialize the camera
+/**
+ * @brief Function to initialize the camera
+ * Configures and initializes the camera module with the specified settings.
+ * 
+ * @return esp_err_t Returns ESP_OK on success, otherwise returns an error code.
+ */
 esp_err_t ai_camera_init() {
     Serial.println("Initializing camera...");
 

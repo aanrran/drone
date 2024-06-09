@@ -12,6 +12,10 @@ extern "C" {
     void app_main(void);
 }
 
+/**
+ * @brief Application entry point
+ * Initializes the serial communication, starts Wi-Fi and controller tasks, and keeps the main task alive.
+ */
 void app_main(void) {
     Serial.begin(115200);
     Serial.println("Starting setup...");

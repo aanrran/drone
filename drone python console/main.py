@@ -6,7 +6,6 @@ import tkinter as tk
 import socket
 from threading import Thread
 
-
 class VideoStreamApp:
     def __init__(self, master, stream_url, tcp_ip, tcp_port):
         self.master = master
