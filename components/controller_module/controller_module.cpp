@@ -20,10 +20,7 @@ void controller_task(void *pvParameters) {
         // Wait for joystick data from the queue
         if (xQueueReceive(joystickQueue, &joystickData, portMAX_DELAY)) {
             PID_control(joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
-        } else {
-            Serial.printf("no joystick data received");
         }
-        delay(1000);
     }
 }
 
