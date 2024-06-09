@@ -800,10 +800,10 @@ C:/Users/aanrr/drone/build/esp-idf/controller/CMakeFiles/list_install_components
 C:/Users/aanrr/drone/build/esp-idf/controller/CMakeFiles/install.dir
 C:/Users/aanrr/drone/build/esp-idf/controller/CMakeFiles/install/local.dir
 C:/Users/aanrr/drone/build/esp-idf/controller/CMakeFiles/install/strip.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/__idf_drone_server.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/edit_cache.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/rebuild_cache.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/list_install_components.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/install.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/install/local.dir
-C:/Users/aanrr/drone/build/esp-idf/drone_server/CMakeFiles/install/strip.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/__idf_wifi_server.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/edit_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/rebuild_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/list_install_components.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/install.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/install/local.dir
+C:/Users/aanrr/drone/build/esp-idf/wifi_server/CMakeFiles/install/strip.dir

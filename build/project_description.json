@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "drone",
-    "project_version":    "e9c3779c-dirty",
+    "project_version":    "be4a6b46-dirty",
     "project_path":       "C:/Users/aanrr/drone",
     "idf_path":           "C:/Users/aanrr/esp/v5.1.4/esp-idf",
     "build_dir":          "C:/Users/aanrr/drone/build",
@@ -21,12 +21,12 @@
     "monitor_toolprefix": "xtensa-esp32s3-elf-",
     "c_compiler":         "C:/esp/tools/Espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-gcc.exe",
     "config_environment" : {
-        "COMPONENT_KCONFIGS" : "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_trace/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bt/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/efuse/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp-tls/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_adc/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_coex/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_common/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_eth/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_event/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_gdbstub/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_client/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_server/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_ota/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_server/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hw_support/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_lcd/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_partition/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_phy/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_pm/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_psram/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_ringbuf/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_system/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_timer/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_wifi/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/espcoredump/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/fatfs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/freertos/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/hal/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/heap/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ieee802154/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/log/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/lwip/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mbedtls/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mqtt/esp-mqtt/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/newlib/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/nvs_flash/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/openthread/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protocomm/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/pthread/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/soc/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spi_flash/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spiffs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/tcp_transport/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ulp/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/unity/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/usb/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/vfs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wear_levelling/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__jsmn/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp32-camera/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__mdns/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_modem/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_insights/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp-dsp/Kconfig;C:/Users/aanrr/drone/managed_components/joltwallet__littlefs/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__rmaker_common/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_diag_data_store/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr/Kconfig",
-        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_app_format/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_rom/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esptool_py/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/partition_table/Kconfig.projbuild;C:/Users/aanrr/drone/components/arduino/Kconfig.projbuild;C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker/Kconfig.projbuild;C:/Users/aanrr/drone/managed_components/espressif__esp-sr/Kconfig.projbuild"
+        "COMPONENT_KCONFIGS" : "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_trace/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bt/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/efuse/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp-tls/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_adc/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_coex/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_common/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_eth/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_event/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_gdbstub/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_client/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_server/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_ota/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_server/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hw_support/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_lcd/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_partition/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_phy/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_pm/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_psram/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_ringbuf/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_system/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_timer/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_wifi/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/espcoredump/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/fatfs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/freertos/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/hal/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/heap/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ieee802154/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/log/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/lwip/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mbedtls/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mqtt/esp-mqtt/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/newlib/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/nvs_flash/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/openthread/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protocomm/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/pthread/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/soc/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spi_flash/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spiffs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/tcp_transport/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ulp/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/unity/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/usb/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/vfs/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wear_levelling/Kconfig;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib/Kconfig;C:/Users/aanrr/drone/managed_components/joltwallet__littlefs/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__mdns/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp32-camera/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_modem/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__rmaker_common/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_diag_data_store/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp-dsp/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__jsmn/Kconfig;C:/Users/aanrr/drone/managed_components/espressif__esp_insights/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_app_format/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_rom/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esptool_py/Kconfig.projbuild;C:/Users/aanrr/esp/v5.1.4/esp-idf/components/partition_table/Kconfig.projbuild;C:/Users/aanrr/drone/components/arduino/Kconfig.projbuild;C:/Users/aanrr/drone/managed_components/espressif__esp-sr/Kconfig.projbuild;C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker/Kconfig.projbuild"
     },
     "common_component_reqs": [ "cxx", "newlib", "freertos", "esp_hw_support", "heap", "log", "soc", "hal", "esp_rom", "esp_common", "esp_system", "xtensa" ],
-    "build_components" : [ "app_trace", "app_update", "arduino", "bootloader", "bootloader_support", "bt", "camera", "chmorgan__esp-libhelix-mp3", "cmock", "console", "controller", "cxx", "driver", "drone_server", "efuse", "esp-tls", "esp_adc", "esp_app_format", "esp_coex", "esp_common", "esp_eth", "esp_event", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_system", "esp_timer", "esp_wifi", "espcoredump", "espressif__cbor", "espressif__esp-dsp", "espressif__esp-sr", "espressif__esp-zboss-lib", "espressif__esp-zigbee-lib", "espressif__esp32-camera", "espressif__esp_diag_data_store", "espressif__esp_diagnostics", "espressif__esp_insights", "espressif__esp_modem", "espressif__esp_rainmaker", "espressif__esp_schedule", "espressif__esp_secure_cert_mgr", "espressif__jsmn", "espressif__json_generator", "espressif__json_parser", "espressif__mdns", "espressif__qrcode", "espressif__rmaker_common", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "joltwallet__littlefs", "json", "log", "lwip", "main", "mbedtls", "mqtt", "newlib", "nvs_flash", "openthread", "partition_table", "perfmon", "protobuf-c", "protocomm", "pthread", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "touch_element", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wpa_supplicant", "xtensa", "" ],
-    "build_component_paths" : [ "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_trace", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_update", "C:/Users/aanrr/drone/components/arduino", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader_support", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bt", "C:/Users/aanrr/drone/components/camera", "C:/Users/aanrr/drone/managed_components/chmorgan__esp-libhelix-mp3", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/cmock", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/console", "C:/Users/aanrr/drone/components/controller", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/cxx", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver", "C:/Users/aanrr/drone/components/drone_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/efuse", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp-tls", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_adc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_app_format", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_coex", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_common", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_eth", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_event", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_gdbstub", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hid", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_client", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_ota", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hw_support", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_lcd", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_local_ctrl", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_mm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif_stack", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_partition", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_phy", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_pm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_psram", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_ringbuf", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_rom", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_system", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_timer", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_wifi", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/espcoredump", "C:/Users/aanrr/drone/managed_components/espressif__cbor", "C:/Users/aanrr/drone/managed_components/espressif__esp-dsp", "C:/Users/aanrr/drone/managed_components/espressif__esp-sr", "C:/Users/aanrr/drone/managed_components/espressif__esp-zboss-lib", "C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib", "C:/Users/aanrr/drone/managed_components/espressif__esp32-camera", "C:/Users/aanrr/drone/managed_components/espressif__esp_diag_data_store", "C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics", "C:/Users/aanrr/drone/managed_components/espressif__esp_insights", "C:/Users/aanrr/drone/managed_components/espressif__esp_modem", "C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker", "C:/Users/aanrr/drone/managed_components/espressif__esp_schedule", "C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr", "C:/Users/aanrr/drone/managed_components/espressif__jsmn", "C:/Users/aanrr/drone/managed_components/espressif__json_generator", "C:/Users/aanrr/drone/managed_components/espressif__json_parser", "C:/Users/aanrr/drone/managed_components/espressif__mdns", "C:/Users/aanrr/drone/managed_components/espressif__qrcode", "C:/Users/aanrr/drone/managed_components/espressif__rmaker_common", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esptool_py", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/fatfs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/freertos", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/hal", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/heap", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/http_parser", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/idf_test", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ieee802154", "C:/Users/aanrr/drone/managed_components/joltwallet__littlefs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/json", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/log", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/lwip", "C:/Users/aanrr/drone/main", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mbedtls", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mqtt", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/newlib", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/nvs_flash", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/openthread", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/partition_table", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/perfmon", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protobuf-c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protocomm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/pthread", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/sdmmc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/soc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spi_flash", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spiffs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/tcp_transport", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/touch_element", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ulp", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/unity", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/usb", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/vfs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wear_levelling", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wpa_supplicant", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/xtensa", "" ],
+    "build_components" : [ "app_trace", "app_update", "arduino", "bootloader", "bootloader_support", "bt", "camera", "chmorgan__esp-libhelix-mp3", "cmock", "console", "controller", "cxx", "driver", "efuse", "esp-tls", "esp_adc", "esp_app_format", "esp_coex", "esp_common", "esp_eth", "esp_event", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_system", "esp_timer", "esp_wifi", "espcoredump", "espressif__cbor", "espressif__esp-dsp", "espressif__esp-sr", "espressif__esp-zboss-lib", "espressif__esp-zigbee-lib", "espressif__esp32-camera", "espressif__esp_diag_data_store", "espressif__esp_diagnostics", "espressif__esp_insights", "espressif__esp_modem", "espressif__esp_rainmaker", "espressif__esp_schedule", "espressif__esp_secure_cert_mgr", "espressif__jsmn", "espressif__json_generator", "espressif__json_parser", "espressif__mdns", "espressif__qrcode", "espressif__rmaker_common", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "joltwallet__littlefs", "json", "log", "lwip", "main", "mbedtls", "mqtt", "newlib", "nvs_flash", "openthread", "partition_table", "perfmon", "protobuf-c", "protocomm", "pthread", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "touch_element", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wifi_server", "wpa_supplicant", "xtensa", "" ],
+    "build_component_paths" : [ "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_trace", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/app_update", "C:/Users/aanrr/drone/components/arduino", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bootloader_support", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/bt", "C:/Users/aanrr/drone/components/camera", "C:/Users/aanrr/drone/managed_components/chmorgan__esp-libhelix-mp3", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/cmock", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/console", "C:/Users/aanrr/drone/components/controller", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/cxx", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/efuse", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp-tls", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_adc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_app_format", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_coex", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_common", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_eth", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_event", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_gdbstub", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hid", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_client", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_http_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_ota", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_https_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_hw_support", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_lcd", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_local_ctrl", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_mm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_netif_stack", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_partition", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_phy", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_pm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_psram", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_ringbuf", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_rom", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_system", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_timer", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esp_wifi", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/espcoredump", "C:/Users/aanrr/drone/managed_components/espressif__cbor", "C:/Users/aanrr/drone/managed_components/espressif__esp-dsp", "C:/Users/aanrr/drone/managed_components/espressif__esp-sr", "C:/Users/aanrr/drone/managed_components/espressif__esp-zboss-lib", "C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib", "C:/Users/aanrr/drone/managed_components/espressif__esp32-camera", "C:/Users/aanrr/drone/managed_components/espressif__esp_diag_data_store", "C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics", "C:/Users/aanrr/drone/managed_components/espressif__esp_insights", "C:/Users/aanrr/drone/managed_components/espressif__esp_modem", "C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker", "C:/Users/aanrr/drone/managed_components/espressif__esp_schedule", "C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr", "C:/Users/aanrr/drone/managed_components/espressif__jsmn", "C:/Users/aanrr/drone/managed_components/espressif__json_generator", "C:/Users/aanrr/drone/managed_components/espressif__json_parser", "C:/Users/aanrr/drone/managed_components/espressif__mdns", "C:/Users/aanrr/drone/managed_components/espressif__qrcode", "C:/Users/aanrr/drone/managed_components/espressif__rmaker_common", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/esptool_py", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/fatfs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/freertos", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/hal", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/heap", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/http_parser", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/idf_test", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ieee802154", "C:/Users/aanrr/drone/managed_components/joltwallet__littlefs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/json", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/log", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/lwip", "C:/Users/aanrr/drone/main", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mbedtls", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/mqtt", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/newlib", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/nvs_flash", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/openthread", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/partition_table", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/perfmon", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protobuf-c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/protocomm", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/pthread", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/sdmmc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/soc", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spi_flash", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/spiffs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/tcp_transport", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/touch_element", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/ulp", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/unity", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/usb", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/vfs", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wear_levelling", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning", "C:/Users/aanrr/drone/components/wifi_server", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wpa_supplicant", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/xtensa", "" ],
     "build_component_info" : {
         "app_trace": {
             "alias": "idf::app_trace",
@@ -222,21 +222,6 @@
             "file": "C:/Users/aanrr/drone/build/esp-idf/driver/libdriver.a",
             "sources": [ "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gpio/gpio.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gpio/gpio_glitch_filter_ops.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gpio/rtc_io.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/spi_bus_lock.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/adc_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/adc_dma_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gpio/dedic_gpio.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gpio/gpio_pin_glitch_filter.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gptimer/gptimer.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/gptimer/gptimer_priv.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/timer_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/i2c/i2c.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/i2s/i2s_common.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/i2s/i2s_std.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/i2s_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/i2s/i2s_pdm.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/i2s/i2s_tdm.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/ledc/ledc.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_cap.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_cmpr.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_com.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_fault.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_gen.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_oper.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_sync.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/mcpwm/mcpwm_timer.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/mcpwm_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/pcnt/pulse_cnt.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/pcnt_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/rmt/rmt_common.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/rmt/rmt_encoder.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/rmt/rmt_rx.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/rmt/rmt_tx.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/rmt_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/sdmmc/sdmmc_transaction.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/sdmmc/sdmmc_host.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/sigma_delta/sdm.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/sigma_delta_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/gpspi/spi_common.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/gpspi/spi_master.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/gpspi/spi_slave.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/sdspi/sdspi_crc.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/sdspi/sdspi_host.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/sdspi/sdspi_transaction.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/spi/gpspi/spi_slave_hd.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/temperature_sensor/temperature_sensor.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/deprecated/rtc_temperature_legacy.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/touch_sensor/touch_sensor_common.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/touch_sensor/esp32s3/touch_sensor.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/twai/twai.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/uart/uart.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/usb_serial_jtag/usb_serial_jtag.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/driver/usb_serial_jtag/usb_serial_jtag_connection_monitor.c" ],
             "include_dirs": [ "include", "deprecated", "analog_comparator/include", "dac/include", "gpio/include", "gptimer/include", "i2c/include", "i2s/include", "ledc/include", "mcpwm/include", "parlio/include", "pcnt/include", "rmt/include", "sdio_slave/include", "sdmmc/include", "sigma_delta/include", "spi/include", "temperature_sensor/include", "touch_sensor/include", "twai/include", "uart/include", "usb_serial_jtag/include", "touch_sensor/esp32s3/include" ]
-        },
-        "drone_server": {
-            "alias": "idf::drone_server",
-            "target": "___idf_drone_server",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/components/drone_server",
-            "type": "LIBRARY",
-            "lib": "__idf_drone_server",
-            "reqs": [ "esp_wifi", "nvs_flash", "esp_http_server", "camera", "espressif__esp32-camera" ],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "file": "C:/Users/aanrr/drone/build/esp-idf/drone_server/libdrone_server.a",
-            "sources": [ "C:/Users/aanrr/drone/components/drone_server/drone_server.cpp" ],
-            "include_dirs": [ "../controller", "." ]
         },
         "efuse": {
             "alias": "idf::efuse",
@@ -1498,6 +1483,21 @@
             "sources": [ "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/wifi_config.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/wifi_scan.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/wifi_ctrl.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/manager.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/handlers.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/scheme_console.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/proto-c/wifi_config.pb-c.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/proto-c/wifi_scan.pb-c.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/proto-c/wifi_ctrl.pb-c.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/proto-c/wifi_constants.pb-c.c", "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/wifi_provisioning/src/scheme_softap.c" ],
             "include_dirs": [ "include" ]
         },
+        "wifi_server": {
+            "alias": "idf::wifi_server",
+            "target": "___idf_wifi_server",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/components/wifi_server",
+            "type": "LIBRARY",
+            "lib": "__idf_wifi_server",
+            "reqs": [ "esp_wifi", "nvs_flash", "esp_http_server", "camera", "espressif__esp32-camera" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/Users/aanrr/drone/build/esp-idf/wifi_server/libwifi_server.a",
+            "sources": [ "C:/Users/aanrr/drone/components/wifi_server/wifi_server.cpp" ],
+            "include_dirs": [ "../controller", "." ]
+        },
         "wpa_supplicant": {
             "alias": "idf::wpa_supplicant",
             "target": "___idf_wpa_supplicant",
@@ -2490,25 +2490,109 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "." ]
         },
-        "drone_server": {
-            "alias": "idf::drone_server",
-            "target": "___idf_drone_server",
+        "wifi_server": {
+            "alias": "idf::wifi_server",
+            "target": "___idf_wifi_server",
             "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/components/drone_server",
-            "lib": "__idf_drone_server",
+            "dir": "C:/Users/aanrr/drone/components/wifi_server",
+            "lib": "__idf_wifi_server",
             "reqs": [ "esp_wifi", "nvs_flash", "esp_http_server", "camera", "espressif__esp32-camera" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "../controller", "." ]
         },
-        "espressif__jsmn": {
-            "alias": "idf::espressif__jsmn",
-            "target": "___idf_espressif__jsmn",
+        "espressif__esp-zigbee-lib": {
+            "alias": "idf::espressif__esp-zigbee-lib",
+            "target": "___idf_espressif__esp-zigbee-lib",
             "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__jsmn",
-            "lib": "__idf_espressif__jsmn",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib",
+            "lib": "__idf_espressif__esp-zigbee-lib",
             "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__esp_schedule": {
+            "alias": "idf::espressif__esp_schedule",
+            "target": "___idf_espressif__esp_schedule",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_schedule",
+            "lib": "__idf_espressif__esp_schedule",
+            "reqs": [ "nvs_flash" ],
+            "priv_reqs": [ "espressif__rmaker_common" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "espressif__rmaker_common" ],
+            "include_dirs": [ "include" ]
+        },
+        "joltwallet__littlefs": {
+            "alias": "idf::joltwallet__littlefs",
+            "target": "___idf_joltwallet__littlefs",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/joltwallet__littlefs",
+            "lib": "__idf_joltwallet__littlefs",
+            "reqs": [ "esp_partition" ],
+            "priv_reqs": [ "esptool_py", "spi_flash", "vfs", "sdmmc" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "chmorgan__esp-libhelix-mp3": {
+            "alias": "idf::chmorgan__esp-libhelix-mp3",
+            "target": "___idf_chmorgan__esp-libhelix-mp3",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/chmorgan__esp-libhelix-mp3",
+            "lib": "__idf_chmorgan__esp-libhelix-mp3",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "libhelix-mp3/pub" ]
+        },
+        "espressif__mdns": {
+            "alias": "idf::espressif__mdns",
+            "target": "___idf_espressif__mdns",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__mdns",
+            "lib": "__idf_espressif__mdns",
+            "reqs": [ "lwip", "console", "esp_netif" ],
+            "priv_reqs": [ "esp_timer", "esp_wifi" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__cbor": {
+            "alias": "idf::espressif__cbor",
+            "target": "___idf_espressif__cbor",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__cbor",
+            "lib": "__idf_espressif__cbor",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "port/include" ]
+        },
+        "espressif__esp32-camera": {
+            "alias": "idf::espressif__esp32-camera",
+            "target": "___idf_espressif__esp32-camera",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp32-camera",
+            "lib": "__idf_espressif__esp32-camera",
+            "reqs": [ "driver" ],
+            "priv_reqs": [ "freertos", "nvs_flash", "esp_timer" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "driver/include", "conversions/include" ]
+        },
+        "espressif__esp_secure_cert_mgr": {
+            "alias": "idf::espressif__esp_secure_cert_mgr",
+            "target": "___idf_espressif__esp_secure_cert_mgr",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr",
+            "lib": "__idf_espressif__esp_secure_cert_mgr",
+            "reqs": [ "spi_flash", "mbedtls", "nvs_flash", "efuse" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
@@ -2526,78 +2610,6 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },
-        "espressif__esp32-camera": {
-            "alias": "idf::espressif__esp32-camera",
-            "target": "___idf_espressif__esp32-camera",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp32-camera",
-            "lib": "__idf_espressif__esp32-camera",
-            "reqs": [ "driver" ],
-            "priv_reqs": [ "freertos", "nvs_flash", "esp_timer" ],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "driver/include", "conversions/include" ]
-        },
-        "espressif__esp_diagnostics": {
-            "alias": "idf::espressif__esp_diagnostics",
-            "target": "___idf_espressif__esp_diagnostics",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics",
-            "lib": "__idf_espressif__esp_diagnostics",
-            "reqs": [],
-            "priv_reqs": [ "freertos", "app_update", "espressif__rmaker_common", "esp_hw_support", "esp_wifi", "esp_event" ],
-            "managed_reqs": [],
-            "managed_priv_reqs": [ "espressif__rmaker_common" ],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__esp-zigbee-lib": {
-            "alias": "idf::espressif__esp-zigbee-lib",
-            "target": "___idf_espressif__esp-zigbee-lib",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-zigbee-lib",
-            "lib": "__idf_espressif__esp-zigbee-lib",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__mdns": {
-            "alias": "idf::espressif__mdns",
-            "target": "___idf_espressif__mdns",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__mdns",
-            "lib": "__idf_espressif__mdns",
-            "reqs": [ "lwip", "console", "esp_netif" ],
-            "priv_reqs": [ "esp_timer", "esp_wifi" ],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__json_generator": {
-            "alias": "idf::espressif__json_generator",
-            "target": "___idf_espressif__json_generator",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__json_generator",
-            "lib": "__idf_espressif__json_generator",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "include" ]
-        },
-        "chmorgan__esp-libhelix-mp3": {
-            "alias": "idf::chmorgan__esp-libhelix-mp3",
-            "target": "___idf_chmorgan__esp-libhelix-mp3",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/chmorgan__esp-libhelix-mp3",
-            "lib": "__idf_chmorgan__esp-libhelix-mp3",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "libhelix-mp3/pub" ]
-        },
         "espressif__esp_modem": {
             "alias": "idf::espressif__esp_modem",
             "target": "___idf_espressif__esp_modem",
@@ -2606,54 +2618,6 @@
             "lib": "__idf_espressif__esp_modem",
             "reqs": [ "driver", "esp_event", "esp_netif" ],
             "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__esp_rainmaker": {
-            "alias": "idf::espressif__esp_rainmaker",
-            "target": "___idf_espressif__esp_rainmaker",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker",
-            "lib": "__idf_espressif__esp_rainmaker",
-            "reqs": [ "espressif__rmaker_common" ],
-            "priv_reqs": [ "protobuf-c", "espressif__json_parser", "espressif__json_generator", "wifi_provisioning", "nvs_flash", "esp_http_client", "app_update", "esp-tls", "mbedtls", "esp_https_ota", "console", "esp_local_ctrl", "esp_https_server", "espressif__mdns", "espressif__esp_schedule", "efuse", "driver", "espressif__rmaker_common", "espressif__esp_secure_cert_mgr" ],
-            "managed_reqs": [],
-            "managed_priv_reqs": [ "espressif__esp_schedule", "espressif__esp_secure_cert_mgr", "espressif__json_generator", "espressif__json_parser", "espressif__mdns", "espressif__rmaker_common" ],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__esp_insights": {
-            "alias": "idf::espressif__esp_insights",
-            "target": "___idf_espressif__esp_insights",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_insights",
-            "lib": "__idf_espressif__esp_insights",
-            "reqs": [ "espressif__esp_diagnostics" ],
-            "priv_reqs": [ "espressif__cbor", "espressif__rmaker_common", "esptool_py", "espcoredump", "espressif__esp_diag_data_store", "nvs_flash", "esp_timer", "esp_hw_support", "esp_wifi", "espressif__esp_diagnostics" ],
-            "managed_reqs": [],
-            "managed_priv_reqs": [ "espressif__cbor", "espressif__esp_diag_data_store", "espressif__esp_diagnostics", "espressif__rmaker_common" ],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__esp-dsp": {
-            "alias": "idf::espressif__esp-dsp",
-            "target": "___idf_espressif__esp-dsp",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-dsp",
-            "lib": "__idf_espressif__esp-dsp",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "modules/dotprod/include", "modules/support/include", "modules/support/mem/include", "modules/windows/include", "modules/windows/hann/include", "modules/windows/blackman/include", "modules/windows/blackman_harris/include", "modules/windows/blackman_nuttall/include", "modules/windows/nuttall/include", "modules/windows/flat_top/include", "modules/iir/include", "modules/fir/include", "modules/math/include", "modules/math/add/include", "modules/math/sub/include", "modules/math/mul/include", "modules/math/addc/include", "modules/math/mulc/include", "modules/math/sqrt/include", "modules/matrix/mul/include", "modules/matrix/add/include", "modules/matrix/addc/include", "modules/matrix/mulc/include", "modules/matrix/sub/include", "modules/matrix/include", "modules/fft/include", "modules/dct/include", "modules/conv/include", "modules/common/include", "modules/matrix/mul/test/include", "modules/kalman/ekf/include", "modules/kalman/ekf_imu13states/include" ]
-        },
-        "joltwallet__littlefs": {
-            "alias": "idf::joltwallet__littlefs",
-            "target": "___idf_joltwallet__littlefs",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/joltwallet__littlefs",
-            "lib": "__idf_joltwallet__littlefs",
-            "reqs": [ "esp_partition" ],
-            "priv_reqs": [ "esptool_py", "spi_flash", "vfs", "sdmmc" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
@@ -2670,6 +2634,18 @@
             "managed_priv_reqs": [ "espressif__esp-dsp" ],
             "include_dirs": [ "src/include", "esp-tts/esp_tts_chinese/include", "include/esp32s3" ]
         },
+        "espressif__json_generator": {
+            "alias": "idf::espressif__json_generator",
+            "target": "___idf_espressif__json_generator",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__json_generator",
+            "lib": "__idf_espressif__json_generator",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
         "espressif__rmaker_common": {
             "alias": "idf::espressif__rmaker_common",
             "target": "___idf_espressif__rmaker_common",
@@ -2682,16 +2658,28 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },
-        "espressif__esp_schedule": {
-            "alias": "idf::espressif__esp_schedule",
-            "target": "___idf_espressif__esp_schedule",
+        "espressif__esp_diagnostics": {
+            "alias": "idf::espressif__esp_diagnostics",
+            "target": "___idf_espressif__esp_diagnostics",
             "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_schedule",
-            "lib": "__idf_espressif__esp_schedule",
-            "reqs": [ "nvs_flash" ],
-            "priv_reqs": [ "espressif__rmaker_common" ],
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_diagnostics",
+            "lib": "__idf_espressif__esp_diagnostics",
+            "reqs": [],
+            "priv_reqs": [ "freertos", "app_update", "espressif__rmaker_common", "esp_hw_support", "esp_wifi", "esp_event" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__rmaker_common" ],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__esp-zboss-lib": {
+            "alias": "idf::espressif__esp-zboss-lib",
+            "target": "___idf_espressif__esp-zboss-lib",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-zboss-lib",
+            "lib": "__idf_espressif__esp-zboss-lib",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },
         "espressif__esp_diag_data_store": {
@@ -2706,28 +2694,52 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "src/rtc_store", "include" ]
         },
-        "espressif__cbor": {
-            "alias": "idf::espressif__cbor",
-            "target": "___idf_espressif__cbor",
+        "espressif__esp-dsp": {
+            "alias": "idf::espressif__esp-dsp",
+            "target": "___idf_espressif__esp-dsp",
             "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__cbor",
-            "lib": "__idf_espressif__cbor",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-dsp",
+            "lib": "__idf_espressif__esp-dsp",
             "reqs": [],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "include_dirs": [ "port/include" ]
+            "include_dirs": [ "modules/dotprod/include", "modules/support/include", "modules/support/mem/include", "modules/windows/include", "modules/windows/hann/include", "modules/windows/blackman/include", "modules/windows/blackman_harris/include", "modules/windows/blackman_nuttall/include", "modules/windows/nuttall/include", "modules/windows/flat_top/include", "modules/iir/include", "modules/fir/include", "modules/math/include", "modules/math/add/include", "modules/math/sub/include", "modules/math/mul/include", "modules/math/addc/include", "modules/math/mulc/include", "modules/math/sqrt/include", "modules/matrix/mul/include", "modules/matrix/add/include", "modules/matrix/addc/include", "modules/matrix/mulc/include", "modules/matrix/sub/include", "modules/matrix/include", "modules/fft/include", "modules/dct/include", "modules/conv/include", "modules/common/include", "modules/matrix/mul/test/include", "modules/kalman/ekf/include", "modules/kalman/ekf_imu13states/include" ]
         },
-        "espressif__esp_secure_cert_mgr": {
-            "alias": "idf::espressif__esp_secure_cert_mgr",
-            "target": "___idf_espressif__esp_secure_cert_mgr",
+        "espressif__esp_rainmaker": {
+            "alias": "idf::espressif__esp_rainmaker",
+            "target": "___idf_espressif__esp_rainmaker",
             "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_secure_cert_mgr",
-            "lib": "__idf_espressif__esp_secure_cert_mgr",
-            "reqs": [ "spi_flash", "mbedtls", "nvs_flash", "efuse" ],
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker",
+            "lib": "__idf_espressif__esp_rainmaker",
+            "reqs": [ "espressif__rmaker_common" ],
+            "priv_reqs": [ "protobuf-c", "espressif__json_parser", "espressif__json_generator", "wifi_provisioning", "nvs_flash", "esp_http_client", "app_update", "esp-tls", "mbedtls", "esp_https_ota", "console", "esp_local_ctrl", "esp_https_server", "espressif__mdns", "espressif__esp_schedule", "efuse", "driver", "espressif__rmaker_common", "espressif__esp_secure_cert_mgr" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "espressif__esp_schedule", "espressif__esp_secure_cert_mgr", "espressif__json_generator", "espressif__json_parser", "espressif__mdns", "espressif__rmaker_common" ],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__jsmn": {
+            "alias": "idf::espressif__jsmn",
+            "target": "___idf_espressif__jsmn",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__jsmn",
+            "lib": "__idf_espressif__jsmn",
+            "reqs": [],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__esp_insights": {
+            "alias": "idf::espressif__esp_insights",
+            "target": "___idf_espressif__esp_insights",
+            "prefix": "idf",
+            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp_insights",
+            "lib": "__idf_espressif__esp_insights",
+            "reqs": [ "espressif__esp_diagnostics" ],
+            "priv_reqs": [ "espressif__cbor", "espressif__rmaker_common", "esptool_py", "espcoredump", "espressif__esp_diag_data_store", "nvs_flash", "esp_timer", "esp_hw_support", "esp_wifi", "espressif__esp_diagnostics" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "espressif__cbor", "espressif__esp_diag_data_store", "espressif__esp_diagnostics", "espressif__rmaker_common" ],
             "include_dirs": [ "include" ]
         },
         "espressif__json_parser": {
@@ -2740,18 +2752,6 @@
             "priv_reqs": [ "espressif__jsmn" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__jsmn" ],
-            "include_dirs": [ "include" ]
-        },
-        "espressif__esp-zboss-lib": {
-            "alias": "idf::espressif__esp-zboss-lib",
-            "target": "___idf_espressif__esp-zboss-lib",
-            "prefix": "idf",
-            "dir": "C:/Users/aanrr/drone/managed_components/espressif__esp-zboss-lib",
-            "lib": "__idf_espressif__esp-zboss-lib",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         }
     },

@@ -1,6 +1,8 @@
-#ifndef DRONECAMERA_H
-#define DRONECAMERA_H
+#ifndef CAMERA_H
+#define CAMERA_H
 
-void init_camera();
+#include "esp_err.h"
 
-#endif // DRONECAMERA_H
+esp_err_t ai_camera_init();
+
+#endif // CAMERA_H
