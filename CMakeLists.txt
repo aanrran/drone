@@ -8,3 +8,4 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(drone)
 set(EXTRA_COMPONENT_DIRS components)
 # set(PARTITION_TABLE_CUSTOM rzo_partitions.csv)
+
