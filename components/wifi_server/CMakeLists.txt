@@ -6,6 +6,7 @@ idf_component_register(SRCS "wifi_server.cpp"
                     REQUIRES controller_module
                     INCLUDE_DIRS ../controller_module
                     INCLUDE_DIRS ../ai_camera
+                    INCLUDE_DIRS ../joysticks_console
                     INCLUDE_DIRS ".")
 
 

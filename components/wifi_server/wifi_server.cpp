@@ -2,13 +2,13 @@
 #include "esp_http_server.h"
 #include "esp_timer.h"
 #include "esp_camera.h"
-#include "controller_module.h"
 #include "WiFi.h"
 #include "nvs_flash.h"
 #include "Arduino.h"
 #include <lwip/sockets.h>
 #include <lwip/netdb.h>
 #include "ai_camera.h"
+#include "joysticks_console.h"
 
 // HTTP server handle
 httpd_handle_t server = NULL;
