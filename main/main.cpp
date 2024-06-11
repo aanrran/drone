@@ -27,14 +27,14 @@ void app_main(void) {
     // Initialize the MPU6050 sensor
     imu.mpu6050_init();
 
-    // // Start Wi-Fi task on core 0
-    // xTaskCreatePinnedToCore(wifi_task, "wifiTask", 8192, NULL, 1, NULL, 0);
-    // // Start the controller task on core 1
-    // startControllerTask();
+    // Start Wi-Fi task on core 0
+    xTaskCreatePinnedToCore(wifi_task, "wifiTask", 8192, NULL, 1, NULL, 0);
+    // Start the controller task on core 1
+    startControllerTask();
 
     while (true) {
 
-        imu.mpu6050_printReadings();
+        // imu.mpu6050_printReadings();
 
         vTaskDelay(pdMS_TO_TICKS(500));
     }
