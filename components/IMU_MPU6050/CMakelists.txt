@@ -1,0 +1,5 @@
+idf_component_register(SRCS "imu_mpu6050.cpp"
+                    REQUIRES MPUdriver
+                    REQUIRES I2Cbus
+                    REQUIRES driver
+                    INCLUDE_DIRS ".")
