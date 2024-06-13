@@ -549,6 +549,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Users/aanrr/drone/build/esp-idf/joysticks_console/cmake_install.cmake")
 endif()
 

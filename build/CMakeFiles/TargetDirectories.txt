@@ -821,6 +821,13 @@ C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/list_install_com
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/install.dir
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/install/local.dir
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/install/strip.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/__idf_dc_motor_driver.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/edit_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/rebuild_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/list_install_components.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/install.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/install/local.dir
+C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/CMakeFiles/install/strip.dir
 C:/Users/aanrr/drone/build/esp-idf/joysticks_console/CMakeFiles/__idf_joysticks_console.dir
 C:/Users/aanrr/drone/build/esp-idf/joysticks_console/CMakeFiles/edit_cache.dir
 C:/Users/aanrr/drone/build/esp-idf/joysticks_console/CMakeFiles/rebuild_cache.dir

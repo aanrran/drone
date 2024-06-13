@@ -4,7 +4,7 @@
 #include "WiFi.h"
 #include "nvs_flash.h"
 #include "imu_mpu6050.h"
-
+#include "dc_motor_driver.h"
 
 // Wi-Fi credentials
 const char* ssid = "acer1664";
@@ -21,6 +21,9 @@ extern "C" {
 void app_main(void) {
     Serial.begin(115200);
     Serial.println("Starting setup...");
+
+    dc_motor_init();
+    set_motor_pwm_duty(50,40,30,20);
 
     // Create an instance of the IMU_MPU6050 class
     IMU_MPU6050 imu(GPIO_NUM_3, GPIO_NUM_46);

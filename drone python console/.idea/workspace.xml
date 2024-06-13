@@ -13,7 +13,16 @@
       <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/git-data/head-ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/.bin_timestamp" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/.bin_timestamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/bootloader/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/bootloader.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/bootloader.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/bootloader.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/bootloader.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_init.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_init.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/esp-idf/bootloader_support/libbootloader_support.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/esp-idf/bootloader_support/libbootloader_support.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/bootloader/esp-idf/esp_app_format/libesp_app_format.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/esp-idf/esp_app_format/libesp_app_format.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../build/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/compile_commands.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/../build/config.env" afterDir="false" />
@@ -27,25 +36,26 @@
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/arduino/CMakeFiles/__idf_arduino.dir/cores/esp32/firmware_msc_fat.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/arduino/CMakeFiles/__idf_arduino.dir/cores/esp32/firmware_msc_fat.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/controller_module/CMakeFiles/__idf_controller_module.dir/controller_module.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/controller_module/CMakeFiles/__idf_controller_module.dir/controller_module.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/controller_module/libcontroller_module.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/controller_module/libcontroller_module.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/wifi_server/CMakeFiles/__idf_wifi_server.dir/wifi_server.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/wifi_server/CMakeFiles/__idf_wifi_server.dir/wifi_server.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/wifi_server/libwifi_server.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/wifi_server/libwifi_server.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/CMakeFiles/__idf_joysticks_console.dir/joysticks_console.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/CMakeFiles/__idf_joysticks_console.dir/joysticks_console.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/libjoysticks_console.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/libjoysticks_console.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/main/libmain.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/main/libmain.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/kconfigs.in" beforeDir="false" afterPath="$PROJECT_DIR$/../build/kconfigs.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/ldgen_libraries" beforeDir="false" afterPath="$PROJECT_DIR$/../build/ldgen_libraries" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/ldgen_libraries.in" beforeDir="false" afterPath="$PROJECT_DIR$/../build/ldgen_libraries.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/project_description.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/project_description.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/srmodels/fst/commands_cn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/srmodels/fst/commands_cn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/srmodels/fst/commands_en.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/srmodels/fst/commands_en.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/srmodels/mn6_cn/_MODEL_INFO_" beforeDir="false" afterPath="$PROJECT_DIR$/../build/srmodels/mn6_cn/_MODEL_INFO_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/srmodels/mn6_cn/vocab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/srmodels/mn6_cn/vocab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/arduino" beforeDir="false" afterPath="$PROJECT_DIR$/../components/arduino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/controller_module/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../components/controller_module/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/controller_module/controller_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/controller_module/controller_module.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/controller_module/controller_module.h" beforeDir="false" afterPath="$PROJECT_DIR$/../components/controller_module/controller_module.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/wifi_server/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../components/wifi_server/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/wifi_server/wifi_server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/wifi_server/wifi_server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/joysticks_console/joysticks_console.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/joysticks_console/joysticks_console.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../main/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../sdkconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../sdkconfig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

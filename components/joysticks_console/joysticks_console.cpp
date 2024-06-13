@@ -7,19 +7,15 @@
 #include <stdio.h>
 #include <algorithm> // For std::min and std::max in C++
 
-// Define joysticks filter parameters
-#define joysticks_SAMPLE_RATE 100  // Sample rate in Hz, this the rate on the PC side
-#define joysticks_CUTOFF_FREQ 420    // Cutoff frequency in Hz
-#define joysticks_FILTER_ORDER 1    // Filter order
-
-// Joysticks filter coefficients
-float joysticks_coefficients[5]; // biquad needs 5 coefficients
+// Define the FIR filter order and coefficients
+#define FIR_ORDER 4
+std::array<float, FIR_ORDER + 1> fir_coefficients = {1.0, 0.8, 0.6, 0.4, 0.2};
 
 // Joysticks delay lines for each data stream
-float joysticks_delayLineX1[4] = {0}; // biquad delay line size is 4
-float joysticks_delayLineY1[4] = {0};
-float joysticks_delayLineX2[4] = {0};
-float joysticks_delayLineY2[4] = {0};
+std::array<float, FIR_ORDER + 1> delayLineX1 = {0};
+std::array<float, FIR_ORDER + 1> delayLineY1 = {0};
+std::array<float, FIR_ORDER + 1> delayLineX2 = {0};
+std::array<float, FIR_ORDER + 1> delayLineY2 = {0};
 
 // Define a queue to communicate joystick data between tasks
 QueueHandle_t joystickQueue;
@@ -34,8 +30,6 @@ QueueHandle_t joystickQueue;
 void joysticks_init() {
     // Create a queue to hold joystick data
     joystickQueue = xQueueCreate(10, sizeof(float[4]));
-    // Initialize filter coefficients for a first-order low-pass filter
-    dsps_biquad_gen_lpf_f32(joysticks_coefficients, joysticks_CUTOFF_FREQ / (float)(joysticks_SAMPLE_RATE / 2), 0.707); // Q factor set to 0.707 for Butterworth filter
 }
 
 /**
@@ -49,27 +43,44 @@ float clamp(float value) {
 }
 
 /**
- * @brief Filter joystick data.
+ * @brief Apply FIR filter to a single data point.
  * 
- * This function applies a low-pass filter to the raw joystick data 
+ * @param input The current raw data point.
+ * @param delayLine The delay line array.
+ * @return The filtered data point.
+ */
+float applyFIRFilter(float input, std::array<float, FIR_ORDER + 1>& delayLine) {
+    // Shift delay line values
+    for (int i = FIR_ORDER; i > 0; i--) {
+        delayLine[i] = delayLine[i - 1];
+    }
+    delayLine[0] = input;
+
+    // Apply FIR filter
+    float output = 0.0;
+    for (int i = 0; i <= FIR_ORDER; i++) {
+        output += fir_coefficients[i] * delayLine[i];
+    }
+
+    return output;
+}
+
+/**
+ * @brief Filter joystick data using an FIR filter.
+ * 
+ * This function applies an FIR filter to the raw joystick data 
  * and stores the filtered data in the provided output array.
  * 
  * @param joystickRawData An array of 4 raw joystick data points.
  * @param filteredJoystickData An array to store the 4 filtered joystick data points.
  */
 void filterJoystickData(float joystickRawData[4], float filteredJoystickData[4]) {
-    // Apply low-pass filter to each data point
-    dsps_biquad_f32(&joystickRawData[0], &filteredJoystickData[0], 1, joysticks_coefficients, joysticks_delayLineX1);
-    dsps_biquad_f32(&joystickRawData[1], &filteredJoystickData[1], 1, joysticks_coefficients, joysticks_delayLineY1);
-    dsps_biquad_f32(&joystickRawData[2], &filteredJoystickData[2], 1, joysticks_coefficients, joysticks_delayLineX2);
-    dsps_biquad_f32(&joystickRawData[3], &filteredJoystickData[3], 1, joysticks_coefficients, joysticks_delayLineY2);
-
-    // Clamp the filtered data to the range [-1, 1]
-    for (int i = 0; i < 4; i++) {
-        filteredJoystickData[i] = clamp(filteredJoystickData[i]);
-    }
+    // Apply FIR filter to each data point
+    filteredJoystickData[0] = clamp(applyFIRFilter(joystickRawData[0], delayLineX1));
+    filteredJoystickData[1] = clamp(applyFIRFilter(joystickRawData[1], delayLineY1));
+    filteredJoystickData[2] = clamp(applyFIRFilter(joystickRawData[2], delayLineX2));
+    filteredJoystickData[3] = clamp(applyFIRFilter(joystickRawData[3], delayLineY2));
 }
-
 /**
  * @brief read joystick and filter the data. Then, update the data to int
  * 
@@ -98,7 +109,9 @@ void joysticks_read() {
     }
 
     // Check if the joystick data is not all zero. if not zero, print the reading
-    if (filteredJoystickData[0] > 0 || filteredJoystickData[1] > 0 || filteredJoystickData[2] > 0 || filteredJoystickData[3] > 0) {
+    if (filteredJoystickData[0] > 0.01 || filteredJoystickData[1] > 0.01 || filteredJoystickData[2] > 0.01 || filteredJoystickData[3] > 0.01||
+        filteredJoystickData[0] < -0.01 || filteredJoystickData[1] < -0.01 || filteredJoystickData[2] < -0.01 || filteredJoystickData[3] < -0.01
+    ) {
         Serial.printf("Joysticks Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
     }
 }
