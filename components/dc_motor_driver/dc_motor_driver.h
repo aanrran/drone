@@ -26,7 +26,7 @@ void dc_motor_init();
  * @param duty3 Duty cycle for motor 3 (0-100).
  * @param duty4 Duty cycle for motor 4 (0-100).
  */
-void set_motor_pwm_duty(int duty1, int duty2, int duty3, int duty4);
+void set_motor_pwm_duty(float duty1, float duty2, float duty3, float duty4);
 
 #ifdef __cplusplus
 }

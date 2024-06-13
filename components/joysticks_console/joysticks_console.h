@@ -1,7 +1,7 @@
 #ifndef JOYSTICKS_CONSOLE_H
 #define JOYSTICKS_CONSOLE_H
 
-static int joystickData[4] = {0, 0, 0, 0};  // Static array to hold joystick data
+extern float joystickData[4];  // array to hold joystick data
 
 // Initialize joystick filters.
 void joysticks_init();

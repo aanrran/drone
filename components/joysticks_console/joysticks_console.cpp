@@ -20,6 +20,7 @@ std::array<float, FIR_ORDER + 1> delayLineY2 = {0};
 // Define a queue to communicate joystick data between tasks
 QueueHandle_t joystickQueue;
 
+float joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
 
 /**
  * @brief Initialize joystick filters.
@@ -94,25 +95,25 @@ void joysticks_read() {
     if (xQueueReceive(joystickQueue, &receivedData, pdMS_TO_TICKS(10)) == pdPASS) {
         // Filter the joystick data
         filterJoystickData(receivedData, filteredJoystickData);
-        // Update the static joystickData array with new data
-        for (int i = 0; i < 4; i++) {
-            joystickData[i] = static_cast<int>(filteredJoystickData[i] * 100);  // Convert to integer representation
-        }
     } else {
         // Reset joystickData to zero if no new data received
         for (int i = 0; i < 4; i++) {
             receivedData[i] = 0;
-            joystickData[i] = 0;
         }
         // update the filter with zero readings
         filterJoystickData(receivedData, filteredJoystickData);
-    }
 
+    }
+    // Update the static joystickData array with new data
+    for (int i = 0; i < 4; i++) {
+        // joystickData[i] = static_cast<int>(filteredJoystickData[i] * 100);  // Convert to integer representation
+        joystickData[i] = filteredJoystickData[i];
+    }
     // Check if the joystick data is not all zero. if not zero, print the reading
     if (filteredJoystickData[0] > 0.01 || filteredJoystickData[1] > 0.01 || filteredJoystickData[2] > 0.01 || filteredJoystickData[3] > 0.01||
         filteredJoystickData[0] < -0.01 || filteredJoystickData[1] < -0.01 || filteredJoystickData[2] < -0.01 || filteredJoystickData[3] < -0.01
     ) {
-        Serial.printf("Joysticks Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
+        // Serial.printf("Joysticks Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
     }
 }
 

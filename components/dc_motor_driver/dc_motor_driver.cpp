@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 // Define GPIO pins for motors
-#define GPIO_PWM0A_OUT 21   // Motor 1
+#define GPIO_PWM0A_OUT 2   // Motor 1
 #define GPIO_PWM0B_OUT 47   // Motor 2
 #define GPIO_PWM1A_OUT 48   // Motor 3
 #define GPIO_PWM1B_OUT 45   // Motor 4
@@ -39,7 +39,7 @@ void dc_motor_init() {
     mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_1, &pwm_config);
 }
 
-void set_motor_pwm_duty(int duty1, int duty2, int duty3, int duty4) {
+void set_motor_pwm_duty(float duty1, float duty2, float duty3, float duty4) {
     // Constrain duty cycle values to be within 0 to 100
     if (duty1 < 0) duty1 = 0;
     if (duty1 > 100) duty1 = 100;
