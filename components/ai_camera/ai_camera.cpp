@@ -2,6 +2,7 @@
 #include "esp_camera.h"
 #include "ai_camera.h"
 #include "driver/i2c.h"  // Include the header for I2C
+#include "driver/gpio.h"
 
 // Camera pin configuration for ESP32-S3
 #define PWDN_GPIO_NUM    -1
@@ -61,6 +62,8 @@ static camera_config_t camera_config = {
     .sccb_i2c_port = I2C_NUM_0
 };
 
+int led_gpio = 2;  // Define the GPIO pin number
+
 /**
  * @brief Function to initialize the camera
  * Configures and initializes the camera module with the specified settings.
@@ -83,6 +86,28 @@ esp_err_t ai_camera_init() {
         return err;
     }
 
+    // Configure the LED GPIO pin as an output
+    pinMode(led_gpio, OUTPUT);
+
     Serial.println("Camera initialized successfully.");
     return ESP_OK;
+}
+
+/**
+ * @brief Controls the camera LED.
+ * 
+ * This function sets the GPIO pin 2 to HIGH or LOW based on the boolean state passed to it.
+ * 
+ * @param state Boolean value to control the LED. 
+ *              True turns the LED on, False turns the LED off.
+ */
+void camera_LED(bool state) {
+
+    if (state) {
+        // Turn on the LED
+        digitalWrite(led_gpio, HIGH);  // Set GPIO level to HIGH (1)
+    } else {
+        // Turn off the LED
+        digitalWrite(led_gpio, LOW);  // Set GPIO level to LOW (0)
+    }
 }

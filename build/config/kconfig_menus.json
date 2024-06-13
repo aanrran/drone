@@ -6778,579 +6778,6 @@
                 "children": [
                     {
                         "children": [],
-                        "depends_on": "<choice ESP_RMAKER_CLAIM_TYPE>",
-                        "help": "Do not use any claiming. The MQTT credentials need to\nbe pre-programmed for this to work. This should be used\nfor all private RainMaker deployments.",
-                        "id": "ESP_RMAKER_NO_CLAIM",
-                        "name": "ESP_RMAKER_NO_CLAIM",
-                        "range": null,
-                        "title": "Do not use Claiming",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "!IDF_TARGET_ESP32 && <choice ESP_RMAKER_CLAIM_TYPE>",
-                        "help": "Use Self Claiming i.e. get the MQTT credentials\ndirectly from the claiming service.",
-                        "id": "ESP_RMAKER_SELF_CLAIM",
-                        "name": "ESP_RMAKER_SELF_CLAIM",
-                        "range": null,
-                        "title": "Use Self Claiming",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "BT_ENABLED && !IDF_TARGET_ESP32S2 && <choice ESP_RMAKER_CLAIM_TYPE>",
-                        "help": "Use Assisted Claiming i.e. get the MQTT credentials\nfrom the claiming service via assistance from clients,\nlike the phone apps.",
-                        "id": "ESP_RMAKER_ASSISTED_CLAIM",
-                        "name": "ESP_RMAKER_ASSISTED_CLAIM",
-                        "range": null,
-                        "title": "Use Assisted Claiming",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "help": "Claiming type to be used.",
-                "id": "esp-rainmaker-config-claiming-type",
-                "name": "ESP_RMAKER_CLAIM_TYPE",
-                "title": "Claiming Type",
-                "type": "choice"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "ESP_RMAKER_NO_CLAIM && <choice ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD>",
-                        "help": "Enable the use of ESP Secure Certificate Manager APIs for the example.\nPlease refer to ESP Secure Certificate Manager documentation for more details.",
-                        "id": "ESP_RMAKER_USE_ESP_SECURE_CERT_MGR",
-                        "name": "ESP_RMAKER_USE_ESP_SECURE_CERT_MGR",
-                        "range": null,
-                        "title": "Use ESP Secure Certificate Manager",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "<choice ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD>",
-                        "help": "This option expects the Private key and Device certificate to be in the NVS.\nThis is the default behaviour.",
-                        "id": "ESP_RMAKER_USE_NVS",
-                        "name": "ESP_RMAKER_USE_NVS",
-                        "range": null,
-                        "title": "Use NVS (default)",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "help": "ESP devices support multiple ways to secure store the PKI credentials.\nCurrently, NVS and ESP Secure Cert Manager are supported.\nThe default behaviour is to access the PKI credentials from the NVS.\nConsult the ESP-TLS documentation in ESP-IDF Programming guide for more details.",
-                "id": "esp-rainmaker-config-choose-pki-credentials-access-method",
-                "name": "ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD",
-                "title": "Choose PKI credentials access method",
-                "type": "choice"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": null,
-                "id": "ESP_RMAKER_CLAIM_TYPE",
-                "name": "ESP_RMAKER_CLAIM_TYPE",
-                "range": null,
-                "title": null,
-                "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": "ESP_RMAKER_SELF_CLAIM",
-                "help": "ESP RainMaker Claiming Service Base URL.",
-                "id": "ESP_RMAKER_CLAIM_SERVICE_BASE_URL",
-                "name": "ESP_RMAKER_CLAIM_SERVICE_BASE_URL",
-                "range": null,
-                "title": "ESP RainMaker Claiming Service Base URL",
-                "type": "string"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Normally, if self claiming or assisted claiming is used, the MQTT Host is anyways read from\nESP_RMAKER_MQTT_HOST, independent of this config option. However, if this is set, even if\nan MQTT host value is found in NVS, it will be overriden with ESP_RMAKER_MQTT_HOST.",
-                "id": "ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
-                "name": "ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
-                "range": null,
-                "title": "Read MQTT Host from ESP_RMAKER_MQTT_HOST (Read Docs)",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "If enabled, the device will get its node id from the device certificate's CN field. If not enabled, \nit will read the node id either from nvs factory partition or mac address, depending on the configuration.",
-                "id": "ESP_RMAKER_READ_NODE_ID_FROM_CERT_CN",
-                "name": "ESP_RMAKER_READ_NODE_ID_FROM_CERT_CN",
-                "range": null,
-                "title": "Read Node ID from Device Certificate",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": "ESP_RMAKER_SELF_CLAIM || ESP_RMAKER_ASSISTED_CLAIM || ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
-                "help": "ESP RainMaker MQTT Host name.",
-                "id": "ESP_RMAKER_MQTT_HOST",
-                "name": "ESP_RMAKER_MQTT_HOST",
-                "range": null,
-                "title": "ESP RainMaker MQTT Host",
-                "type": "string"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "This config enables the use of AWS Basic Ingest Topics for Node to Cloud communication, \nwhich eliminates the MQTT Broker and thus reduces messaging cost.",
-                "id": "ESP_RMAKER_MQTT_USE_BASIC_INGEST_TOPICS",
-                "name": "ESP_RMAKER_MQTT_USE_BASIC_INGEST_TOPICS",
-                "range": null,
-                "title": "Use Basic Ingest Topics",
-                "type": "bool"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                        "help": "Default MQTT budget. Budget will reduce on sending an MQTT message and increase based on\nESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD. If no budget is available, MQTT message will be dropped.",
-                        "id": "ESP_RMAKER_MQTT_DEFAULT_BUDGET",
-                        "name": "ESP_RMAKER_MQTT_DEFAULT_BUDGET",
-                        "range": [
-                            64,
-                            1024
-                        ],
-                        "title": "Default MQTT Budget",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                        "help": "Maximum budget that the node can have. No additional budget will be allocated if this count is reached.",
-                        "id": "ESP_RMAKER_MQTT_MAX_BUDGET",
-                        "name": "ESP_RMAKER_MQTT_MAX_BUDGET",
-                        "range": [
-                            64,
-                            2048
-                        ],
-                        "title": "Max MQTT Budget",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                        "help": "Period in seconds after which the MQTT budget should revive (by ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT).\nThis is used to limit the messages being sent by the node.",
-                        "id": "ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD",
-                        "name": "ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD",
-                        "range": [
-                            5,
-                            600
-                        ],
-                        "title": "MQTT Budget revive period",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                        "help": "The count by which the budget will be increased periodically based on ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD.",
-                        "id": "ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT",
-                        "name": "ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT",
-                        "range": [
-                            1,
-                            16
-                        ],
-                        "title": "MQTT Budget revive count",
-                        "type": "int"
-                    }
-                ],
-                "depends_on": null,
-                "help": "Enable MQTT budgeting, which will control the number of MQTT messages sent by the node.",
-                "id": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                "name": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
-                "range": null,
-                "title": "Enable MQTT budgeting",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Maximum size of the payload for reporting parameter values.",
-                "id": "ESP_RMAKER_MAX_PARAM_DATA_SIZE",
-                "name": "ESP_RMAKER_MAX_PARAM_DATA_SIZE",
-                "range": [
-                    64,
-                    8192
-                ],
-                "title": "Maximum Parameters' data size",
-                "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "The handlers for User Node Mapping are now registered internally by ESP RainMaker core,\nby registering to appropriate Wi-Fi Provisioning events. If your application code also\nhas the calls to create and register the user mapping handlers, enable this config\noption to prevent duplication.",
-                "id": "ESP_RMAKER_DISABLE_USER_MAPPING_PROV",
-                "name": "ESP_RMAKER_DISABLE_USER_MAPPING_PROV",
-                "range": null,
-                "title": "Disable User Mapping during Provisioning",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "This enables the additional user id checks during user node mapping. Whenever a new user\nid is received, it is checked against the existing user id in NVS. If there is a mismatch,\nor if no user id exists in NVS, this is considered as a reset state and the same is reported\nto the ESP RainMaker Cloud during the User Node association MQTT Publish so that the cloud\ncan take appropriate action w.r.t user permissions. It is recommended to enable this option\nfor security reasons.",
-                "id": "ESP_RMAKER_USER_ID_CHECK",
-                "name": "ESP_RMAKER_USER_ID_CHECK",
-                "range": null,
-                "title": "User id check for User Node mapping",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "By default, the \"Name\" parameter (esp.param.name) changes are handled internally. If Applications\nwant to handle this themselves, this config option can be enabled. Please ensure that you update\nand report the name parameter in your callback so that it reflects correctly everywhere.\nIf no device callback is registered, the name paramater will be handled internally.",
-                "id": "RMAKER_NAME_PARAM_CB",
-                "name": "RMAKER_NAME_PARAM_CB",
-                "range": null,
-                "title": "Call device callback for Name param",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Enabling this allows to discover and control the node over local Wi-Fi network.\nNote that this uses only Wi-Fi level security and so, any client on the same\nWi-Fi network can potentially control the node. The communication is not encrypted\nand uses plain HTTP. Please Check the RainMaker documentation for additional details.\nNote that enabling this just means that the APIs to enable/disable local\ncontrol will be compiled in and can be used in application code. If CONFIG_ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE\nis also enabled, then no additional APIs are required for actually enabling local control.",
-                "id": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
-                "name": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
-                "range": null,
-                "title": "ESP RainMaker Local Control Feature",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Automatically enabled local control when RainMaker starts.",
-                "id": "ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE",
-                "name": "ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE",
-                "range": null,
-                "title": "Auto ESP RainMaker Local Control",
-                "type": "bool"
-            },
-            {
-                "children": [],
-                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
-                "help": "The port number to be used for http for local control.",
-                "id": "ESP_RMAKER_LOCAL_CTRL_HTTP_PORT",
-                "name": "ESP_RMAKER_LOCAL_CTRL_HTTP_PORT",
-                "range": null,
-                "title": "Local Control HTTP Port",
-                "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
-                "help": "The task stack size to be used for http server for local control.",
-                "id": "ESP_RMAKER_LOCAL_CTRL_STACK_SIZE",
-                "name": "ESP_RMAKER_LOCAL_CTRL_STACK_SIZE",
-                "range": null,
-                "title": "Local Control HTTP Server task stack size",
-                "type": "int"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "<choice ESP_RMAKER_LOCAL_CTRL_SECURITY>",
-                        "help": null,
-                        "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY_0",
-                        "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY_0",
-                        "range": null,
-                        "title": "sec0",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "<choice ESP_RMAKER_LOCAL_CTRL_SECURITY>",
-                        "help": null,
-                        "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY_1",
-                        "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY_1",
-                        "range": null,
-                        "title": "sec1",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
-                "help": "Security type to be selected for local control.",
-                "id": "esp-rainmaker-config-local-control-security-type",
-                "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
-                "title": "Local Control Security Type",
-                "type": "choice"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": null,
-                "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
-                "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
-                "range": null,
-                "title": null,
-                "type": "int"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "<choice ESP_RMAKER_CONSOLE_UART_NUM>",
-                        "help": null,
-                        "id": "ESP_RMAKER_CONSOLE_UART_NUM_0",
-                        "name": "ESP_RMAKER_CONSOLE_UART_NUM_0",
-                        "range": null,
-                        "title": "UART0",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "<choice ESP_RMAKER_CONSOLE_UART_NUM>",
-                        "help": null,
-                        "id": "ESP_RMAKER_CONSOLE_UART_NUM_1",
-                        "name": "ESP_RMAKER_CONSOLE_UART_NUM_1",
-                        "range": null,
-                        "title": "UART1",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "help": "UART to be selected for serial console.",
-                "id": "esp-rainmaker-config-uart-for-console-input",
-                "name": "ESP_RMAKER_CONSOLE_UART_NUM",
-                "title": "UART for console input",
-                "type": "choice"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": null,
-                "id": "ESP_RMAKER_CONSOLE_UART_NUM",
-                "name": "ESP_RMAKER_CONSOLE_UART_NUM",
-                "range": null,
-                "title": null,
-                "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Use Certificate Bundle for server authentication. Enabling this is recommended to safeguard\nagainst any changes in the server certificates in future. This has an impact on the binary\nsize as well as heap requirement.",
-                "id": "ESP_RMAKER_USE_CERT_BUNDLE",
-                "name": "ESP_RMAKER_USE_CERT_BUNDLE",
-                "range": null,
-                "title": "Use Certificate Bundle",
-                "type": "bool"
-            },
-            {
-                "children": [
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "ESP_RMAKER_OTA_AUTOFETCH",
-                                "help": "Periodically send an OTA fetch request. If set to 0, the request will be sent only once,\nwhen the node connects to the ESP RainMaker Cloud first time after a boot.\nElse, this defines the period (in hours) for the periodic fetch request.",
-                                "id": "ESP_RMAKER_OTA_AUTOFETCH_PERIOD",
-                                "name": "ESP_RMAKER_OTA_AUTOFETCH_PERIOD",
-                                "range": [
-                                    0,
-                                    168
-                                ],
-                                "title": "OTA Auto Fetch Period",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Applicable only for OTA using Topics.\nFetch the OTA (i.e. get the URL and other details) by actively sending an\nOTA fetch request to ESP RainMaker Cloud. If this is disabled, the node\nwill stay subscribed to the OTA Topics, but will get the information only\nif someone explicitly triggers it.",
-                        "id": "ESP_RMAKER_OTA_AUTOFETCH",
-                        "name": "ESP_RMAKER_OTA_AUTOFETCH",
-                        "range": null,
-                        "title": "Auto Fetch OTA",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This allows you to skip the validation of OTA server certificate CN field.",
-                        "id": "ESP_RMAKER_SKIP_COMMON_NAME_CHECK",
-                        "name": "ESP_RMAKER_SKIP_COMMON_NAME_CHECK",
-                        "range": null,
-                        "title": "Skip server certificate CN field check",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This allows you to skip the firmware version check. Useful during development,\nbut not for production.",
-                        "id": "ESP_RMAKER_SKIP_VERSION_CHECK",
-                        "name": "ESP_RMAKER_SKIP_VERSION_CHECK",
-                        "range": null,
-                        "title": "Skip firmware version check",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This allows you to skip the secure version check. Useful during development,\nbut not for production. Check out ESP IDF's Anti-rollback feature for more details.",
-                        "id": "ESP_RMAKER_SKIP_SECURE_VERSION_CHECK",
-                        "name": "ESP_RMAKER_SKIP_SECURE_VERSION_CHECK",
-                        "range": null,
-                        "title": "Skip secure version check",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This allows you to skip the project name check.",
-                        "id": "ESP_RMAKER_SKIP_PROJECT_NAME_CHECK",
-                        "name": "ESP_RMAKER_SKIP_PROJECT_NAME_CHECK",
-                        "range": null,
-                        "title": "Skip project name check",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Increasing this value beyond the default would speed up the OTA download process.\nHowever, please ensure that your application has enough memory headroom to allow this,\nelse, the OTA may fail.",
-                        "id": "ESP_RMAKER_OTA_HTTP_RX_BUFFER_SIZE",
-                        "name": "ESP_RMAKER_OTA_HTTP_RX_BUFFER_SIZE",
-                        "range": [
-                            512,
-                            5760
-                        ],
-                        "title": "OTA HTTP receive buffer size",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "After an OTA Update, if CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE is set, then the firmware will wait for MQTT\nconnection to mark the new firmware as valid. However, if it is not able to do so within\nthis wait period (in seconds), the firmware will be marked as invalid and the older\nfirmware will be booted into.",
-                        "id": "ESP_RMAKER_OTA_ROLLBACK_WAIT_PERIOD",
-                        "name": "ESP_RMAKER_OTA_ROLLBACK_WAIT_PERIOD",
-                        "range": [
-                            30,
-                            600
-                        ],
-                        "title": "OTA Rollback Wait Period (Seconds)",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "After OTA image is flashed and active partition changed, the device automatically reboots. To disable this\nbehaviour and handle reboot on your own, based on RMAKER_OTA event, enable this option.",
-                        "id": "ESP_RMAKER_OTA_DISABLE_AUTO_REBOOT",
-                        "name": "ESP_RMAKER_OTA_DISABLE_AUTO_REBOOT",
-                        "range": null,
-                        "title": "Disable auto reboot",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "OTA Jobs can include additional metadata for time to indicate a range of valid date and the time within\nthose dates. Eg. Perform OTA between 1 Dec 2022 and 10 Dec 2022 that too only between 2:00am and 5:00am.\nIf you want to ignore this, disable this option.",
-                        "id": "ESP_RMAKER_OTA_TIME_SUPPORT",
-                        "name": "ESP_RMAKER_OTA_TIME_SUPPORT",
-                        "range": null,
-                        "title": "Enable OTA Time Support",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "esp-rainmaker-config-esp-rainmaker-ota-config",
-                "title": "ESP RainMaker OTA Config",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Maximum Number of schedules allowed. The json size for report params increases as the number of schedules increases.",
-                        "id": "ESP_RMAKER_SCHEDULING_MAX_SCHEDULES",
-                        "name": "ESP_RMAKER_SCHEDULING_MAX_SCHEDULES",
-                        "range": [
-                            1,
-                            50
-                        ],
-                        "title": "Maximum schedules",
-                        "type": "int"
-                    }
-                ],
-                "depends_on": null,
-                "id": "esp-rainmaker-config-esp-rainmaker-scheduling",
-                "title": "ESP RainMaker Scheduling",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Maximum Number of scenes allowed. The json size for report params increases as the number of scenes increases.",
-                        "id": "ESP_RMAKER_SCENES_MAX_SCENES",
-                        "name": "ESP_RMAKER_SCENES_MAX_SCENES",
-                        "range": [
-                            1,
-                            50
-                        ],
-                        "title": "Maximum scenes",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This enables the deactivate callback support. The application callback will be invoked with the source\nset to ESP_RMAKER_REQ_SRC_SCENE_DEACTIVATE when the deactivate operation is received. However, the\nparam values would be the same as those for activate, since the RainMaker core does not know what the\nexpected values are for scene deactivation.",
-                        "id": "ESP_RMAKER_SCENES_DEACTIVATE_SUPPORT",
-                        "name": "ESP_RMAKER_SCENES_DEACTIVATE_SUPPORT",
-                        "range": null,
-                        "title": "Enable Deactivate support",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "esp-rainmaker-config-esp-rainmaker-scenes",
-                "title": "ESP RainMaker Scenes",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "ESP_RMAKER_CMD_RESP_ENABLE",
-                                "help": "Enable testing for Command-Response module. This enables triggering commands and parsing response from the node itself,\nrather than receiving the commands from cloud. C API or the serial console can be used to trigger the commands.\nThis should be enabled only while testing commands, but should always be disabled in production firmware.",
-                                "id": "ESP_RMAKER_CMD_RESP_TEST_ENABLE",
-                                "name": "ESP_RMAKER_CMD_RESP_TEST_ENABLE",
-                                "range": null,
-                                "title": "Enable Command-Response Testing",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Enable the ESP RainMaker Command-Response module for semi-synchronous communication. Please refer the RainMaker documents\nfor additional information.",
-                        "id": "ESP_RMAKER_CMD_RESP_ENABLE",
-                        "name": "ESP_RMAKER_CMD_RESP_ENABLE",
-                        "range": null,
-                        "title": "Enable Command-Response Module",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "esp-rainmaker-config-esp-rainmaker-command-response",
-                "title": "ESP RainMaker Command-Response",
-                "type": "menu"
-            }
-        ],
-        "depends_on": null,
-        "id": "esp-rainmaker-config",
-        "title": "ESP RainMaker Config",
-        "type": "menu"
-    },
-    {
-        "children": [
-            {
-                "children": [
-                    {
-                        "children": [],
                         "depends_on": "<choice MODEL_DATA_PATH>",
                         "help": null,
                         "id": "MODEL_IN_FLASH",
@@ -12079,6 +11506,579 @@
         "depends_on": null,
         "id": "esp-speech-recognition",
         "title": "ESP Speech Recognition",
+        "type": "menu"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_CLAIM_TYPE>",
+                        "help": "Do not use any claiming. The MQTT credentials need to\nbe pre-programmed for this to work. This should be used\nfor all private RainMaker deployments.",
+                        "id": "ESP_RMAKER_NO_CLAIM",
+                        "name": "ESP_RMAKER_NO_CLAIM",
+                        "range": null,
+                        "title": "Do not use Claiming",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "!IDF_TARGET_ESP32 && <choice ESP_RMAKER_CLAIM_TYPE>",
+                        "help": "Use Self Claiming i.e. get the MQTT credentials\ndirectly from the claiming service.",
+                        "id": "ESP_RMAKER_SELF_CLAIM",
+                        "name": "ESP_RMAKER_SELF_CLAIM",
+                        "range": null,
+                        "title": "Use Self Claiming",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "BT_ENABLED && !IDF_TARGET_ESP32S2 && <choice ESP_RMAKER_CLAIM_TYPE>",
+                        "help": "Use Assisted Claiming i.e. get the MQTT credentials\nfrom the claiming service via assistance from clients,\nlike the phone apps.",
+                        "id": "ESP_RMAKER_ASSISTED_CLAIM",
+                        "name": "ESP_RMAKER_ASSISTED_CLAIM",
+                        "range": null,
+                        "title": "Use Assisted Claiming",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "Claiming type to be used.",
+                "id": "esp-rainmaker-config-claiming-type",
+                "name": "ESP_RMAKER_CLAIM_TYPE",
+                "title": "Claiming Type",
+                "type": "choice"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "ESP_RMAKER_NO_CLAIM && <choice ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD>",
+                        "help": "Enable the use of ESP Secure Certificate Manager APIs for the example.\nPlease refer to ESP Secure Certificate Manager documentation for more details.",
+                        "id": "ESP_RMAKER_USE_ESP_SECURE_CERT_MGR",
+                        "name": "ESP_RMAKER_USE_ESP_SECURE_CERT_MGR",
+                        "range": null,
+                        "title": "Use ESP Secure Certificate Manager",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD>",
+                        "help": "This option expects the Private key and Device certificate to be in the NVS.\nThis is the default behaviour.",
+                        "id": "ESP_RMAKER_USE_NVS",
+                        "name": "ESP_RMAKER_USE_NVS",
+                        "range": null,
+                        "title": "Use NVS (default)",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "ESP devices support multiple ways to secure store the PKI credentials.\nCurrently, NVS and ESP Secure Cert Manager are supported.\nThe default behaviour is to access the PKI credentials from the NVS.\nConsult the ESP-TLS documentation in ESP-IDF Programming guide for more details.",
+                "id": "esp-rainmaker-config-choose-pki-credentials-access-method",
+                "name": "ESP_RMAKER_CHOOSE_PKI_ACCESS_METHOD",
+                "title": "Choose PKI credentials access method",
+                "type": "choice"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": null,
+                "id": "ESP_RMAKER_CLAIM_TYPE",
+                "name": "ESP_RMAKER_CLAIM_TYPE",
+                "range": null,
+                "title": null,
+                "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": "ESP_RMAKER_SELF_CLAIM",
+                "help": "ESP RainMaker Claiming Service Base URL.",
+                "id": "ESP_RMAKER_CLAIM_SERVICE_BASE_URL",
+                "name": "ESP_RMAKER_CLAIM_SERVICE_BASE_URL",
+                "range": null,
+                "title": "ESP RainMaker Claiming Service Base URL",
+                "type": "string"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Normally, if self claiming or assisted claiming is used, the MQTT Host is anyways read from\nESP_RMAKER_MQTT_HOST, independent of this config option. However, if this is set, even if\nan MQTT host value is found in NVS, it will be overriden with ESP_RMAKER_MQTT_HOST.",
+                "id": "ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
+                "name": "ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
+                "range": null,
+                "title": "Read MQTT Host from ESP_RMAKER_MQTT_HOST (Read Docs)",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "If enabled, the device will get its node id from the device certificate's CN field. If not enabled, \nit will read the node id either from nvs factory partition or mac address, depending on the configuration.",
+                "id": "ESP_RMAKER_READ_NODE_ID_FROM_CERT_CN",
+                "name": "ESP_RMAKER_READ_NODE_ID_FROM_CERT_CN",
+                "range": null,
+                "title": "Read Node ID from Device Certificate",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": "ESP_RMAKER_SELF_CLAIM || ESP_RMAKER_ASSISTED_CLAIM || ESP_RMAKER_READ_MQTT_HOST_FROM_CONFIG",
+                "help": "ESP RainMaker MQTT Host name.",
+                "id": "ESP_RMAKER_MQTT_HOST",
+                "name": "ESP_RMAKER_MQTT_HOST",
+                "range": null,
+                "title": "ESP RainMaker MQTT Host",
+                "type": "string"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "This config enables the use of AWS Basic Ingest Topics for Node to Cloud communication, \nwhich eliminates the MQTT Broker and thus reduces messaging cost.",
+                "id": "ESP_RMAKER_MQTT_USE_BASIC_INGEST_TOPICS",
+                "name": "ESP_RMAKER_MQTT_USE_BASIC_INGEST_TOPICS",
+                "range": null,
+                "title": "Use Basic Ingest Topics",
+                "type": "bool"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                        "help": "Default MQTT budget. Budget will reduce on sending an MQTT message and increase based on\nESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD. If no budget is available, MQTT message will be dropped.",
+                        "id": "ESP_RMAKER_MQTT_DEFAULT_BUDGET",
+                        "name": "ESP_RMAKER_MQTT_DEFAULT_BUDGET",
+                        "range": [
+                            64,
+                            1024
+                        ],
+                        "title": "Default MQTT Budget",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                        "help": "Maximum budget that the node can have. No additional budget will be allocated if this count is reached.",
+                        "id": "ESP_RMAKER_MQTT_MAX_BUDGET",
+                        "name": "ESP_RMAKER_MQTT_MAX_BUDGET",
+                        "range": [
+                            64,
+                            2048
+                        ],
+                        "title": "Max MQTT Budget",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                        "help": "Period in seconds after which the MQTT budget should revive (by ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT).\nThis is used to limit the messages being sent by the node.",
+                        "id": "ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD",
+                        "name": "ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD",
+                        "range": [
+                            5,
+                            600
+                        ],
+                        "title": "MQTT Budget revive period",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                        "help": "The count by which the budget will be increased periodically based on ESP_RMAKER_MQTT_BUDGET_REVIVE_PERIOD.",
+                        "id": "ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT",
+                        "name": "ESP_RMAKER_MQTT_BUDGET_REVIVE_COUNT",
+                        "range": [
+                            1,
+                            16
+                        ],
+                        "title": "MQTT Budget revive count",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "help": "Enable MQTT budgeting, which will control the number of MQTT messages sent by the node.",
+                "id": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                "name": "ESP_RMAKER_MQTT_ENABLE_BUDGETING",
+                "range": null,
+                "title": "Enable MQTT budgeting",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Maximum size of the payload for reporting parameter values.",
+                "id": "ESP_RMAKER_MAX_PARAM_DATA_SIZE",
+                "name": "ESP_RMAKER_MAX_PARAM_DATA_SIZE",
+                "range": [
+                    64,
+                    8192
+                ],
+                "title": "Maximum Parameters' data size",
+                "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "The handlers for User Node Mapping are now registered internally by ESP RainMaker core,\nby registering to appropriate Wi-Fi Provisioning events. If your application code also\nhas the calls to create and register the user mapping handlers, enable this config\noption to prevent duplication.",
+                "id": "ESP_RMAKER_DISABLE_USER_MAPPING_PROV",
+                "name": "ESP_RMAKER_DISABLE_USER_MAPPING_PROV",
+                "range": null,
+                "title": "Disable User Mapping during Provisioning",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "This enables the additional user id checks during user node mapping. Whenever a new user\nid is received, it is checked against the existing user id in NVS. If there is a mismatch,\nor if no user id exists in NVS, this is considered as a reset state and the same is reported\nto the ESP RainMaker Cloud during the User Node association MQTT Publish so that the cloud\ncan take appropriate action w.r.t user permissions. It is recommended to enable this option\nfor security reasons.",
+                "id": "ESP_RMAKER_USER_ID_CHECK",
+                "name": "ESP_RMAKER_USER_ID_CHECK",
+                "range": null,
+                "title": "User id check for User Node mapping",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "By default, the \"Name\" parameter (esp.param.name) changes are handled internally. If Applications\nwant to handle this themselves, this config option can be enabled. Please ensure that you update\nand report the name parameter in your callback so that it reflects correctly everywhere.\nIf no device callback is registered, the name paramater will be handled internally.",
+                "id": "RMAKER_NAME_PARAM_CB",
+                "name": "RMAKER_NAME_PARAM_CB",
+                "range": null,
+                "title": "Call device callback for Name param",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Enabling this allows to discover and control the node over local Wi-Fi network.\nNote that this uses only Wi-Fi level security and so, any client on the same\nWi-Fi network can potentially control the node. The communication is not encrypted\nand uses plain HTTP. Please Check the RainMaker documentation for additional details.\nNote that enabling this just means that the APIs to enable/disable local\ncontrol will be compiled in and can be used in application code. If CONFIG_ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE\nis also enabled, then no additional APIs are required for actually enabling local control.",
+                "id": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
+                "name": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
+                "range": null,
+                "title": "ESP RainMaker Local Control Feature",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Automatically enabled local control when RainMaker starts.",
+                "id": "ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE",
+                "name": "ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE",
+                "range": null,
+                "title": "Auto ESP RainMaker Local Control",
+                "type": "bool"
+            },
+            {
+                "children": [],
+                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
+                "help": "The port number to be used for http for local control.",
+                "id": "ESP_RMAKER_LOCAL_CTRL_HTTP_PORT",
+                "name": "ESP_RMAKER_LOCAL_CTRL_HTTP_PORT",
+                "range": null,
+                "title": "Local Control HTTP Port",
+                "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
+                "help": "The task stack size to be used for http server for local control.",
+                "id": "ESP_RMAKER_LOCAL_CTRL_STACK_SIZE",
+                "name": "ESP_RMAKER_LOCAL_CTRL_STACK_SIZE",
+                "range": null,
+                "title": "Local Control HTTP Server task stack size",
+                "type": "int"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_LOCAL_CTRL_SECURITY>",
+                        "help": null,
+                        "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY_0",
+                        "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY_0",
+                        "range": null,
+                        "title": "sec0",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_LOCAL_CTRL_SECURITY>",
+                        "help": null,
+                        "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY_1",
+                        "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY_1",
+                        "range": null,
+                        "title": "sec1",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": "ESP_RMAKER_LOCAL_CTRL_FEATURE_ENABLE",
+                "help": "Security type to be selected for local control.",
+                "id": "esp-rainmaker-config-local-control-security-type",
+                "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
+                "title": "Local Control Security Type",
+                "type": "choice"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": null,
+                "id": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
+                "name": "ESP_RMAKER_LOCAL_CTRL_SECURITY",
+                "range": null,
+                "title": null,
+                "type": "int"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_CONSOLE_UART_NUM>",
+                        "help": null,
+                        "id": "ESP_RMAKER_CONSOLE_UART_NUM_0",
+                        "name": "ESP_RMAKER_CONSOLE_UART_NUM_0",
+                        "range": null,
+                        "title": "UART0",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP_RMAKER_CONSOLE_UART_NUM>",
+                        "help": null,
+                        "id": "ESP_RMAKER_CONSOLE_UART_NUM_1",
+                        "name": "ESP_RMAKER_CONSOLE_UART_NUM_1",
+                        "range": null,
+                        "title": "UART1",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "UART to be selected for serial console.",
+                "id": "esp-rainmaker-config-uart-for-console-input",
+                "name": "ESP_RMAKER_CONSOLE_UART_NUM",
+                "title": "UART for console input",
+                "type": "choice"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": null,
+                "id": "ESP_RMAKER_CONSOLE_UART_NUM",
+                "name": "ESP_RMAKER_CONSOLE_UART_NUM",
+                "range": null,
+                "title": null,
+                "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Use Certificate Bundle for server authentication. Enabling this is recommended to safeguard\nagainst any changes in the server certificates in future. This has an impact on the binary\nsize as well as heap requirement.",
+                "id": "ESP_RMAKER_USE_CERT_BUNDLE",
+                "name": "ESP_RMAKER_USE_CERT_BUNDLE",
+                "range": null,
+                "title": "Use Certificate Bundle",
+                "type": "bool"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "ESP_RMAKER_OTA_AUTOFETCH",
+                                "help": "Periodically send an OTA fetch request. If set to 0, the request will be sent only once,\nwhen the node connects to the ESP RainMaker Cloud first time after a boot.\nElse, this defines the period (in hours) for the periodic fetch request.",
+                                "id": "ESP_RMAKER_OTA_AUTOFETCH_PERIOD",
+                                "name": "ESP_RMAKER_OTA_AUTOFETCH_PERIOD",
+                                "range": [
+                                    0,
+                                    168
+                                ],
+                                "title": "OTA Auto Fetch Period",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Applicable only for OTA using Topics.\nFetch the OTA (i.e. get the URL and other details) by actively sending an\nOTA fetch request to ESP RainMaker Cloud. If this is disabled, the node\nwill stay subscribed to the OTA Topics, but will get the information only\nif someone explicitly triggers it.",
+                        "id": "ESP_RMAKER_OTA_AUTOFETCH",
+                        "name": "ESP_RMAKER_OTA_AUTOFETCH",
+                        "range": null,
+                        "title": "Auto Fetch OTA",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This allows you to skip the validation of OTA server certificate CN field.",
+                        "id": "ESP_RMAKER_SKIP_COMMON_NAME_CHECK",
+                        "name": "ESP_RMAKER_SKIP_COMMON_NAME_CHECK",
+                        "range": null,
+                        "title": "Skip server certificate CN field check",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This allows you to skip the firmware version check. Useful during development,\nbut not for production.",
+                        "id": "ESP_RMAKER_SKIP_VERSION_CHECK",
+                        "name": "ESP_RMAKER_SKIP_VERSION_CHECK",
+                        "range": null,
+                        "title": "Skip firmware version check",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This allows you to skip the secure version check. Useful during development,\nbut not for production. Check out ESP IDF's Anti-rollback feature for more details.",
+                        "id": "ESP_RMAKER_SKIP_SECURE_VERSION_CHECK",
+                        "name": "ESP_RMAKER_SKIP_SECURE_VERSION_CHECK",
+                        "range": null,
+                        "title": "Skip secure version check",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This allows you to skip the project name check.",
+                        "id": "ESP_RMAKER_SKIP_PROJECT_NAME_CHECK",
+                        "name": "ESP_RMAKER_SKIP_PROJECT_NAME_CHECK",
+                        "range": null,
+                        "title": "Skip project name check",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Increasing this value beyond the default would speed up the OTA download process.\nHowever, please ensure that your application has enough memory headroom to allow this,\nelse, the OTA may fail.",
+                        "id": "ESP_RMAKER_OTA_HTTP_RX_BUFFER_SIZE",
+                        "name": "ESP_RMAKER_OTA_HTTP_RX_BUFFER_SIZE",
+                        "range": [
+                            512,
+                            5760
+                        ],
+                        "title": "OTA HTTP receive buffer size",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "After an OTA Update, if CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE is set, then the firmware will wait for MQTT\nconnection to mark the new firmware as valid. However, if it is not able to do so within\nthis wait period (in seconds), the firmware will be marked as invalid and the older\nfirmware will be booted into.",
+                        "id": "ESP_RMAKER_OTA_ROLLBACK_WAIT_PERIOD",
+                        "name": "ESP_RMAKER_OTA_ROLLBACK_WAIT_PERIOD",
+                        "range": [
+                            30,
+                            600
+                        ],
+                        "title": "OTA Rollback Wait Period (Seconds)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "After OTA image is flashed and active partition changed, the device automatically reboots. To disable this\nbehaviour and handle reboot on your own, based on RMAKER_OTA event, enable this option.",
+                        "id": "ESP_RMAKER_OTA_DISABLE_AUTO_REBOOT",
+                        "name": "ESP_RMAKER_OTA_DISABLE_AUTO_REBOOT",
+                        "range": null,
+                        "title": "Disable auto reboot",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "OTA Jobs can include additional metadata for time to indicate a range of valid date and the time within\nthose dates. Eg. Perform OTA between 1 Dec 2022 and 10 Dec 2022 that too only between 2:00am and 5:00am.\nIf you want to ignore this, disable this option.",
+                        "id": "ESP_RMAKER_OTA_TIME_SUPPORT",
+                        "name": "ESP_RMAKER_OTA_TIME_SUPPORT",
+                        "range": null,
+                        "title": "Enable OTA Time Support",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "esp-rainmaker-config-esp-rainmaker-ota-config",
+                "title": "ESP RainMaker OTA Config",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Maximum Number of schedules allowed. The json size for report params increases as the number of schedules increases.",
+                        "id": "ESP_RMAKER_SCHEDULING_MAX_SCHEDULES",
+                        "name": "ESP_RMAKER_SCHEDULING_MAX_SCHEDULES",
+                        "range": [
+                            1,
+                            50
+                        ],
+                        "title": "Maximum schedules",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "id": "esp-rainmaker-config-esp-rainmaker-scheduling",
+                "title": "ESP RainMaker Scheduling",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Maximum Number of scenes allowed. The json size for report params increases as the number of scenes increases.",
+                        "id": "ESP_RMAKER_SCENES_MAX_SCENES",
+                        "name": "ESP_RMAKER_SCENES_MAX_SCENES",
+                        "range": [
+                            1,
+                            50
+                        ],
+                        "title": "Maximum scenes",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This enables the deactivate callback support. The application callback will be invoked with the source\nset to ESP_RMAKER_REQ_SRC_SCENE_DEACTIVATE when the deactivate operation is received. However, the\nparam values would be the same as those for activate, since the RainMaker core does not know what the\nexpected values are for scene deactivation.",
+                        "id": "ESP_RMAKER_SCENES_DEACTIVATE_SUPPORT",
+                        "name": "ESP_RMAKER_SCENES_DEACTIVATE_SUPPORT",
+                        "range": null,
+                        "title": "Enable Deactivate support",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "esp-rainmaker-config-esp-rainmaker-scenes",
+                "title": "ESP RainMaker Scenes",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "ESP_RMAKER_CMD_RESP_ENABLE",
+                                "help": "Enable testing for Command-Response module. This enables triggering commands and parsing response from the node itself,\nrather than receiving the commands from cloud. C API or the serial console can be used to trigger the commands.\nThis should be enabled only while testing commands, but should always be disabled in production firmware.",
+                                "id": "ESP_RMAKER_CMD_RESP_TEST_ENABLE",
+                                "name": "ESP_RMAKER_CMD_RESP_TEST_ENABLE",
+                                "range": null,
+                                "title": "Enable Command-Response Testing",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Enable the ESP RainMaker Command-Response module for semi-synchronous communication. Please refer the RainMaker documents\nfor additional information.",
+                        "id": "ESP_RMAKER_CMD_RESP_ENABLE",
+                        "name": "ESP_RMAKER_CMD_RESP_ENABLE",
+                        "range": null,
+                        "title": "Enable Command-Response Module",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "esp-rainmaker-config-esp-rainmaker-command-response",
+                "title": "ESP RainMaker Command-Response",
+                "type": "menu"
+            }
+        ],
+        "depends_on": null,
+        "id": "esp-rainmaker-config",
+        "title": "ESP RainMaker Config",
         "type": "menu"
     },
     {
@@ -33663,6 +33663,338 @@
             {
                 "children": [
                     {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Toggle SD card support\nThis requires IDF v5+ as older ESP-IDF do not support SD card erase.",
+                        "id": "LITTLEFS_SDMMC_SUPPORT",
+                        "name": "LITTLEFS_SDMMC_SUPPORT",
+                        "range": null,
+                        "title": "SDMMC support (requires ESP-IDF v5+)",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Define maximum number of partitions that can be mounted.",
+                        "id": "LITTLEFS_MAX_PARTITIONS",
+                        "name": "LITTLEFS_MAX_PARTITIONS",
+                        "range": [
+                            1,
+                            10
+                        ],
+                        "title": "Maximum Number of Partitions",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Logical page size of LITTLEFS partition, in bytes. Must be multiple\nof flash page size (which is usually 256 bytes).\nLarger page sizes reduce overhead when storing large files, and\nimprove filesystem performance when reading large files.\nSmaller page sizes reduce overhead when storing small (< page size)\nfiles.",
+                        "id": "LITTLEFS_PAGE_SIZE",
+                        "name": "LITTLEFS_PAGE_SIZE",
+                        "range": [
+                            256,
+                            1024
+                        ],
+                        "title": "LITTLEFS logical page size",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Includes NULL-terminator. If flashing a prebuilt filesystem image,\nrebuild the filesystem image if this value changes.\nmklittlefs, the tool that generates the image will automatically be rebuilt.\nIf downloading a pre-built release of mklittlefs, it was most-likely\nbuilt with LFS_NAME_MAX=32 and should not be used.",
+                        "id": "LITTLEFS_OBJ_NAME_LEN",
+                        "name": "LITTLEFS_OBJ_NAME_LEN",
+                        "range": [
+                            16,
+                            1022
+                        ],
+                        "title": "Maximum object name length including NULL terminator.",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Minimum size of a block read. All read operations will be a\nmultiple of this value.",
+                        "id": "LITTLEFS_READ_SIZE",
+                        "name": "LITTLEFS_READ_SIZE",
+                        "range": null,
+                        "title": "Minimum size of a block read.",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Minimum size of a block program. All write operations will be a\nmultiple of this value.",
+                        "id": "LITTLEFS_WRITE_SIZE",
+                        "name": "LITTLEFS_WRITE_SIZE",
+                        "range": null,
+                        "title": "Minimum size of a block write.",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Look ahead size. Must be a multiple of 8.",
+                        "id": "LITTLEFS_LOOKAHEAD_SIZE",
+                        "name": "LITTLEFS_LOOKAHEAD_SIZE",
+                        "range": null,
+                        "title": "Look ahead size.",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Size of block caches. Each cache buffers a portion of a block in RAM.\nThe littlefs needs a read cache, a program cache, and one additional\ncache per file. Larger caches can improve performance by storing more\ndata and reducing the number of disk accesses. Must be a multiple of\nthe read and program sizes, and a factor of the block size (4096).",
+                        "id": "LITTLEFS_CACHE_SIZE",
+                        "name": "LITTLEFS_CACHE_SIZE",
+                        "range": null,
+                        "title": "Cache Size",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Number of erase cycles before littlefs evicts metadata logs and moves \nthe metadata to another block. Suggested values are in the\nrange 100-1000, with large values having better performance at the cost\nof less consistent wear distribution.\nSet to -1 to disable block-level wear-leveling.",
+                        "id": "LITTLEFS_BLOCK_CYCLES",
+                        "name": "LITTLEFS_BLOCK_CYCLES",
+                        "range": [
+                            -1,
+                            1024
+                        ],
+                        "title": "LittleFS wear-leveling block cycles",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Saves timestamp on modification. Uses an additional 4bytes.",
+                        "id": "LITTLEFS_USE_MTIME",
+                        "name": "LITTLEFS_USE_MTIME",
+                        "range": null,
+                        "title": "Save file modification time",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Records the filepath only as a 32-bit hash in the file descriptor instead\nof the entire filepath. Saves approximately `sizeof(filepath)` bytes\nper file descriptor.\nIf enabled, functionality (like fstat) that requires the file path \nfrom the file descriptor will not work.\nIn rare cases, may cause unlinking or renaming issues (unlikely) if\nthere's a hash collision between an open filepath and a filepath\nto be modified.",
+                        "id": "LITTLEFS_USE_ONLY_HASH",
+                        "name": "LITTLEFS_USE_ONLY_HASH",
+                        "range": null,
+                        "title": "Don't store filepath in the file descriptor",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Converts LittleFS error codes into human readable strings.\nMay increase binary size depending on logging level.",
+                        "id": "LITTLEFS_HUMAN_READABLE",
+                        "name": "LITTLEFS_HUMAN_READABLE",
+                        "range": null,
+                        "title": "Make errno human-readable",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice LITTLEFS_MTIME>",
+                                "help": "Saves timestamp on modification.",
+                                "id": "LITTLEFS_MTIME_USE_SECONDS",
+                                "name": "LITTLEFS_MTIME_USE_SECONDS",
+                                "range": null,
+                                "title": "Use Seconds",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice LITTLEFS_MTIME>",
+                                "help": "Saves nonce on modification; intended for detecting filechanges\non systems without access to a RTC.\n\nA file who's nonce is the same as it was at a previous time has \nhigh probability of not having been modified.\n\nUpon file modification, the nonce is incremented by one. Upon file\ncreation, a random nonce is assigned.\n\nThere is a very slim chance that a file will have the same nonce if\nit is deleted and created again (approx 1 in 4 billion).",
+                                "id": "LITTLEFS_MTIME_USE_NONCE",
+                                "name": "LITTLEFS_MTIME_USE_NONCE",
+                                "range": null,
+                                "title": "Use Nonce",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": "LITTLEFS_USE_MTIME",
+                        "help": "Save an additional 4-byte attribute. Options listed below.",
+                        "id": "component-config-littlefs-mtime-attribute-options",
+                        "name": "LITTLEFS_MTIME",
+                        "title": "mtime attribute options",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enabling this feature allows for greater drop-in compatability\nwhen replacing SPIFFS. Since SPIFFS doesn't have folders, and \nfolders are just considered as part of a file name, enabling this\nwill automatically create folders as necessary to create a file\ninstead of throwing an error. Similarly, upon the deletion of the\nlast file in a folder, the folder will be deleted. It is recommended\nto only enable this flag as a stop-gap solution.",
+                        "id": "LITTLEFS_SPIFFS_COMPAT",
+                        "name": "LITTLEFS_SPIFFS_COMPAT",
+                        "range": null,
+                        "title": "Improve SPIFFS drop-in compatability",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enabling this feature extends SPIFFS capability.\nIn SPIFFS data is written immediately to the flash storage when fflush() function called.\nIn LittleFS flush() does not write data to the flash, and fsync() call needed after.\nWith this feature fflush() will write data to the storage.",
+                        "id": "LITTLEFS_FLUSH_FILE_EVERY_WRITE",
+                        "name": "LITTLEFS_FLUSH_FILE_EVERY_WRITE",
+                        "range": null,
+                        "title": "Flush file to flash after each write operation",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "!LITTLEFS_USE_ONLY_HASH && LITTLEFS_SPIFFS_COMPAT",
+                        "help": "Support opening directory by following APIs:\n\n    int fd = open(\"my_directory\", O_DIRECTORY);",
+                        "id": "LITTLEFS_OPEN_DIR",
+                        "name": "LITTLEFS_OPEN_DIR",
+                        "range": null,
+                        "title": "Support opening directory",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "LITTLEFS_FCNTL_GET_PATH",
+                                "help": "ESP-IDF's header file \"fcntl.h\" doesn't support macro \"F_GETPATH\",\nso we should define this macro here.",
+                                "id": "LITTLEFS_FCNTL_F_GETPATH_VALUE",
+                                "name": "LITTLEFS_FCNTL_F_GETPATH_VALUE",
+                                "range": null,
+                                "title": "Value of command F_GETPATH",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": "!LITTLEFS_USE_ONLY_HASH",
+                        "help": "Support getting directory by following APIs:\n\n    char buffer[MAXPATHLEN];\n\n    int fd = open(\"my_file\", flags);\n    fcntl(fd, F_GETPATH, buffer);",
+                        "id": "LITTLEFS_FCNTL_GET_PATH",
+                        "name": "LITTLEFS_FCNTL_GET_PATH",
+                        "range": null,
+                        "title": "Support get file or directory path",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
+                                        "help": null,
+                                        "id": "LITTLEFS_DISK_VERSION_MOST_RECENT",
+                                        "name": "LITTLEFS_DISK_VERSION_MOST_RECENT",
+                                        "range": null,
+                                        "title": "Write the most recent LittleFS version",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
+                                        "help": null,
+                                        "id": "LITTLEFS_DISK_VERSION_2_1",
+                                        "name": "LITTLEFS_DISK_VERSION_2_1",
+                                        "range": null,
+                                        "title": "Write LittleFS 2.1",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
+                                        "help": null,
+                                        "id": "LITTLEFS_DISK_VERSION_2_0",
+                                        "name": "LITTLEFS_DISK_VERSION_2_0",
+                                        "range": null,
+                                        "title": "Write LittleFS 2.0 (no forward-looking erase-state CRCs)",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": "LITTLEFS_MULTIVERSION",
+                                "help": "See LITTLEFS_MULTIVERSION for details.",
+                                "id": "component-config-littlefs-support-selecting-the-littlefs-minor-version-to-write-to-disk-littlefs_disk_version",
+                                "name": "LITTLEFS_DISK_VERSION",
+                                "title": "LITTLEFS_DISK_VERSION",
+                                "type": "choice"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "LittleFS 2.6 bumps the on-disk minor version of littlefs from lfs2.0 -> lfs2.1.\n\nThis change is backwards-compatible, but after the first write with the new version,\nthe image on disk will no longer be mountable by older versions of littlefs.\n\nEnabling LITTLEFS_MULTIVERSION allows to select the On-disk version\nto use when writing in the form of 16-bit major version\n+ 16-bit minor version. This limiting metadata to what is supported by\nolder minor versions. Note that some features will be lost. Defaults to\nto the most recent minor version when zero.",
+                        "id": "LITTLEFS_MULTIVERSION",
+                        "name": "LITTLEFS_MULTIVERSION",
+                        "range": null,
+                        "title": "Support selecting the LittleFS minor version to write to disk",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
+                                "help": "Disallow dynamic allocation, static buffers must be provided by the calling application.",
+                                "id": "LITTLEFS_MALLOC_STRATEGY_DISABLE",
+                                "name": "LITTLEFS_MALLOC_STRATEGY_DISABLE",
+                                "range": null,
+                                "title": "Static buffers only",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
+                                "help": "Uses an automatic allocation strategy. On systems with heap in SPIRAM, if\nthe allocation size does not exceed SPIRAM_MALLOC_ALWAYSINTERNAL then internal\nheap allocation if preferred, otherwise allocation will be attempted from SPIRAM\nheap.",
+                                "id": "LITTLEFS_MALLOC_STRATEGY_DEFAULT",
+                                "name": "LITTLEFS_MALLOC_STRATEGY_DEFAULT",
+                                "range": null,
+                                "title": "Default heap selection",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
+                                "help": "Uses ESP-IDF heap_caps_malloc to allocate from internal heap.",
+                                "id": "LITTLEFS_MALLOC_STRATEGY_INTERNAL",
+                                "name": "LITTLEFS_MALLOC_STRATEGY_INTERNAL",
+                                "range": null,
+                                "title": "Internal heap",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "SPIRAM_USE_MALLOC && ESP32_SPIRAM_SUPPORT && <choice LITTLEFS_MALLOC_STRATEGY>",
+                                "help": "Uses ESP-IDF heap_caps_malloc to allocate from SPIRAM heap.",
+                                "id": "LITTLEFS_MALLOC_STRATEGY_SPIRAM",
+                                "name": "LITTLEFS_MALLOC_STRATEGY_SPIRAM",
+                                "range": null,
+                                "title": "SPIRAM heap",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Maps lfs_malloc to ESP-IDF capabilities-based memory allocator or\ndisables dynamic allocation in favour of user-provided static buffers.",
+                        "id": "component-config-littlefs-buffer-allocation-strategy",
+                        "name": "LITTLEFS_MALLOC_STRATEGY",
+                        "title": "Buffer allocation strategy",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Selects whether littlefs performs runtime assert checks.",
+                        "id": "LITTLEFS_ASSERTS",
+                        "name": "LITTLEFS_ASSERTS",
+                        "range": null,
+                        "title": "Enable asserts",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-littlefs",
+                "title": "LittleFS",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
                         "children": [
                             {
                                 "children": [],
@@ -34013,182 +34345,148 @@
                 "children": [
                     {
                         "children": [],
-                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
-                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
-                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
-                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "depends_on": "IDF_TARGET_ESP32 || IDF_TARGET_ESP32S3",
+                        "help": null,
+                        "id": "DSP_OPTIMIZATIONS_SUPPORTED",
+                        "name": "DSP_OPTIMIZATIONS_SUPPORTED",
                         "range": null,
-                        "title": "Enable DS peripheral support",
+                        "title": null,
                         "type": "bool"
                     },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
-                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "range": null,
-                        "title": "Enable support for legacy formats",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-esp-secure-cert-manager",
-                "title": "ESP Secure Cert Manager",
-                "type": "menu"
-            },
-            {
-                "children": [
                     {
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "<choice DIAG_LOG_MSG_ARG_FORMAT>",
+                                "depends_on": "<choice DSP_OPTIMIZATION>",
                                 "help": null,
-                                "id": "DIAG_LOG_MSG_ARG_FORMAT_TLV",
-                                "name": "DIAG_LOG_MSG_ARG_FORMAT_TLV",
+                                "id": "DSP_ANSI",
+                                "name": "DSP_ANSI",
                                 "range": null,
-                                "title": "Format arguments as TLV",
+                                "title": "ANSI C",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice DIAG_LOG_MSG_ARG_FORMAT>",
+                                "depends_on": "DSP_OPTIMIZATIONS_SUPPORTED && <choice DSP_OPTIMIZATION>",
                                 "help": null,
-                                "id": "DIAG_LOG_MSG_ARG_FORMAT_STRING",
-                                "name": "DIAG_LOG_MSG_ARG_FORMAT_STRING",
+                                "id": "DSP_OPTIMIZED",
+                                "name": "DSP_OPTIMIZED",
                                 "range": null,
-                                "title": "Format arguments as string",
+                                "title": "Optimized",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "For error/warning/event logs, diagnostics module collects program counter, timestamp,\ntag, RO data pointer and log arguments. Log arguments are stored in statically allocated buffer.\nThis option configures how to format and store log arguments in buffer.\nLog arguments can be formatted as TLV or complete log string formatted using vsnprintf.\n\nIf \"TLV\" is selected, buffer contains arguments formatted as TLV.\nType - 1 byte for the type of argument, please check esp_diag_arg_type_t.\nLength - 1 byte for the size of argument, size is calculated using sizeof operator.\nValue - Size bytes for the value.\n\nIf \"STRING\" is selected, buffer contains the entire string formatted using vsnprintf.",
-                        "id": "component-config-diagnostics-diagnostics-log-argument-format",
-                        "name": "DIAG_LOG_MSG_ARG_FORMAT",
-                        "title": "Diagnostics log argument format",
+                        "help": "An ANSI C version could be used for verification and debug purpose,\nor for chips where an optimized version is not available.",
+                        "id": "component-config-dsp-library-dsp-optimization",
+                        "name": "DSP_OPTIMIZATION",
+                        "title": "DSP Optimization",
                         "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Log arguments are stored in a static allocated buffer.\nThis option configures the maximum size of buffer for storing log arguments.",
-                        "id": "DIAG_LOG_MSG_ARG_MAX_SIZE",
-                        "name": "DIAG_LOG_MSG_ARG_MAX_SIZE",
-                        "range": [
-                            32,
-                            255
-                        ],
-                        "title": "Maximum size of diagnostics log argument buffer",
+                        "help": null,
+                        "id": "DSP_OPTIMIZATION",
+                        "name": "DSP_OPTIMIZATION",
+                        "range": null,
+                        "title": null,
                         "type": "int"
                     },
                     {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Every Wi-Fi log printed on the console adds three diagnostics logs.\nFor some users, Wi-Fi logs may not be that useful.\nBy default, diagnostics drops Wi-Fi logs. Set this config option to \"n\" for recording Wi-Fi logs.",
-                        "id": "DIAG_LOG_DROP_WIFI_LOGS",
-                        "name": "DIAG_LOG_DROP_WIFI_LOGS",
-                        "range": null,
-                        "title": "Drop Wi-Fi logs",
-                        "type": "bool"
-                    },
-                    {
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "DIAG_ENABLE_METRICS",
-                                "help": "This option configures the maximum number of metrics that can be registered.",
-                                "id": "DIAG_METRICS_MAX_COUNT",
-                                "name": "DIAG_METRICS_MAX_COUNT",
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_512",
+                                "name": "DSP_MAX_FFT_SIZE_512",
                                 "range": null,
-                                "title": "Maximum number of metrics",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "DIAG_ENABLE_METRICS",
-                                "help": "Enables the heap memory metrics. This collects free memory, largest free block,\nand minimum free memory for heaps in internal as well as external memory.",
-                                "id": "DIAG_ENABLE_HEAP_METRICS",
-                                "name": "DIAG_ENABLE_HEAP_METRICS",
-                                "range": null,
-                                "title": "Enable Heap Metrics",
+                                "title": "512",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "DIAG_ENABLE_METRICS",
-                                "help": "Enables Wi-Fi metrics and collects Wi-Fi RSSI and minumum ever Wi-Fi RSSI.",
-                                "id": "DIAG_ENABLE_WIFI_METRICS",
-                                "name": "DIAG_ENABLE_WIFI_METRICS",
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_1024",
+                                "name": "DSP_MAX_FFT_SIZE_1024",
                                 "range": null,
-                                "title": "Enable Wi-Fi Metrics",
+                                "title": "1024",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_2048",
+                                "name": "DSP_MAX_FFT_SIZE_2048",
+                                "range": null,
+                                "title": "2048",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_4096",
+                                "name": "DSP_MAX_FFT_SIZE_4096",
+                                "range": null,
+                                "title": "4096",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_8192",
+                                "name": "DSP_MAX_FFT_SIZE_8192",
+                                "range": null,
+                                "title": "8192",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_16384",
+                                "name": "DSP_MAX_FFT_SIZE_16384",
+                                "range": null,
+                                "title": "16384",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
+                                "help": null,
+                                "id": "DSP_MAX_FFT_SIZE_32768",
+                                "name": "DSP_MAX_FFT_SIZE_32768",
+                                "range": null,
+                                "title": "32768",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "Diagnostics module supports recording and reporting metrics to cloud.\nThis option enables the diagnostics metrics and related functionality.",
-                        "id": "DIAG_ENABLE_METRICS",
-                        "name": "DIAG_ENABLE_METRICS",
-                        "range": null,
-                        "title": "Enable diagnostics metrics",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "DIAG_ENABLE_VARIABLES",
-                                "help": "This option configures the maximum number of variables that can be registered.",
-                                "id": "DIAG_VARIABLES_MAX_COUNT",
-                                "name": "DIAG_VARIABLES_MAX_COUNT",
-                                "range": null,
-                                "title": "Maximum number of variables",
-                                "type": "int"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "DIAG_ENABLE_NETWORK_VARIABLES",
-                                        "help": "Enable more advanced network variables",
-                                        "id": "DIAG_MORE_NETWORK_VARS",
-                                        "name": "DIAG_MORE_NETWORK_VARS",
-                                        "range": null,
-                                        "title": "Enable More Advanced Network variables",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": "DIAG_ENABLE_VARIABLES",
-                                "help": "Enables the Wi-Fi and IP address variables. Below variables are collected.\nFor Wi-Fi: SSID, BSSID, channel, auth mode, connection status, disconnection reason.\nFor IP: IPv4 address, netmask, and gateway of the device.",
-                                "id": "DIAG_ENABLE_NETWORK_VARIABLES",
-                                "name": "DIAG_ENABLE_NETWORK_VARIABLES",
-                                "range": null,
-                                "title": "Enable Network variables",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Variables are similar to metrics but they represent entities where their current value\nis much more important than over a period of time.\nThis option enables the diagnostics variables and related functionality",
-                        "id": "DIAG_ENABLE_VARIABLES",
-                        "name": "DIAG_ENABLE_VARIABLES",
-                        "range": null,
-                        "title": "Enable diagnostics variables",
-                        "type": "bool"
+                        "help": "This is default FFT size for internal usage.",
+                        "id": "component-config-dsp-library-maximum-fft-length",
+                        "name": "DSP_MAX_FFT_SIZE",
+                        "title": "Maximum FFT length",
+                        "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Diagnostics component wraps the esp_log_write and esp_log_writev APIs using `--wrap` gcc option.\nThere can be scenario where another component also wants to wrap the logging functions.\nIn that case, enable this option and use the data ingestion APIs esp_diag_log_write and esp_diag_log_writev.",
-                        "id": "DIAG_USE_EXTERNAL_LOG_WRAP",
-                        "name": "DIAG_USE_EXTERNAL_LOG_WRAP",
+                        "help": null,
+                        "id": "DSP_MAX_FFT_SIZE",
+                        "name": "DSP_MAX_FFT_SIZE",
                         "range": null,
-                        "title": "Use external log wrapper",
-                        "type": "bool"
+                        "title": null,
+                        "type": "int"
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-diagnostics",
-                "title": "Diagnostics",
+                "id": "component-config-dsp-library",
+                "title": "DSP Library",
                 "type": "menu"
             },
             {
@@ -34196,37 +34494,463 @@
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "You can access parent node of parsed json",
-                        "id": "JSMN_PARENT_LINKS",
-                        "name": "JSMN_PARENT_LINKS",
+                        "help": "Number of network interfaces to be served by the mDNS library.\nLowering this number helps to reduce some static RAM usage.",
+                        "id": "MDNS_MAX_INTERFACES",
+                        "name": "MDNS_MAX_INTERFACES",
+                        "range": [
+                            1,
+                            9
+                        ],
+                        "title": "Max number of interfaces",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Services take up a certain amount of memory, and allowing fewer\nservices to be open at the same time conserves memory. Specify\nthe maximum amount of services here.",
+                        "id": "MDNS_MAX_SERVICES",
+                        "name": "MDNS_MAX_SERVICES",
                         "range": null,
-                        "title": "Enable parent links",
+                        "title": "Max number of services",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS task priority. Please do not set the task priority\nhigher than priorities of system tasks. Compile time warning/error\nwould be emitted if the chosen task priority were too high.",
+                        "id": "MDNS_TASK_PRIORITY",
+                        "name": "MDNS_TASK_PRIORITY",
+                        "range": [
+                            1,
+                            255
+                        ],
+                        "title": "mDNS task priority",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting the length of mDNS action queue.",
+                        "id": "MDNS_ACTION_QUEUE_LEN",
+                        "name": "MDNS_ACTION_QUEUE_LEN",
+                        "range": [
+                            8,
+                            64
+                        ],
+                        "title": "Maximum actions pending to the server",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS task stacksize.",
+                        "id": "MDNS_TASK_STACK_SIZE",
+                        "name": "MDNS_TASK_STACK_SIZE",
+                        "range": null,
+                        "title": "mDNS task stack size",
+                        "type": "int"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_NO_AFFINITY",
+                                "name": "MDNS_TASK_AFFINITY_NO_AFFINITY",
+                                "range": null,
+                                "title": "No affinity",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_CPU0",
+                                "name": "MDNS_TASK_AFFINITY_CPU0",
+                                "range": null,
+                                "title": "CPU0",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "!FREERTOS_UNICORE && <choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_CPU1",
+                                "name": "MDNS_TASK_AFFINITY_CPU1",
+                                "range": null,
+                                "title": "CPU1",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS tasks affinity, i.e. whether the task is pinned to\nCPU0, pinned to CPU1, or allowed to run on any CPU.",
+                        "id": "component-config-mdns-mdns-task-affinity",
+                        "name": "MDNS_TASK_AFFINITY",
+                        "title": "mDNS task affinity",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "MDNS_TASK_AFFINITY",
+                        "name": "MDNS_TASK_AFFINITY",
+                        "range": null,
+                        "title": null,
+                        "type": "hex"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Configures timeout for adding a new mDNS service. Adding a service\nfails if could not be completed within this time.",
+                        "id": "MDNS_SERVICE_ADD_TIMEOUT_MS",
+                        "name": "MDNS_SERVICE_ADD_TIMEOUT_MS",
+                        "range": [
+                            10,
+                            30000
+                        ],
+                        "title": "mDNS adding service timeout (ms)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Configures period of mDNS timer, which periodically transmits packets\nand schedules mDNS searches.",
+                        "id": "MDNS_TIMER_PERIOD_MS",
+                        "name": "MDNS_TIMER_PERIOD_MS",
+                        "range": [
+                            10,
+                            10000
+                        ],
+                        "title": "mDNS timer period (ms)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables optional mDNS networking implementation using BSD sockets\nin UDP multicast mode.\nThis option creates a new thread to serve receiving packets (TODO).\nThis option uses additional N sockets, where N is number of interfaces.",
+                        "id": "MDNS_NETWORKING_SOCKET",
+                        "name": "MDNS_NETWORKING_SOCKET",
+                        "range": null,
+                        "title": "Use BSD sockets for mDNS networking",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "In strict mode primitives are: numbers and booleans",
-                        "id": "JSMN_STRICT",
-                        "name": "JSMN_STRICT",
+                        "help": "Enable only if the querier and the responder share the same IP address.\nThis usually happens in test mode, where we may run multiple instances of\nresponders/queriers on the same interface.",
+                        "id": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
+                        "name": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
                         "range": null,
-                        "title": "Enable strict mode",
+                        "title": "Skip suppressing our own packets",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Declar JSMN API as static (instead of extern)",
-                        "id": "JSMN_STATIC",
-                        "name": "JSMN_STATIC",
+                        "help": "Enable for the library to log received and sent mDNS packets to stdout.",
+                        "id": "MDNS_ENABLE_DEBUG_PRINTS",
+                        "name": "MDNS_ENABLE_DEBUG_PRINTS",
                         "range": null,
-                        "title": "Declare JSMN API as static",
+                        "title": "Enable debug prints of mDNS packets",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable for the console cli to be available on the device.",
+                        "id": "MDNS_ENABLE_CONSOLE_CLI",
+                        "name": "MDNS_ENABLE_CONSOLE_CLI",
+                        "range": null,
+                        "title": "Enable Command Line Interface on device console",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables support for IPv4 reverse lookup. If enabled, the mDNS library\nresponse to PTR queries of \"A.B.C.D.in-addr.arpa\" type.",
+                        "id": "MDNS_RESPOND_REVERSE_QUERIES",
+                        "name": "MDNS_RESPOND_REVERSE_QUERIES",
+                        "range": null,
+                        "title": "Enable responding to IPv4 reverse queries",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables adding multiple service instances under the same service type.",
+                        "id": "MDNS_MULTIPLE_INSTANCE",
+                        "name": "MDNS_MULTIPLE_INSTANCE",
+                        "range": null,
+                        "title": "Multiple instances under the same service type",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set up mDNS for the default WiFi station.\nDisable this option if you do not need mDNS on default WiFi STA.",
+                                "id": "MDNS_PREDEF_NETIF_STA",
+                                "name": "MDNS_PREDEF_NETIF_STA",
+                                "range": null,
+                                "title": "Use predefined interface for WiFi Station",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set up mDNS for the default WiFi Access Point.\nDisable this option if you do not need mDNS on default WiFi AP.",
+                                "id": "MDNS_PREDEF_NETIF_AP",
+                                "name": "MDNS_PREDEF_NETIF_AP",
+                                "range": null,
+                                "title": "Use predefined interface for WiFi Access Point",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "ETH_ENABLED",
+                                "help": "Set up mDNS for the default Ethernet interface.\nDisable this option if you do not need mDNS on default Ethernet.",
+                                "id": "MDNS_PREDEF_NETIF_ETH",
+                                "name": "MDNS_PREDEF_NETIF_ETH",
+                                "range": null,
+                                "title": "Use predefined interface for Ethernet",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "component-config-mdns-mdns-predefined-interfaces",
+                        "title": "MDNS Predefined interfaces",
+                        "type": "menu"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-mdns",
+                "title": "mDNS",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP_INSIGHTS_DEBUG_ENABLED",
+                                        "help": "Print pretty format json data for cbor messages\nIf this option is not enabled, hexdump will be presented instead of json data",
+                                        "id": "ESP_INSIGHTS_DEBUG_PRINT_JSON",
+                                        "name": "ESP_INSIGHTS_DEBUG_PRINT_JSON",
+                                        "range": null,
+                                        "title": "Dump CBOR decoded data instead of hexdump",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": "ESP_INSIGHTS_ENABLED",
+                                "help": null,
+                                "id": "ESP_INSIGHTS_DEBUG_ENABLED",
+                                "name": "ESP_INSIGHTS_DEBUG_ENABLED",
+                                "range": null,
+                                "title": "Enable Insights debug prints",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "ESP_INSIGHTS_ENABLED",
+                        "name": "ESP_INSIGHTS_ENABLED",
+                        "range": null,
+                        "title": "Enable ESP Insights",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "(ESP_COREDUMP_ENABLE_TO_FLASH && ESP_COREDUMP_DATA_FORMAT_ELF) || (ESP32_ENABLE_COREDUMP_TO_FLASH && ESP32_COREDUMP_DATA_FORMAT_ELF)",
+                        "help": "This option enables core dump summary functionality in insights.\nIn case of crash, insights sends the core dump summary to cloud on next boot.",
+                        "id": "ESP_INSIGHTS_COREDUMP_ENABLE",
+                        "name": "ESP_INSIGHTS_COREDUMP_ENABLE",
+                        "range": null,
+                        "title": "Enable core dump summary support",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice ESP_INSIGHTS_TRANSPORT>",
+                                "help": null,
+                                "id": "ESP_INSIGHTS_TRANSPORT_MQTT",
+                                "name": "ESP_INSIGHTS_TRANSPORT_MQTT",
+                                "range": null,
+                                "title": "MQTT",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice ESP_INSIGHTS_TRANSPORT>",
+                                "help": null,
+                                "id": "ESP_INSIGHTS_TRANSPORT_HTTPS",
+                                "name": "ESP_INSIGHTS_TRANSPORT_HTTPS",
+                                "range": null,
+                                "title": "HTTPS",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "By default insights can send data to cloud using MQTT and HTTPS transports.\nThis option configures the default insights transport.\nInsights transport can be overridden using esp_insights_transport_register API.",
+                        "id": "component-config-esp-insights-insights-default-transport",
+                        "name": "ESP_INSIGHTS_TRANSPORT",
+                        "title": "Insights default transport",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "ESP_INSIGHTS_TRANSPORT_HTTPS",
+                        "help": null,
+                        "id": "ESP_INSIGHTS_TRANSPORT_HTTPS_HOST",
+                        "name": "ESP_INSIGHTS_TRANSPORT_HTTPS_HOST",
+                        "range": null,
+                        "title": "Insights https host",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Minimum interval between two consecutive cloud posts.\nThere is a dynamic logic to decide the next timeout when the insights data will be reported.\nIt depends on whether the data was sent or not during the previous timeout.\nIf the data was sent, the next timeout is doubled and if not, it is halved.",
+                        "id": "ESP_INSIGHTS_CLOUD_POST_MIN_INTERVAL_SEC",
+                        "name": "ESP_INSIGHTS_CLOUD_POST_MIN_INTERVAL_SEC",
+                        "range": null,
+                        "title": "Insights cloud post min interval (sec)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Maximum interval between two consecutive cloud posts.\nThere is a dynamic logic to decide the next timeout when the insights data will be reported.\nIt depends on whether the data was sent or not during the previous timeout.\nIf the data was sent, the next timeout is doubled and if not, it is halved.",
+                        "id": "ESP_INSIGHTS_CLOUD_POST_MAX_INTERVAL_SEC",
+                        "name": "ESP_INSIGHTS_CLOUD_POST_MAX_INTERVAL_SEC",
+                        "range": null,
+                        "title": "Insights cloud post max interval (sec)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "For users already using older metadata, this provides an option to keep using the same.\nThis is important as the new metadata version (1.1), is not backwad compatible.",
+                        "id": "ESP_INSIGHTS_META_VERSION_10",
+                        "name": "ESP_INSIGHTS_META_VERSION_10",
+                        "range": null,
+                        "title": "Use older metadata format (1.0)",
                         "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-jsmn",
-                "title": "jsmn",
+                "id": "component-config-esp-insights",
+                "title": "ESP Insights",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice DIAG_DATA_STORE_RTC_OR_FLASH>",
+                                "help": null,
+                                "id": "DIAG_DATA_STORE_RTC",
+                                "name": "DIAG_DATA_STORE_RTC",
+                                "range": null,
+                                "title": "RTC memory",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DIAG_DATA_STORE_RTC_OR_FLASH>",
+                                "help": "Just a placeholder. This data store type is not supported as of now",
+                                "id": "DIAG_DATA_STORE_FLASH",
+                                "name": "DIAG_DATA_STORE_FLASH",
+                                "range": null,
+                                "title": "Flash",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "This option configures the place to store diagnostics data: RTC memory or Flash.\n\nFlash store needs an additional patition table entry.\nNOTE: Diagnostics data partition must be encrypted if Flash Encryption is enabled.",
+                        "id": "component-config-diagnostics-data-store-diagnostics-data-store-destination",
+                        "name": "DIAG_DATA_STORE_RTC_OR_FLASH",
+                        "title": "Diagnostics data store destination",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Data store has facility to post an event when buffer is filled to a configured level.\nThis option configures the reporting watermark for critical and non critical data.",
+                        "id": "DIAG_DATA_STORE_REPORTING_WATERMARK_PERCENT",
+                        "name": "DIAG_DATA_STORE_REPORTING_WATERMARK_PERCENT",
+                        "range": [
+                            50,
+                            90
+                        ],
+                        "title": "Reporting watermark percentage",
+                        "type": "int"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_DATA_STORE_RTC",
+                                "help": "RTC data store is divided into two parts to store critical and non-critical data.\nThis option configures the total size of data store.\nNOTE: On ESP32 devices, from esp-idf release v4.3 and onwards we can use all 8K RTC memory,\nso max range is specified as 7K. On releases before v4.3 we can only access maximum 4K RTC memory and\nRTC store uses few bytes for its operation so default for ESP32 is set to 3K.",
+                                "id": "RTC_STORE_DATA_SIZE",
+                                "name": "RTC_STORE_DATA_SIZE",
+                                "range": [
+                                    512,
+                                    7168
+                                ],
+                                "title": "RTC store data size",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_DATA_STORE_RTC",
+                                "help": "This option configures the size of critical data buffer and remaining is used for\nnon critical data buffer.",
+                                "id": "RTC_STORE_CRITICAL_DATA_SIZE",
+                                "name": "RTC_STORE_CRITICAL_DATA_SIZE",
+                                "range": [
+                                    512,
+                                    6144
+                                ],
+                                "title": "Maximum size of critical data store",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": "DIAG_DATA_STORE_RTC",
+                        "id": "component-config-diagnostics-data-store-rtc-store",
+                        "title": "RTC Store",
+                        "type": "menu"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_DATA_STORE_FLASH",
+                                "help": "Diagnostics data is stored in this partition",
+                                "id": "FLASH_STORE_PARTITION_LABEL",
+                                "name": "FLASH_STORE_PARTITION_LABEL",
+                                "range": null,
+                                "title": "Diagnostics data partition name",
+                                "type": "string"
+                            }
+                        ],
+                        "depends_on": "DIAG_DATA_STORE_FLASH",
+                        "id": "component-config-diagnostics-data-store-flash-store",
+                        "title": "Flash Store",
+                        "type": "menu"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-diagnostics-data-store",
+                "title": "Diagnostics data store",
                 "type": "menu"
             },
             {
@@ -34608,945 +35332,221 @@
             {
                 "children": [
                     {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Number of network interfaces to be served by the mDNS library.\nLowering this number helps to reduce some static RAM usage.",
-                        "id": "MDNS_MAX_INTERFACES",
-                        "name": "MDNS_MAX_INTERFACES",
-                        "range": [
-                            1,
-                            9
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice DIAG_LOG_MSG_ARG_FORMAT>",
+                                "help": null,
+                                "id": "DIAG_LOG_MSG_ARG_FORMAT_TLV",
+                                "name": "DIAG_LOG_MSG_ARG_FORMAT_TLV",
+                                "range": null,
+                                "title": "Format arguments as TLV",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice DIAG_LOG_MSG_ARG_FORMAT>",
+                                "help": null,
+                                "id": "DIAG_LOG_MSG_ARG_FORMAT_STRING",
+                                "name": "DIAG_LOG_MSG_ARG_FORMAT_STRING",
+                                "range": null,
+                                "title": "Format arguments as string",
+                                "type": "bool"
+                            }
                         ],
-                        "title": "Max number of interfaces",
-                        "type": "int"
+                        "depends_on": null,
+                        "help": "For error/warning/event logs, diagnostics module collects program counter, timestamp,\ntag, RO data pointer and log arguments. Log arguments are stored in statically allocated buffer.\nThis option configures how to format and store log arguments in buffer.\nLog arguments can be formatted as TLV or complete log string formatted using vsnprintf.\n\nIf \"TLV\" is selected, buffer contains arguments formatted as TLV.\nType - 1 byte for the type of argument, please check esp_diag_arg_type_t.\nLength - 1 byte for the size of argument, size is calculated using sizeof operator.\nValue - Size bytes for the value.\n\nIf \"STRING\" is selected, buffer contains the entire string formatted using vsnprintf.",
+                        "id": "component-config-diagnostics-diagnostics-log-argument-format",
+                        "name": "DIAG_LOG_MSG_ARG_FORMAT",
+                        "title": "Diagnostics log argument format",
+                        "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Services take up a certain amount of memory, and allowing fewer\nservices to be open at the same time conserves memory. Specify\nthe maximum amount of services here.",
-                        "id": "MDNS_MAX_SERVICES",
-                        "name": "MDNS_MAX_SERVICES",
-                        "range": null,
-                        "title": "Max number of services",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Allows setting mDNS task priority. Please do not set the task priority\nhigher than priorities of system tasks. Compile time warning/error\nwould be emitted if the chosen task priority were too high.",
-                        "id": "MDNS_TASK_PRIORITY",
-                        "name": "MDNS_TASK_PRIORITY",
+                        "help": "Log arguments are stored in a static allocated buffer.\nThis option configures the maximum size of buffer for storing log arguments.",
+                        "id": "DIAG_LOG_MSG_ARG_MAX_SIZE",
+                        "name": "DIAG_LOG_MSG_ARG_MAX_SIZE",
                         "range": [
-                            1,
+                            32,
                             255
                         ],
-                        "title": "mDNS task priority",
+                        "title": "Maximum size of diagnostics log argument buffer",
                         "type": "int"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Allows setting the length of mDNS action queue.",
-                        "id": "MDNS_ACTION_QUEUE_LEN",
-                        "name": "MDNS_ACTION_QUEUE_LEN",
-                        "range": [
-                            8,
-                            64
-                        ],
-                        "title": "Maximum actions pending to the server",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Allows setting mDNS task stacksize.",
-                        "id": "MDNS_TASK_STACK_SIZE",
-                        "name": "MDNS_TASK_STACK_SIZE",
+                        "help": "Every Wi-Fi log printed on the console adds three diagnostics logs.\nFor some users, Wi-Fi logs may not be that useful.\nBy default, diagnostics drops Wi-Fi logs. Set this config option to \"n\" for recording Wi-Fi logs.",
+                        "id": "DIAG_LOG_DROP_WIFI_LOGS",
+                        "name": "DIAG_LOG_DROP_WIFI_LOGS",
                         "range": null,
-                        "title": "mDNS task stack size",
-                        "type": "int"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
-                                "help": null,
-                                "id": "MDNS_TASK_AFFINITY_NO_AFFINITY",
-                                "name": "MDNS_TASK_AFFINITY_NO_AFFINITY",
-                                "range": null,
-                                "title": "No affinity",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
-                                "help": null,
-                                "id": "MDNS_TASK_AFFINITY_CPU0",
-                                "name": "MDNS_TASK_AFFINITY_CPU0",
-                                "range": null,
-                                "title": "CPU0",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "!FREERTOS_UNICORE && <choice MDNS_TASK_AFFINITY>",
-                                "help": null,
-                                "id": "MDNS_TASK_AFFINITY_CPU1",
-                                "name": "MDNS_TASK_AFFINITY_CPU1",
-                                "range": null,
-                                "title": "CPU1",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Allows setting mDNS tasks affinity, i.e. whether the task is pinned to\nCPU0, pinned to CPU1, or allowed to run on any CPU.",
-                        "id": "component-config-mdns-mdns-task-affinity",
-                        "name": "MDNS_TASK_AFFINITY",
-                        "title": "mDNS task affinity",
-                        "type": "choice"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "MDNS_TASK_AFFINITY",
-                        "name": "MDNS_TASK_AFFINITY",
-                        "range": null,
-                        "title": null,
-                        "type": "hex"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Configures timeout for adding a new mDNS service. Adding a service\nfails if could not be completed within this time.",
-                        "id": "MDNS_SERVICE_ADD_TIMEOUT_MS",
-                        "name": "MDNS_SERVICE_ADD_TIMEOUT_MS",
-                        "range": [
-                            10,
-                            30000
-                        ],
-                        "title": "mDNS adding service timeout (ms)",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Configures period of mDNS timer, which periodically transmits packets\nand schedules mDNS searches.",
-                        "id": "MDNS_TIMER_PERIOD_MS",
-                        "name": "MDNS_TIMER_PERIOD_MS",
-                        "range": [
-                            10,
-                            10000
-                        ],
-                        "title": "mDNS timer period (ms)",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enables optional mDNS networking implementation using BSD sockets\nin UDP multicast mode.\nThis option creates a new thread to serve receiving packets (TODO).\nThis option uses additional N sockets, where N is number of interfaces.",
-                        "id": "MDNS_NETWORKING_SOCKET",
-                        "name": "MDNS_NETWORKING_SOCKET",
-                        "range": null,
-                        "title": "Use BSD sockets for mDNS networking",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enable only if the querier and the responder share the same IP address.\nThis usually happens in test mode, where we may run multiple instances of\nresponders/queriers on the same interface.",
-                        "id": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
-                        "name": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
-                        "range": null,
-                        "title": "Skip suppressing our own packets",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enable for the library to log received and sent mDNS packets to stdout.",
-                        "id": "MDNS_ENABLE_DEBUG_PRINTS",
-                        "name": "MDNS_ENABLE_DEBUG_PRINTS",
-                        "range": null,
-                        "title": "Enable debug prints of mDNS packets",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enable for the console cli to be available on the device.",
-                        "id": "MDNS_ENABLE_CONSOLE_CLI",
-                        "name": "MDNS_ENABLE_CONSOLE_CLI",
-                        "range": null,
-                        "title": "Enable Command Line Interface on device console",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enables support for IPv4 reverse lookup. If enabled, the mDNS library\nresponse to PTR queries of \"A.B.C.D.in-addr.arpa\" type.",
-                        "id": "MDNS_RESPOND_REVERSE_QUERIES",
-                        "name": "MDNS_RESPOND_REVERSE_QUERIES",
-                        "range": null,
-                        "title": "Enable responding to IPv4 reverse queries",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enables adding multiple service instances under the same service type.",
-                        "id": "MDNS_MULTIPLE_INSTANCE",
-                        "name": "MDNS_MULTIPLE_INSTANCE",
-                        "range": null,
-                        "title": "Multiple instances under the same service type",
+                        "title": "Drop Wi-Fi logs",
                         "type": "bool"
                     },
                     {
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": null,
-                                "help": "Set up mDNS for the default WiFi station.\nDisable this option if you do not need mDNS on default WiFi STA.",
-                                "id": "MDNS_PREDEF_NETIF_STA",
-                                "name": "MDNS_PREDEF_NETIF_STA",
+                                "depends_on": "DIAG_ENABLE_METRICS",
+                                "help": "This option configures the maximum number of metrics that can be registered.",
+                                "id": "DIAG_METRICS_MAX_COUNT",
+                                "name": "DIAG_METRICS_MAX_COUNT",
                                 "range": null,
-                                "title": "Use predefined interface for WiFi Station",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": null,
-                                "help": "Set up mDNS for the default WiFi Access Point.\nDisable this option if you do not need mDNS on default WiFi AP.",
-                                "id": "MDNS_PREDEF_NETIF_AP",
-                                "name": "MDNS_PREDEF_NETIF_AP",
-                                "range": null,
-                                "title": "Use predefined interface for WiFi Access Point",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "ETH_ENABLED",
-                                "help": "Set up mDNS for the default Ethernet interface.\nDisable this option if you do not need mDNS on default Ethernet.",
-                                "id": "MDNS_PREDEF_NETIF_ETH",
-                                "name": "MDNS_PREDEF_NETIF_ETH",
-                                "range": null,
-                                "title": "Use predefined interface for Ethernet",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "id": "component-config-mdns-mdns-predefined-interfaces",
-                        "title": "MDNS Predefined interfaces",
-                        "type": "menu"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-mdns",
-                "title": "mDNS",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Toggle SD card support\nThis requires IDF v5+ as older ESP-IDF do not support SD card erase.",
-                        "id": "LITTLEFS_SDMMC_SUPPORT",
-                        "name": "LITTLEFS_SDMMC_SUPPORT",
-                        "range": null,
-                        "title": "SDMMC support (requires ESP-IDF v5+)",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Define maximum number of partitions that can be mounted.",
-                        "id": "LITTLEFS_MAX_PARTITIONS",
-                        "name": "LITTLEFS_MAX_PARTITIONS",
-                        "range": [
-                            1,
-                            10
-                        ],
-                        "title": "Maximum Number of Partitions",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Logical page size of LITTLEFS partition, in bytes. Must be multiple\nof flash page size (which is usually 256 bytes).\nLarger page sizes reduce overhead when storing large files, and\nimprove filesystem performance when reading large files.\nSmaller page sizes reduce overhead when storing small (< page size)\nfiles.",
-                        "id": "LITTLEFS_PAGE_SIZE",
-                        "name": "LITTLEFS_PAGE_SIZE",
-                        "range": [
-                            256,
-                            1024
-                        ],
-                        "title": "LITTLEFS logical page size",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Includes NULL-terminator. If flashing a prebuilt filesystem image,\nrebuild the filesystem image if this value changes.\nmklittlefs, the tool that generates the image will automatically be rebuilt.\nIf downloading a pre-built release of mklittlefs, it was most-likely\nbuilt with LFS_NAME_MAX=32 and should not be used.",
-                        "id": "LITTLEFS_OBJ_NAME_LEN",
-                        "name": "LITTLEFS_OBJ_NAME_LEN",
-                        "range": [
-                            16,
-                            1022
-                        ],
-                        "title": "Maximum object name length including NULL terminator.",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Minimum size of a block read. All read operations will be a\nmultiple of this value.",
-                        "id": "LITTLEFS_READ_SIZE",
-                        "name": "LITTLEFS_READ_SIZE",
-                        "range": null,
-                        "title": "Minimum size of a block read.",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Minimum size of a block program. All write operations will be a\nmultiple of this value.",
-                        "id": "LITTLEFS_WRITE_SIZE",
-                        "name": "LITTLEFS_WRITE_SIZE",
-                        "range": null,
-                        "title": "Minimum size of a block write.",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Look ahead size. Must be a multiple of 8.",
-                        "id": "LITTLEFS_LOOKAHEAD_SIZE",
-                        "name": "LITTLEFS_LOOKAHEAD_SIZE",
-                        "range": null,
-                        "title": "Look ahead size.",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Size of block caches. Each cache buffers a portion of a block in RAM.\nThe littlefs needs a read cache, a program cache, and one additional\ncache per file. Larger caches can improve performance by storing more\ndata and reducing the number of disk accesses. Must be a multiple of\nthe read and program sizes, and a factor of the block size (4096).",
-                        "id": "LITTLEFS_CACHE_SIZE",
-                        "name": "LITTLEFS_CACHE_SIZE",
-                        "range": null,
-                        "title": "Cache Size",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Number of erase cycles before littlefs evicts metadata logs and moves \nthe metadata to another block. Suggested values are in the\nrange 100-1000, with large values having better performance at the cost\nof less consistent wear distribution.\nSet to -1 to disable block-level wear-leveling.",
-                        "id": "LITTLEFS_BLOCK_CYCLES",
-                        "name": "LITTLEFS_BLOCK_CYCLES",
-                        "range": [
-                            -1,
-                            1024
-                        ],
-                        "title": "LittleFS wear-leveling block cycles",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Saves timestamp on modification. Uses an additional 4bytes.",
-                        "id": "LITTLEFS_USE_MTIME",
-                        "name": "LITTLEFS_USE_MTIME",
-                        "range": null,
-                        "title": "Save file modification time",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Records the filepath only as a 32-bit hash in the file descriptor instead\nof the entire filepath. Saves approximately `sizeof(filepath)` bytes\nper file descriptor.\nIf enabled, functionality (like fstat) that requires the file path \nfrom the file descriptor will not work.\nIn rare cases, may cause unlinking or renaming issues (unlikely) if\nthere's a hash collision between an open filepath and a filepath\nto be modified.",
-                        "id": "LITTLEFS_USE_ONLY_HASH",
-                        "name": "LITTLEFS_USE_ONLY_HASH",
-                        "range": null,
-                        "title": "Don't store filepath in the file descriptor",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Converts LittleFS error codes into human readable strings.\nMay increase binary size depending on logging level.",
-                        "id": "LITTLEFS_HUMAN_READABLE",
-                        "name": "LITTLEFS_HUMAN_READABLE",
-                        "range": null,
-                        "title": "Make errno human-readable",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice LITTLEFS_MTIME>",
-                                "help": "Saves timestamp on modification.",
-                                "id": "LITTLEFS_MTIME_USE_SECONDS",
-                                "name": "LITTLEFS_MTIME_USE_SECONDS",
-                                "range": null,
-                                "title": "Use Seconds",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice LITTLEFS_MTIME>",
-                                "help": "Saves nonce on modification; intended for detecting filechanges\non systems without access to a RTC.\n\nA file who's nonce is the same as it was at a previous time has \nhigh probability of not having been modified.\n\nUpon file modification, the nonce is incremented by one. Upon file\ncreation, a random nonce is assigned.\n\nThere is a very slim chance that a file will have the same nonce if\nit is deleted and created again (approx 1 in 4 billion).",
-                                "id": "LITTLEFS_MTIME_USE_NONCE",
-                                "name": "LITTLEFS_MTIME_USE_NONCE",
-                                "range": null,
-                                "title": "Use Nonce",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": "LITTLEFS_USE_MTIME",
-                        "help": "Save an additional 4-byte attribute. Options listed below.",
-                        "id": "component-config-littlefs-mtime-attribute-options",
-                        "name": "LITTLEFS_MTIME",
-                        "title": "mtime attribute options",
-                        "type": "choice"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enabling this feature allows for greater drop-in compatability\nwhen replacing SPIFFS. Since SPIFFS doesn't have folders, and \nfolders are just considered as part of a file name, enabling this\nwill automatically create folders as necessary to create a file\ninstead of throwing an error. Similarly, upon the deletion of the\nlast file in a folder, the folder will be deleted. It is recommended\nto only enable this flag as a stop-gap solution.",
-                        "id": "LITTLEFS_SPIFFS_COMPAT",
-                        "name": "LITTLEFS_SPIFFS_COMPAT",
-                        "range": null,
-                        "title": "Improve SPIFFS drop-in compatability",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Enabling this feature extends SPIFFS capability.\nIn SPIFFS data is written immediately to the flash storage when fflush() function called.\nIn LittleFS flush() does not write data to the flash, and fsync() call needed after.\nWith this feature fflush() will write data to the storage.",
-                        "id": "LITTLEFS_FLUSH_FILE_EVERY_WRITE",
-                        "name": "LITTLEFS_FLUSH_FILE_EVERY_WRITE",
-                        "range": null,
-                        "title": "Flush file to flash after each write operation",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "!LITTLEFS_USE_ONLY_HASH && LITTLEFS_SPIFFS_COMPAT",
-                        "help": "Support opening directory by following APIs:\n\n    int fd = open(\"my_directory\", O_DIRECTORY);",
-                        "id": "LITTLEFS_OPEN_DIR",
-                        "name": "LITTLEFS_OPEN_DIR",
-                        "range": null,
-                        "title": "Support opening directory",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "LITTLEFS_FCNTL_GET_PATH",
-                                "help": "ESP-IDF's header file \"fcntl.h\" doesn't support macro \"F_GETPATH\",\nso we should define this macro here.",
-                                "id": "LITTLEFS_FCNTL_F_GETPATH_VALUE",
-                                "name": "LITTLEFS_FCNTL_F_GETPATH_VALUE",
-                                "range": null,
-                                "title": "Value of command F_GETPATH",
+                                "title": "Maximum number of metrics",
                                 "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_ENABLE_METRICS",
+                                "help": "Enables the heap memory metrics. This collects free memory, largest free block,\nand minimum free memory for heaps in internal as well as external memory.",
+                                "id": "DIAG_ENABLE_HEAP_METRICS",
+                                "name": "DIAG_ENABLE_HEAP_METRICS",
+                                "range": null,
+                                "title": "Enable Heap Metrics",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_ENABLE_METRICS",
+                                "help": "Enables Wi-Fi metrics and collects Wi-Fi RSSI and minumum ever Wi-Fi RSSI.",
+                                "id": "DIAG_ENABLE_WIFI_METRICS",
+                                "name": "DIAG_ENABLE_WIFI_METRICS",
+                                "range": null,
+                                "title": "Enable Wi-Fi Metrics",
+                                "type": "bool"
                             }
                         ],
-                        "depends_on": "!LITTLEFS_USE_ONLY_HASH",
-                        "help": "Support getting directory by following APIs:\n\n    char buffer[MAXPATHLEN];\n\n    int fd = open(\"my_file\", flags);\n    fcntl(fd, F_GETPATH, buffer);",
-                        "id": "LITTLEFS_FCNTL_GET_PATH",
-                        "name": "LITTLEFS_FCNTL_GET_PATH",
+                        "depends_on": null,
+                        "help": "Diagnostics module supports recording and reporting metrics to cloud.\nThis option enables the diagnostics metrics and related functionality.",
+                        "id": "DIAG_ENABLE_METRICS",
+                        "name": "DIAG_ENABLE_METRICS",
                         "range": null,
-                        "title": "Support get file or directory path",
+                        "title": "Enable diagnostics metrics",
                         "type": "bool"
                     },
                     {
                         "children": [
+                            {
+                                "children": [],
+                                "depends_on": "DIAG_ENABLE_VARIABLES",
+                                "help": "This option configures the maximum number of variables that can be registered.",
+                                "id": "DIAG_VARIABLES_MAX_COUNT",
+                                "name": "DIAG_VARIABLES_MAX_COUNT",
+                                "range": null,
+                                "title": "Maximum number of variables",
+                                "type": "int"
+                            },
                             {
                                 "children": [
                                     {
                                         "children": [],
-                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
-                                        "help": null,
-                                        "id": "LITTLEFS_DISK_VERSION_MOST_RECENT",
-                                        "name": "LITTLEFS_DISK_VERSION_MOST_RECENT",
+                                        "depends_on": "DIAG_ENABLE_NETWORK_VARIABLES",
+                                        "help": "Enable more advanced network variables",
+                                        "id": "DIAG_MORE_NETWORK_VARS",
+                                        "name": "DIAG_MORE_NETWORK_VARS",
                                         "range": null,
-                                        "title": "Write the most recent LittleFS version",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
-                                        "help": null,
-                                        "id": "LITTLEFS_DISK_VERSION_2_1",
-                                        "name": "LITTLEFS_DISK_VERSION_2_1",
-                                        "range": null,
-                                        "title": "Write LittleFS 2.1",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice LITTLEFS_DISK_VERSION>",
-                                        "help": null,
-                                        "id": "LITTLEFS_DISK_VERSION_2_0",
-                                        "name": "LITTLEFS_DISK_VERSION_2_0",
-                                        "range": null,
-                                        "title": "Write LittleFS 2.0 (no forward-looking erase-state CRCs)",
+                                        "title": "Enable More Advanced Network variables",
                                         "type": "bool"
                                     }
                                 ],
-                                "depends_on": "LITTLEFS_MULTIVERSION",
-                                "help": "See LITTLEFS_MULTIVERSION for details.",
-                                "id": "component-config-littlefs-support-selecting-the-littlefs-minor-version-to-write-to-disk-littlefs_disk_version",
-                                "name": "LITTLEFS_DISK_VERSION",
-                                "title": "LITTLEFS_DISK_VERSION",
-                                "type": "choice"
+                                "depends_on": "DIAG_ENABLE_VARIABLES",
+                                "help": "Enables the Wi-Fi and IP address variables. Below variables are collected.\nFor Wi-Fi: SSID, BSSID, channel, auth mode, connection status, disconnection reason.\nFor IP: IPv4 address, netmask, and gateway of the device.",
+                                "id": "DIAG_ENABLE_NETWORK_VARIABLES",
+                                "name": "DIAG_ENABLE_NETWORK_VARIABLES",
+                                "range": null,
+                                "title": "Enable Network variables",
+                                "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "LittleFS 2.6 bumps the on-disk minor version of littlefs from lfs2.0 -> lfs2.1.\n\nThis change is backwards-compatible, but after the first write with the new version,\nthe image on disk will no longer be mountable by older versions of littlefs.\n\nEnabling LITTLEFS_MULTIVERSION allows to select the On-disk version\nto use when writing in the form of 16-bit major version\n+ 16-bit minor version. This limiting metadata to what is supported by\nolder minor versions. Note that some features will be lost. Defaults to\nto the most recent minor version when zero.",
-                        "id": "LITTLEFS_MULTIVERSION",
-                        "name": "LITTLEFS_MULTIVERSION",
+                        "help": "Variables are similar to metrics but they represent entities where their current value\nis much more important than over a period of time.\nThis option enables the diagnostics variables and related functionality",
+                        "id": "DIAG_ENABLE_VARIABLES",
+                        "name": "DIAG_ENABLE_VARIABLES",
                         "range": null,
-                        "title": "Support selecting the LittleFS minor version to write to disk",
+                        "title": "Enable diagnostics variables",
                         "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
-                                "help": "Disallow dynamic allocation, static buffers must be provided by the calling application.",
-                                "id": "LITTLEFS_MALLOC_STRATEGY_DISABLE",
-                                "name": "LITTLEFS_MALLOC_STRATEGY_DISABLE",
-                                "range": null,
-                                "title": "Static buffers only",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
-                                "help": "Uses an automatic allocation strategy. On systems with heap in SPIRAM, if\nthe allocation size does not exceed SPIRAM_MALLOC_ALWAYSINTERNAL then internal\nheap allocation if preferred, otherwise allocation will be attempted from SPIRAM\nheap.",
-                                "id": "LITTLEFS_MALLOC_STRATEGY_DEFAULT",
-                                "name": "LITTLEFS_MALLOC_STRATEGY_DEFAULT",
-                                "range": null,
-                                "title": "Default heap selection",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice LITTLEFS_MALLOC_STRATEGY>",
-                                "help": "Uses ESP-IDF heap_caps_malloc to allocate from internal heap.",
-                                "id": "LITTLEFS_MALLOC_STRATEGY_INTERNAL",
-                                "name": "LITTLEFS_MALLOC_STRATEGY_INTERNAL",
-                                "range": null,
-                                "title": "Internal heap",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "SPIRAM_USE_MALLOC && ESP32_SPIRAM_SUPPORT && <choice LITTLEFS_MALLOC_STRATEGY>",
-                                "help": "Uses ESP-IDF heap_caps_malloc to allocate from SPIRAM heap.",
-                                "id": "LITTLEFS_MALLOC_STRATEGY_SPIRAM",
-                                "name": "LITTLEFS_MALLOC_STRATEGY_SPIRAM",
-                                "range": null,
-                                "title": "SPIRAM heap",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Maps lfs_malloc to ESP-IDF capabilities-based memory allocator or\ndisables dynamic allocation in favour of user-provided static buffers.",
-                        "id": "component-config-littlefs-buffer-allocation-strategy",
-                        "name": "LITTLEFS_MALLOC_STRATEGY",
-                        "title": "Buffer allocation strategy",
-                        "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Selects whether littlefs performs runtime assert checks.",
-                        "id": "LITTLEFS_ASSERTS",
-                        "name": "LITTLEFS_ASSERTS",
+                        "help": "Diagnostics component wraps the esp_log_write and esp_log_writev APIs using `--wrap` gcc option.\nThere can be scenario where another component also wants to wrap the logging functions.\nIn that case, enable this option and use the data ingestion APIs esp_diag_log_write and esp_diag_log_writev.",
+                        "id": "DIAG_USE_EXTERNAL_LOG_WRAP",
+                        "name": "DIAG_USE_EXTERNAL_LOG_WRAP",
                         "range": null,
-                        "title": "Enable asserts",
+                        "title": "Use external log wrapper",
                         "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-littlefs",
-                "title": "LittleFS",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice DIAG_DATA_STORE_RTC_OR_FLASH>",
-                                "help": null,
-                                "id": "DIAG_DATA_STORE_RTC",
-                                "name": "DIAG_DATA_STORE_RTC",
-                                "range": null,
-                                "title": "RTC memory",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DIAG_DATA_STORE_RTC_OR_FLASH>",
-                                "help": "Just a placeholder. This data store type is not supported as of now",
-                                "id": "DIAG_DATA_STORE_FLASH",
-                                "name": "DIAG_DATA_STORE_FLASH",
-                                "range": null,
-                                "title": "Flash",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "This option configures the place to store diagnostics data: RTC memory or Flash.\n\nFlash store needs an additional patition table entry.\nNOTE: Diagnostics data partition must be encrypted if Flash Encryption is enabled.",
-                        "id": "component-config-diagnostics-data-store-diagnostics-data-store-destination",
-                        "name": "DIAG_DATA_STORE_RTC_OR_FLASH",
-                        "title": "Diagnostics data store destination",
-                        "type": "choice"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Data store has facility to post an event when buffer is filled to a configured level.\nThis option configures the reporting watermark for critical and non critical data.",
-                        "id": "DIAG_DATA_STORE_REPORTING_WATERMARK_PERCENT",
-                        "name": "DIAG_DATA_STORE_REPORTING_WATERMARK_PERCENT",
-                        "range": [
-                            50,
-                            90
-                        ],
-                        "title": "Reporting watermark percentage",
-                        "type": "int"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "DIAG_DATA_STORE_RTC",
-                                "help": "RTC data store is divided into two parts to store critical and non-critical data.\nThis option configures the total size of data store.\nNOTE: On ESP32 devices, from esp-idf release v4.3 and onwards we can use all 8K RTC memory,\nso max range is specified as 7K. On releases before v4.3 we can only access maximum 4K RTC memory and\nRTC store uses few bytes for its operation so default for ESP32 is set to 3K.",
-                                "id": "RTC_STORE_DATA_SIZE",
-                                "name": "RTC_STORE_DATA_SIZE",
-                                "range": [
-                                    512,
-                                    7168
-                                ],
-                                "title": "RTC store data size",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "DIAG_DATA_STORE_RTC",
-                                "help": "This option configures the size of critical data buffer and remaining is used for\nnon critical data buffer.",
-                                "id": "RTC_STORE_CRITICAL_DATA_SIZE",
-                                "name": "RTC_STORE_CRITICAL_DATA_SIZE",
-                                "range": [
-                                    512,
-                                    6144
-                                ],
-                                "title": "Maximum size of critical data store",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": "DIAG_DATA_STORE_RTC",
-                        "id": "component-config-diagnostics-data-store-rtc-store",
-                        "title": "RTC Store",
-                        "type": "menu"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "DIAG_DATA_STORE_FLASH",
-                                "help": "Diagnostics data is stored in this partition",
-                                "id": "FLASH_STORE_PARTITION_LABEL",
-                                "name": "FLASH_STORE_PARTITION_LABEL",
-                                "range": null,
-                                "title": "Diagnostics data partition name",
-                                "type": "string"
-                            }
-                        ],
-                        "depends_on": "DIAG_DATA_STORE_FLASH",
-                        "id": "component-config-diagnostics-data-store-flash-store",
-                        "title": "Flash Store",
-                        "type": "menu"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-diagnostics-data-store",
-                "title": "Diagnostics data store",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "ESP_INSIGHTS_DEBUG_ENABLED",
-                                        "help": "Print pretty format json data for cbor messages\nIf this option is not enabled, hexdump will be presented instead of json data",
-                                        "id": "ESP_INSIGHTS_DEBUG_PRINT_JSON",
-                                        "name": "ESP_INSIGHTS_DEBUG_PRINT_JSON",
-                                        "range": null,
-                                        "title": "Dump CBOR decoded data instead of hexdump",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": "ESP_INSIGHTS_ENABLED",
-                                "help": null,
-                                "id": "ESP_INSIGHTS_DEBUG_ENABLED",
-                                "name": "ESP_INSIGHTS_DEBUG_ENABLED",
-                                "range": null,
-                                "title": "Enable Insights debug prints",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "ESP_INSIGHTS_ENABLED",
-                        "name": "ESP_INSIGHTS_ENABLED",
-                        "range": null,
-                        "title": "Enable ESP Insights",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "(ESP_COREDUMP_ENABLE_TO_FLASH && ESP_COREDUMP_DATA_FORMAT_ELF) || (ESP32_ENABLE_COREDUMP_TO_FLASH && ESP32_COREDUMP_DATA_FORMAT_ELF)",
-                        "help": "This option enables core dump summary functionality in insights.\nIn case of crash, insights sends the core dump summary to cloud on next boot.",
-                        "id": "ESP_INSIGHTS_COREDUMP_ENABLE",
-                        "name": "ESP_INSIGHTS_COREDUMP_ENABLE",
-                        "range": null,
-                        "title": "Enable core dump summary support",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice ESP_INSIGHTS_TRANSPORT>",
-                                "help": null,
-                                "id": "ESP_INSIGHTS_TRANSPORT_MQTT",
-                                "name": "ESP_INSIGHTS_TRANSPORT_MQTT",
-                                "range": null,
-                                "title": "MQTT",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice ESP_INSIGHTS_TRANSPORT>",
-                                "help": null,
-                                "id": "ESP_INSIGHTS_TRANSPORT_HTTPS",
-                                "name": "ESP_INSIGHTS_TRANSPORT_HTTPS",
-                                "range": null,
-                                "title": "HTTPS",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "By default insights can send data to cloud using MQTT and HTTPS transports.\nThis option configures the default insights transport.\nInsights transport can be overridden using esp_insights_transport_register API.",
-                        "id": "component-config-esp-insights-insights-default-transport",
-                        "name": "ESP_INSIGHTS_TRANSPORT",
-                        "title": "Insights default transport",
-                        "type": "choice"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "ESP_INSIGHTS_TRANSPORT_HTTPS",
-                        "help": null,
-                        "id": "ESP_INSIGHTS_TRANSPORT_HTTPS_HOST",
-                        "name": "ESP_INSIGHTS_TRANSPORT_HTTPS_HOST",
-                        "range": null,
-                        "title": "Insights https host",
-                        "type": "string"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Minimum interval between two consecutive cloud posts.\nThere is a dynamic logic to decide the next timeout when the insights data will be reported.\nIt depends on whether the data was sent or not during the previous timeout.\nIf the data was sent, the next timeout is doubled and if not, it is halved.",
-                        "id": "ESP_INSIGHTS_CLOUD_POST_MIN_INTERVAL_SEC",
-                        "name": "ESP_INSIGHTS_CLOUD_POST_MIN_INTERVAL_SEC",
-                        "range": null,
-                        "title": "Insights cloud post min interval (sec)",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Maximum interval between two consecutive cloud posts.\nThere is a dynamic logic to decide the next timeout when the insights data will be reported.\nIt depends on whether the data was sent or not during the previous timeout.\nIf the data was sent, the next timeout is doubled and if not, it is halved.",
-                        "id": "ESP_INSIGHTS_CLOUD_POST_MAX_INTERVAL_SEC",
-                        "name": "ESP_INSIGHTS_CLOUD_POST_MAX_INTERVAL_SEC",
-                        "range": null,
-                        "title": "Insights cloud post max interval (sec)",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "For users already using older metadata, this provides an option to keep using the same.\nThis is important as the new metadata version (1.1), is not backwad compatible.",
-                        "id": "ESP_INSIGHTS_META_VERSION_10",
-                        "name": "ESP_INSIGHTS_META_VERSION_10",
-                        "range": null,
-                        "title": "Use older metadata format (1.0)",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-esp-insights",
-                "title": "ESP Insights",
+                "id": "component-config-diagnostics",
+                "title": "Diagnostics",
                 "type": "menu"
             },
             {
                 "children": [
                     {
                         "children": [],
-                        "depends_on": "IDF_TARGET_ESP32 || IDF_TARGET_ESP32S3",
-                        "help": null,
-                        "id": "DSP_OPTIMIZATIONS_SUPPORTED",
-                        "name": "DSP_OPTIMIZATIONS_SUPPORTED",
+                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
+                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
+                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
                         "range": null,
-                        "title": null,
+                        "title": "Enable DS peripheral support",
                         "type": "bool"
                     },
                     {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_OPTIMIZATION>",
-                                "help": null,
-                                "id": "DSP_ANSI",
-                                "name": "DSP_ANSI",
-                                "range": null,
-                                "title": "ANSI C",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "DSP_OPTIMIZATIONS_SUPPORTED && <choice DSP_OPTIMIZATION>",
-                                "help": null,
-                                "id": "DSP_OPTIMIZED",
-                                "name": "DSP_OPTIMIZED",
-                                "range": null,
-                                "title": "Optimized",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "An ANSI C version could be used for verification and debug purpose,\nor for chips where an optimized version is not available.",
-                        "id": "component-config-dsp-library-dsp-optimization",
-                        "name": "DSP_OPTIMIZATION",
-                        "title": "DSP Optimization",
-                        "type": "choice"
-                    },
-                    {
                         "children": [],
                         "depends_on": null,
-                        "help": null,
-                        "id": "DSP_OPTIMIZATION",
-                        "name": "DSP_OPTIMIZATION",
+                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
+                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
+                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
                         "range": null,
-                        "title": null,
-                        "type": "int"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_512",
-                                "name": "DSP_MAX_FFT_SIZE_512",
-                                "range": null,
-                                "title": "512",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_1024",
-                                "name": "DSP_MAX_FFT_SIZE_1024",
-                                "range": null,
-                                "title": "1024",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_2048",
-                                "name": "DSP_MAX_FFT_SIZE_2048",
-                                "range": null,
-                                "title": "2048",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_4096",
-                                "name": "DSP_MAX_FFT_SIZE_4096",
-                                "range": null,
-                                "title": "4096",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_8192",
-                                "name": "DSP_MAX_FFT_SIZE_8192",
-                                "range": null,
-                                "title": "8192",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_16384",
-                                "name": "DSP_MAX_FFT_SIZE_16384",
-                                "range": null,
-                                "title": "16384",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice DSP_MAX_FFT_SIZE>",
-                                "help": null,
-                                "id": "DSP_MAX_FFT_SIZE_32768",
-                                "name": "DSP_MAX_FFT_SIZE_32768",
-                                "range": null,
-                                "title": "32768",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "This is default FFT size for internal usage.",
-                        "id": "component-config-dsp-library-maximum-fft-length",
-                        "name": "DSP_MAX_FFT_SIZE",
-                        "title": "Maximum FFT length",
-                        "type": "choice"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "DSP_MAX_FFT_SIZE",
-                        "name": "DSP_MAX_FFT_SIZE",
-                        "range": null,
-                        "title": null,
-                        "type": "int"
+                        "title": "Enable support for legacy formats",
+                        "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-dsp-library",
-                "title": "DSP Library",
+                "id": "component-config-esp-secure-cert-manager",
+                "title": "ESP Secure Cert Manager",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "You can access parent node of parsed json",
+                        "id": "JSMN_PARENT_LINKS",
+                        "name": "JSMN_PARENT_LINKS",
+                        "range": null,
+                        "title": "Enable parent links",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "In strict mode primitives are: numbers and booleans",
+                        "id": "JSMN_STRICT",
+                        "name": "JSMN_STRICT",
+                        "range": null,
+                        "title": "Enable strict mode",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Declar JSMN API as static (instead of extern)",
+                        "id": "JSMN_STATIC",
+                        "name": "JSMN_STATIC",
+                        "range": null,
+                        "title": "Declare JSMN API as static",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-jsmn",
+                "title": "jsmn",
                 "type": "menu"
             }
         ],

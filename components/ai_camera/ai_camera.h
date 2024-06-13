@@ -10,6 +10,8 @@ extern "C" {
 // Function to initialize the camera
 esp_err_t ai_camera_init(void);
 
+void camera_LED(bool state);
+
 #ifdef __cplusplus
 }
 #endif

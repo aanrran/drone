@@ -23,6 +23,7 @@
 413	5646	7399923350999654	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s3/uart_periph.c.obj	a042b1ee8472931a
 18234	18351	7399923525495966	esp-idf/esp_system/libesp_system.a	8d908c65ac162153
 6612	10871	7399923413267878	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s3/timer_periph.c.obj	cf390b6d52d071c9
+4	28101	7399965650201227	build.ninja	ff2d08da3517e9cd
 15417	16002	7399923500649441	esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s3/esp_efuse_utility.c.obj	8666f267abfa09e4
 697	6611	7399923353350750	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s3/adc_periph.c.obj	294f18f2dab14329
 840	6707	7399923354886355	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s3/gpio_periph.c.obj	c90c13433bba41
@@ -110,8 +111,8 @@
 19822	20127	7399923543180706	bootloader.elf	acbaaa4c5a4966e6
 20127	20597	7399923547948052	.bin_timestamp	c251bfd9377a0691
 20127	20597	7399923547948052	C:/Users/aanrr/drone/build/bootloader/.bin_timestamp	c251bfd9377a0691
-20598	20741	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
-20598	20741	0	C:/Users/aanrr/drone/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
-5	28700	7399930145877878	build.ninja	ff2d08da3517e9cd
-15	653	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
-15	653	0	C:/Users/aanrr/drone/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
+16	382	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
+16	382	0	C:/Users/aanrr/drone/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
+3	26151	7399965650201227	build.ninja	ff2d08da3517e9cd
+16	487	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
+16	487	0	C:/Users/aanrr/drone/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	6abfe807dfdfcf21
