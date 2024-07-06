@@ -71,7 +71,7 @@ int led_gpio = 2;  // Define the GPIO pin number
  * @return esp_err_t Returns ESP_OK on success, otherwise returns an error code.
  */
 esp_err_t ai_camera_init() {
-    Serial.println("Initializing camera...");
+    printf("Initializing camera...\n");
 
     // Power up the camera if needed
     if (PWDN_GPIO_NUM != -1) {
@@ -82,32 +82,13 @@ esp_err_t ai_camera_init() {
     // Initialize the camera with the configuration
     esp_err_t err = esp_camera_init(&camera_config);
     if (err != ESP_OK) {
-        Serial.printf("Camera Init Failed with error 0x%x", err);
+        printf("Camera Init Failed with error 0x%x\n", err);
         return err;
     }
 
     // Configure the LED GPIO pin as an output
     pinMode(led_gpio, OUTPUT);
 
-    Serial.println("Camera initialized successfully.");
+    printf("Camera initialized successfully.\n");
     return ESP_OK;
-}
-
-/**
- * @brief Controls the camera LED.
- * 
- * This function sets the GPIO pin 2 to HIGH or LOW based on the boolean state passed to it.
- * 
- * @param state Boolean value to control the LED. 
- *              True turns the LED on, False turns the LED off.
- */
-void camera_LED(bool state) {
-
-    if (state) {
-        // Turn on the LED
-        digitalWrite(led_gpio, HIGH);  // Set GPIO level to HIGH (1)
-    } else {
-        // Turn off the LED
-        digitalWrite(led_gpio, LOW);  // Set GPIO level to LOW (0)
-    }
 }

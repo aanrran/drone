@@ -166,13 +166,10 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
 
         // Parse the joystick data and LED state
         float x1, y1, x2, y2;
-        int led_state;
-        sscanf(buffer, "%f %f %f %f %d", &x1, &y1, &x2, &y2, &led_state);
+
+        sscanf(buffer, "%f %f %f %f", &x1, &y1, &x2, &y2);
 
         processJoystickData(x1, y1, x2, y2);
-        // Control the LED based on the received state
-        Serial.printf("led state is %d", led_state);
-        camera_LED(led_state == 1);
     }
 
     close(client_sock);

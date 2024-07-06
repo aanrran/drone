@@ -35,6 +35,37 @@ run *idf.py menuconfig* , then select MPU9250 from menu *Component config -> MPU
 
 ![Menuconfig](C:\Users\aanrr\drone\components\IMU_ICM20948\menuconfig_mpu-driver.png)
 
+There are a few bugs needs to fix in file *MPU.cpp* from line 1871 to line 1894. Copy the below code in place of the original code:
+
+```c++
+        // slave 0 reads from magnetometer data register
+        const auxi2c_slv_config_t kSlaveReadDataConfig = {
+            .slave           = MAG_SLAVE_READ_DATA,
+            .addr            = COMPASS_I2CADDRESS,
+            .rw              = AUXI2C_READ,
+            .reg_addr        = regs::mag::STATUS1,
+            .reg_dis         = 0,
+            .sample_delay_en = 1,
+            .swap_en         = 0,
+            .end_of_word     = (auxi2c_eow_t)0,
+            .rxlength        = 8  //
+        };
+        if (MPU_ERR_CHECK(setAuxI2CSlaveConfig(kSlaveReadDataConfig))) return err;
+
+        // slave 1 changes mode to single measurement
+        const auxi2c_slv_config_t kSlaveChgModeConfig = {
+            .slave           = MAG_SLAVE_CHG_MODE,
+            .addr            = COMPASS_I2CADDRESS,
+            .rw              = AUXI2C_WRITE,
+            .reg_addr        = regs::mag::CONTROL1,
+            .reg_dis         = 0,
+            .sample_delay_en = 1,
+            .txdata          = kControl1Value  //
+        };
+```
+
+
+
 ## Example
 
 ```C++
