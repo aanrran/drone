@@ -434,6 +434,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Users/aanrr/drone/build/esp-idf/IMU_MPU6050/cmake_install.cmake")
 endif()
 

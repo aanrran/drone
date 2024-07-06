@@ -68,6 +68,7 @@ $<TARGET_FILE:__idf_espressif__esp32-camera>
 $<TARGET_FILE:__idf_main>
 $<TARGET_FILE:__idf_I2Cbus>
 $<TARGET_FILE:__idf_MPUdriver>
+$<TARGET_FILE:__idf_IMU_ICM20948>
 $<TARGET_FILE:__idf_IMU_MPU6050>
 $<TARGET_FILE:__idf_chmorgan__esp-libhelix-mp3>
 $<TARGET_FILE:__idf_espressif__mdns>

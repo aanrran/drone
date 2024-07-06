@@ -6,5 +6,5 @@ source "C:/Users/aanrr/esp/v5.1.4/esp-idf/components/partition_table/Kconfig.pro
 source "C:/Users/aanrr/drone/components/I2Cbus/Kconfig.projbuild"
 source "C:/Users/aanrr/drone/components/MPUdriver/Kconfig.projbuild"
 source "C:/Users/aanrr/drone/components/arduino/Kconfig.projbuild"
-source "C:/Users/aanrr/drone/managed_components/espressif__esp-sr/Kconfig.projbuild"
 source "C:/Users/aanrr/drone/managed_components/espressif__esp_rainmaker/Kconfig.projbuild"
+source "C:/Users/aanrr/drone/managed_components/espressif__esp-sr/Kconfig.projbuild"

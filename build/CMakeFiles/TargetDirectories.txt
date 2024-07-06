@@ -662,6 +662,13 @@ C:/Users/aanrr/drone/build/esp-idf/MPUdriver/CMakeFiles/list_install_components.
 C:/Users/aanrr/drone/build/esp-idf/MPUdriver/CMakeFiles/install.dir
 C:/Users/aanrr/drone/build/esp-idf/MPUdriver/CMakeFiles/install/local.dir
 C:/Users/aanrr/drone/build/esp-idf/MPUdriver/CMakeFiles/install/strip.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/__idf_IMU_ICM20948.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/edit_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/rebuild_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/list_install_components.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/install.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/install/local.dir
+C:/Users/aanrr/drone/build/esp-idf/IMU_ICM20948/CMakeFiles/install/strip.dir
 C:/Users/aanrr/drone/build/esp-idf/IMU_MPU6050/CMakeFiles/__idf_IMU_MPU6050.dir
 C:/Users/aanrr/drone/build/esp-idf/IMU_MPU6050/CMakeFiles/edit_cache.dir
 C:/Users/aanrr/drone/build/esp-idf/IMU_MPU6050/CMakeFiles/rebuild_cache.dir
