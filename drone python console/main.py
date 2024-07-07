@@ -124,8 +124,8 @@ class VideoStreamApp:
             # Update the status label if no joystick is connected
             self.status_label.config(text="No joystick connected")
 
-        # Call this method again after 100 milliseconds
-        self.master.after(100, self.update_joystick_status)
+        # Call this method again after 10 milliseconds
+        self.master.after(10, self.update_joystick_status)
 
     def close(self):
         """Close the application, releasing the resources."""

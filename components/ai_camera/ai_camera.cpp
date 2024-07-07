@@ -40,7 +40,7 @@ static camera_config_t camera_config = {
     .pin_vsync = VSYNC_GPIO_NUM,
     .pin_href = HREF_GPIO_NUM,
     .pin_pclk = PCLK_GPIO_NUM,
-    .xclk_freq_hz = 5000000,
+    .xclk_freq_hz = 20000000,
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
     .pixel_format = PIXFORMAT_JPEG,
@@ -55,14 +55,14 @@ static camera_config_t camera_config = {
         FRAMESIZE_XGA (1024 x 768)
         FRAMESIZE_SXGA (1280 x 1024)
     */
-    .jpeg_quality = 30,  // Increase JPEG quality to reduce the size
-    .fb_count = 4,
+    .jpeg_quality = 20,  // Increase JPEG quality to reduce the size
+    .fb_count = 1,
     .fb_location = CAMERA_FB_IN_PSRAM,
     .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
     .sccb_i2c_port = I2C_NUM_0
 };
 
-int led_gpio = 2;  // Define the GPIO pin number
+
 
 /**
  * @brief Function to initialize the camera
@@ -86,8 +86,6 @@ esp_err_t ai_camera_init() {
         return err;
     }
 
-    // Configure the LED GPIO pin as an output
-    pinMode(led_gpio, OUTPUT);
 
     printf("Camera initialized successfully.\n");
     return ESP_OK;

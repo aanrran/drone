@@ -36,22 +36,19 @@
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/HEAD" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/HEAD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/HEAD" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/HEAD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/wifi_server/CMakeFiles/__idf_wifi_server.dir/wifi_server.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/wifi_server/CMakeFiles/__idf_wifi_server.dir/wifi_server.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/wifi_server/libwifi_server.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/wifi_server/libwifi_server.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/CMakeFiles/__idf_joysticks_console.dir/joysticks_console.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/CMakeFiles/__idf_joysticks_console.dir/joysticks_console.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/libjoysticks_console.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/joysticks_console/libjoysticks_console.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/kconfigs.in" beforeDir="false" afterPath="$PROJECT_DIR$/../build/kconfigs.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/kconfigs_projbuild.in" beforeDir="false" afterPath="$PROJECT_DIR$/../build/kconfigs_projbuild.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/project_description.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/project_description.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/IMU_ICM20948/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../components/IMU_ICM20948/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/IMU_ICM20948/imu_icm20948.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/IMU_ICM20948/imu_icm20948.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/MPUdriver" beforeDir="false" afterPath="$PROJECT_DIR$/../components/MPUdriver" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/ai_camera/ai_camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/ai_camera/ai_camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/ai_camera/ai_camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/../components/ai_camera/ai_camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/arduino" beforeDir="false" afterPath="$PROJECT_DIR$/../components/arduino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/wifi_server/wifi_server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/wifi_server/wifi_server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/joysticks_console/joysticks_console.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/joysticks_console/joysticks_console.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../sdkconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../sdkconfig" afterDir="false" />
@@ -72,13 +69,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "esp-now"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;esp-now&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
