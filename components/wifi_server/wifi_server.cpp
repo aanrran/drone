@@ -23,6 +23,28 @@ static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %
 #define TCP_PORT 3333
 
 /**
+ * @brief Calculate CRC-8 using the polynomial 0x07
+ * 
+ * @param data Pointer to the data buffer
+ * @param len Length of the data buffer
+ * @return uint8_t Calculated CRC-8 value
+ */
+uint8_t calculate_crc8(const uint8_t *data, size_t len) {
+    uint8_t crc = 0x00;
+    while (len--) {
+        crc ^= *data++;
+        for (uint8_t i = 0; i < 8; i++) {
+            if (crc & 0x80) {
+                crc = (crc << 1) ^ 0x07;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+    return crc;
+}
+
+/**
  * @brief Wi-Fi task function
  * Initializes the Wi-Fi server and keeps the task alive.
  * 
@@ -155,21 +177,36 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
         vTaskDelete(NULL);
     }
 
-    char buffer[128];
+    char buffer[5];  // Expected data length: 4 bytes data + 1 byte CRC
     while (true) {
-        int len = recv(client_sock, buffer, sizeof(buffer) - 1, 0);
+        int len = recv(client_sock, buffer, sizeof(buffer), 0);
         if (len < 0) {
             Serial.println("Failed to receive data");
             break;
         }
-        buffer[len] = '\0';
 
-        // Parse the joystick data and LED state
-        float x1, y1, x2, y2;
+        if (len == 5) { // Expecting 4 bytes of data and 1 byte of CRC
+            // Parse the joystick data
+            int8_t x1 = buffer[0];
+            int8_t y1 = buffer[1];
+            int8_t x2 = buffer[2];
+            int8_t y2 = buffer[3];
+            uint8_t received_crc = buffer[4];
 
-        sscanf(buffer, "%f %f %f %f", &x1, &y1, &x2, &y2);
+            // Calculate CRC-8
+            uint8_t calculated_crc = calculate_crc8((uint8_t*)buffer, 4);
 
-        processJoystickData(x1, y1, x2, y2);
+            if (calculated_crc == received_crc) {
+                // Serial.printf("Received - Joystick 1 - X: %d, Y: %d\n", x1, y1);
+                // Serial.printf("Received - Joystick 2 - X: %d, Y: %d\n", x2, y2);
+                // Process joystick data
+                processJoystickData(x1, y1, x2, y2);
+            } else {
+                Serial.println("CRC mismatch, data corrupted");
+            }
+        } else {
+            Serial.println("Failed to parse data");
+        }
     }
 
     close(client_sock);

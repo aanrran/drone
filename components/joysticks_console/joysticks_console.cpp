@@ -8,8 +8,8 @@
 #include <algorithm> // For std::min and std::max in C++
 
 // Define the FIR filter order and coefficients
-#define FIR_ORDER 2
-std::array<float, FIR_ORDER + 1> fir_coefficients = {1.0, 0.8, 0.5};
+#define FIR_ORDER 0
+std::array<float, FIR_ORDER + 1> fir_coefficients = {1.0};
 
 // Joysticks delay lines for each data stream
 std::array<float, FIR_ORDER + 1> delayLineX1 = {0};
@@ -30,7 +30,7 @@ float joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
  */
 void joysticks_init() {
     // Create a queue to hold joystick data
-    joystickQueue = xQueueCreate(10, sizeof(float[4]));
+    joystickQueue = xQueueCreate(5, sizeof(float[4]));
 }
 
 /**
@@ -113,7 +113,9 @@ void joysticks_read() {
     if (filteredJoystickData[0] > 0.01 || filteredJoystickData[1] > 0.01 || filteredJoystickData[2] > 0.01 || filteredJoystickData[3] > 0.01||
         filteredJoystickData[0] < -0.01 || filteredJoystickData[1] < -0.01 || filteredJoystickData[2] < -0.01 || filteredJoystickData[3] < -0.01
     ) {
-        // Serial.printf("Joysticks Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
+        printf("Joysticks raw Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)receivedData[0], (float)receivedData[1], (float)receivedData[2], (float)receivedData[3]);
+
+        printf("Joysticks fil Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
     }
 }
 
@@ -125,8 +127,8 @@ void joysticks_read() {
  * @param x2 Second joystick X-axis
  * @param y2 Second joystick Y-axis
  */
-void processJoystickData(float x1, float y1, float x2, float y2) {
+void processJoystickData(int x1, int y1, int x2, int y2) {
     // Send joystick data to the queue
-    float data[4] = {x1, y1, x2, y2};
+    float data[4] = {x1*0.1f, y1*0.1f, x2*0.1f, y2*0.1f};
     xQueueSend(joystickQueue, &data, portMAX_DELAY);
 }

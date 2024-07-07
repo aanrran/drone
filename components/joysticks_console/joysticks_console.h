@@ -10,6 +10,6 @@ void joysticks_init();
 void joysticks_read();
 
 // Function to process joystick data and send it to a queue storage
-void processJoystickData(float x1, float y1, float x2, float y2);
+void processJoystickData(int x1, int y1, int x2, int y2);
 
 #endif // JOYSTICKS_CONSOLE_H

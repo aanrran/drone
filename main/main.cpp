@@ -37,7 +37,7 @@ void app_main(void) {
 
     while (true) {
 
-        imu.icm20948_printReadings();
+        // imu.icm20948_printReadings();
 
         vTaskDelay(pdMS_TO_TICKS(500));
     }
