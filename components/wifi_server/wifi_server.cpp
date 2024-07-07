@@ -249,7 +249,7 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     Serial.println("Wi-Fi server started.");
 
     // Start TCP task to receive joystick data
-    xTaskCreatePinnedToCore(tcp_task, "tcpTask", 4096, NULL, 1, NULL, 0);
+    xTaskCreatePinnedToCore(tcp_task, "tcpTask", 4096, NULL, 2, NULL, 0);
 
     return ESP_OK;
 }

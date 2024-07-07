@@ -31,7 +31,7 @@ void app_main(void) {
     imu.icm20948_init();
 
     // Start Wi-Fi task on core 0
-    xTaskCreatePinnedToCore(wifi_task, "wifiTask", 8192, NULL, 1, NULL, 0);
+    xTaskCreatePinnedToCore(wifi_task, "wifiTask", 20480, NULL, 24, NULL, 1);
     // Start the controller task on core 1
     startControllerTask();
 

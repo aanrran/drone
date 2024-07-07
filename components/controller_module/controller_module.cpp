@@ -26,7 +26,7 @@ void PID_control() {
     // Check if the joystick data is not all zero. if not zero, print the reading
     if (x1 > 0.01 || y1 > 0.01 || x2 > 0.01 || y2 > 0.01||
         x1 < -0.01 || y1 < -0.01 || x2 < -0.01 || y2 < -0.01) {
-        Serial.printf("PID Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n",x1, y1, x2, y2);   
+        printf("PID Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n",x1, y1, x2, y2);
     }
     set_motor_pwm_duty((x1*100), (y1*100), (x2*100), (y2*100));
 
@@ -82,11 +82,11 @@ void startControllerTask() {
     joysticks_init();    
 
     // Create the controller task pinned to core 2
-    xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 1);
+    xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 0);
 
     // Create the PID control task pinned to core 2
     TaskHandle_t PIDControlTaskHandle;
-    xTaskCreatePinnedToCore(PID_control_task, "PIDControlTask", 4096, NULL, 2, &PIDControlTaskHandle, 1);
+    xTaskCreatePinnedToCore(PID_control_task, "PIDControlTask", 4096, NULL, 23, &PIDControlTaskHandle, 0);
 
     // Configure the timer
     gptimer_config_t timer_config = {

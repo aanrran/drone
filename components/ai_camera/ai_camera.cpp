@@ -56,7 +56,7 @@ static camera_config_t camera_config = {
         FRAMESIZE_SXGA (1280 x 1024)
     */
     .jpeg_quality = 20,  // Increase JPEG quality to reduce the size
-    .fb_count = 1,
+    .fb_count = 2,
     .fb_location = CAMERA_FB_IN_PSRAM,
     .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
     .sccb_i2c_port = I2C_NUM_0
