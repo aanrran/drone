@@ -9,9 +9,9 @@
 
 // Define GPIO pins for motors
 #define GPIO_PWM0A_OUT 21   // Motor 1
-#define GPIO_PWM0B_OUT 47   // Motor 2
-#define GPIO_PWM1A_OUT 48   // Motor 3
-#define GPIO_PWM1B_OUT 45   // Motor 4
+#define GPIO_PWM0B_OUT 41   // Motor 2
+#define GPIO_PWM1A_OUT 45   // Motor 3
+#define GPIO_PWM1B_OUT 47   // Motor 4
 
 void mcpwm_example_gpio_initialize(void) {
     printf("Initializing MCPWM GPIO...\n");
