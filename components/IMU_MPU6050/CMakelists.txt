@@ -2,4 +2,6 @@ idf_component_register(SRCS "imu_mpu6050.cpp"
                     REQUIRES MPUdriver
                     REQUIRES I2Cbus
                     REQUIRES driver
+                    REQUIRES esp-dsp
+                    REQUIRES esp_timer
                     INCLUDE_DIRS ".")

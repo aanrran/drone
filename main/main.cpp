@@ -3,7 +3,7 @@
 #include "controller_module.h"
 #include "WiFi.h"
 #include "nvs_flash.h"
-#include "imu_icm20948.h"
+#include "imu_mpu6050.h"
 #include "dc_motor_driver.h"
 
 // Wi-Fi credentials
@@ -26,9 +26,9 @@ void app_main(void) {
     set_motor_pwm_duty(50,40,30,20);
 
     // Create an instance of the IMU_MPU6050 class
-    IMU_ICM20948 imu(GPIO_NUM_3, GPIO_NUM_46);
+    IMU_MPU6050 imu(GPIO_NUM_3, GPIO_NUM_46);
     // Initialize the MPU6050 sensor
-    imu.icm20948_init();
+    imu.mpu6050_init();
 
     // Start Wi-Fi task on core 0
     xTaskCreatePinnedToCore(wifi_task, "wifiTask", 20480, NULL, 24, NULL, 1);
@@ -37,7 +37,8 @@ void app_main(void) {
 
     while (true) {
 
-        // imu.icm20948_printReadings();
+        imu.mpu6050_printReadings();
+        imu.mpu6050_printAngles();
 
         vTaskDelay(pdMS_TO_TICKS(500));
     }

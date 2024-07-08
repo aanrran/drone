@@ -21,7 +21,7 @@ void IMU_ICM20948::icm20948_init() {
     setGyroFullScale(mpud::GYRO_FS_500DPS);
     setDigitalLowPassFilter(mpud::DLPF_42HZ);  // smoother data
     // setInterruptEnabled(mpud::INT_EN_RAWDATA_READY);  // enable INT pin
-    compassSetMode(mpud::MAG_MODE_POWER_DOWN); // unuse the compass
+    // compassSetMode(mpud::MAG_MODE_POWER_DOWN); // unuse the compass
 }
 
 void IMU_ICM20948::icm20948_printReadings() {
