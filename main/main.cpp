@@ -25,11 +25,10 @@ void app_main(void) {
     dc_motor_init();
     set_motor_pwm_duty(0,0,0,0);
     vTaskDelay(pdMS_TO_TICKS(1000));
-    // set_motor_pwm_duty(50,50,50,50);
 
-    // Start Wi-Fi task on core 0
+    // Start Wi-Fi task on core 1
     xTaskCreatePinnedToCore(wifi_task, "wifiTask", 20480, NULL, 24, NULL, 1);
-    // Start the controller task on core 1
+    // Start the controller task on core 0
     startControllerTask();
 
     while (true) {

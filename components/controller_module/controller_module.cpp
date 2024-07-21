@@ -12,6 +12,15 @@
 
 static gptimer_handle_t timer = NULL;  // Timer handle
 
+// Define the states
+typedef enum {
+    STATE_START,
+    STATE_OPERATE
+} controller_state_t;
+
+// Create and initialize the state
+static controller_state_t current_state = STATE_START;
+
 // Create an instance of the IMU_MPU6050 class
 static IMU_MPU6050 imu6050(GPIO_NUM_48, GPIO_NUM_45);
 
@@ -39,12 +48,25 @@ bool joystick_pushed() {
     float y1 = joystickData[1];
     float x2 = joystickData[2];
     float y2 = joystickData[3];
+    static int8_t counter = 0;
         // Check if the joystick data is not all zero. if not zero, print the reading
     if (x1 > 0.01 || y1 > 0.01 || x2 > 0.01 || y2 > 0.01||
         x1 < -0.01 || y1 < -0.01 || x2 < -0.01 || y2 < -0.01) {
-        return true;
+            counter ++;
+            if(counter > 2) { // check if the joysticks has moved for a while
+                counter = 0;
+                return  true;
+            } else return false;
     }
     return false;
+}
+
+/**
+ * @brief setter function to triger the restart of the state machine
+ * This function reset the state machine status to restart
+ */
+void state_machine_restart() {
+    current_state = STATE_START;
 }
 
 /**
@@ -112,9 +134,13 @@ float computePID(PID &pid, float error, float dt) {
 
 /**
  * @brief PID control function
- * This function reads the static joystick data and prints them if they are not all zero.
+ * The function is the main controller loop and updates motor duty cycle.
  */
 void PID_control() {
+    if(current_state != STATE_OPERATE) { // check to make sure drone is in operation.
+        set_motor_pwm_duty(0,0,0,0); // stop the motor
+        return;
+    }
     // Read joystick data
     float x1 = joystickData[0]; // + move right, - move left
     float y1 = joystickData[1]; // from -0.5 to + 1.0 move up, at -0.5 motor zero speed, -1 to -0.5 keep previous y1 reading  
@@ -145,26 +171,19 @@ void PID_control() {
     float pitch_err = pitch_cmd - imu6050.pitch; // Pitch error
     float yaw_err = yaw_cmd - imu6050.yaw;      // Yaw error
 
-    // Initialize PID parameters for roll, pitch, and yaw
-    static PID pid_roll = {1.0, 0.1, 0.05, 0, 0, 50};   // PID parameters for roll
-    static PID pid_pitch = {1.2, 0.1, 0.06, 0, 0, 50};  // PID parameters for pitch
-    static PID pid_yaw = {0.8, 0.1, 0.04, 0, 0, 50};    // PID parameters for yaw
-
     // Compute PID outputs
     float roll_output = computePID(pid_roll, roll_err, dt);   // Roll PID output
     float pitch_output = computePID(pid_pitch, pitch_err, dt); // Pitch PID output
     float yaw_output = computePID(pid_yaw, yaw_err, dt);      // Yaw PID output
 
     // Base motor speed logic
-    static float previous_y1 = 0;  // Previous y1 value to maintain speed when y1 < -0.5
     float base_speed = 0;
 
-    if (y1 >= -0.5 && y1 <= 1.0) {
-        base_speed = (y1 + 0.5) * 100.0 / 1.5; // Scale from -0.5 to 1.0 to 0 to 100
-    } else if (y1 < -0.5 && y1 >= -1.0) {
-        base_speed = previous_y1; // Keep previous y1 reading
+    if (y1 >= 0) {
+        base_speed = y1 * (100.0 - 30.0) + 30.0; // Scale from 0 to 1.0 as 30 to 100
+    } else {
+        base_speed = (y1 + 1.0) * 30.0; // Scale from -1.0 to 0 as 0 to 30
     }
-    previous_y1 = base_speed; // Update previous y1 value
 
     // Calculate motor duty cycles based on base speed and PID outputs
     float duty_cycle1 = base_speed - pitch_output + roll_output + yaw_output; // Motor 1
@@ -211,8 +230,27 @@ void controller_task(void *pvParameters) {
     while (true) {
         joysticks_read();
 
-        if(joystick_pushed()) {
+        switch (current_state) {
+            case STATE_START:
+                // printf("State: START\n");
+                // Perform actions for the START state  
+                current_state = STATE_START;  // repeat if below events not happening
 
+                if(joystick_pushed()) {
+                    current_state = STATE_OPERATE;
+                }                      
+                break;
+
+            case STATE_OPERATE:
+                // printf("State: OPERATE\n");
+                current_state = STATE_OPERATE; // repeat if below events not happening
+                // Perform actions for the OPERATE state
+
+                break;
+
+            default:
+                printf("Unknown state!\n");
+                break;
         }
 
         vTaskDelay(pdMS_TO_TICKS(10));

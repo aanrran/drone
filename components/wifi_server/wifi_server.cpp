@@ -9,6 +9,7 @@
 #include <lwip/netdb.h>
 #include "ai_camera.h"
 #include "joysticks_console.h"
+#include "controller_module.h"
 
 // HTTP server handle
 httpd_handle_t server = NULL;
@@ -21,6 +22,7 @@ static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %
 
 // TCP server port for receiving joystick data
 #define TCP_PORT 3333
+#define RESTART_COMMAND "RESTART"
 
 /**
  * @brief Calculate CRC-8 using the polynomial 0x07
@@ -147,7 +149,7 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
     // Create a TCP socket
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
-        Serial.println("Failed to create socket");
+        printf("Failed to create socket");
         vTaskDelete(NULL);
     }
 
@@ -158,13 +160,13 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
     server_addr.sin_port = htons(TCP_PORT);
 
     if (bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-        Serial.println("Failed to bind socket");
+        printf("Failed to bind socket");
         close(sock);
         vTaskDelete(NULL);
     }
 
     if (listen(sock, 1) < 0) {
-        Serial.println("Failed to listen on socket");
+        printf("Failed to listen on socket");
         close(sock);
         vTaskDelete(NULL);
     }
@@ -172,40 +174,70 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
     Serial.println("Waiting for a connection...");
     int client_sock = accept(sock, NULL, NULL);
     if (client_sock < 0) {
-        Serial.println("Failed to accept connection");
+        printf("Failed to accept connection");
         close(sock);
         vTaskDelete(NULL);
     }
 
-    char buffer[5];  // Expected data length: 4 bytes data + 1 byte CRC
+    char buffer[256];  // Buffer to hold received data
     while (true) {
         int len = recv(client_sock, buffer, sizeof(buffer), 0);
         if (len < 0) {
-            Serial.println("Failed to receive data");
+            printf("Failed to receive data");
             break;
         }
 
-        if (len == 5) { // Expecting 4 bytes of data and 1 byte of CRC
-            // Parse the joystick data
-            int8_t x1 = buffer[0];
-            int8_t y1 = buffer[1];
-            int8_t x2 = buffer[2];
-            int8_t y2 = buffer[3];
-            uint8_t received_crc = buffer[4];
+        if (len > 0) {
+            // Check if the received data is the RESTART command
+            if (strncmp(buffer, RESTART_COMMAND, len) == 0) {
+                printf("Received RESTART command. Restarting the drone...");
+                state_machine_restart();  // Restart the drone
+            } 
+            else if (len == 5) { // Expecting 4 bytes of joystick data and 1 byte of CRC
+                // Parse the joystick data
+                int8_t x1 = buffer[0];
+                int8_t y1 = buffer[1];
+                int8_t x2 = buffer[2];
+                int8_t y2 = buffer[3];
+                uint8_t received_crc = buffer[4];
 
-            // Calculate CRC-8
-            uint8_t calculated_crc = calculate_crc8((uint8_t*)buffer, 4);
+                // Calculate CRC-8
+                uint8_t calculated_crc = calculate_crc8((uint8_t*)buffer, 4);
 
-            if (calculated_crc == received_crc) {
-                // Serial.printf("Received - Joystick 1 - X: %d, Y: %d\n", x1, y1);
-                // Serial.printf("Received - Joystick 2 - X: %d, Y: %d\n", x2, y2);
-                // Process joystick data
-                processJoystickData(x1, y1, x2, y2);
-            } else {
-                Serial.println("CRC mismatch, data corrupted");
+                if (calculated_crc == received_crc) {
+                    // Process joystick data
+                    processJoystickData(x1, y1, x2, y2);
+                } else {
+                    printf("CRC mismatch, data corrupted");
+                }
+            }
+            else if (len == 41) { // Expecting 40 bytes of PID parameters and 1 byte of CRC
+                float Kp_roll, Ki_roll, Kd_roll, Kp_pitch, Ki_pitch, Kd_pitch, Kp_yaw, Ki_yaw, Kd_yaw, integral_max;
+                memcpy(&Kp_roll, &buffer[0], sizeof(float));
+                memcpy(&Ki_roll, &buffer[4], sizeof(float));
+                memcpy(&Kd_roll, &buffer[8], sizeof(float));
+                memcpy(&Kp_pitch, &buffer[12], sizeof(float));
+                memcpy(&Ki_pitch, &buffer[16], sizeof(float));
+                memcpy(&Kd_pitch, &buffer[20], sizeof(float));
+                memcpy(&Kp_yaw, &buffer[24], sizeof(float));
+                memcpy(&Ki_yaw, &buffer[28], sizeof(float));
+                memcpy(&Kd_yaw, &buffer[32], sizeof(float));
+                memcpy(&integral_max, &buffer[36], sizeof(float));
+                uint8_t received_crc = buffer[40];
+
+                // Calculate CRC-8
+                uint8_t calculated_crc = calculate_crc8((uint8_t*)buffer, 40);
+
+                if (calculated_crc == received_crc) {
+                    // Set PID parameters
+                    setPIDParameters(Kp_roll, Ki_roll, Kd_roll, Kp_pitch, Ki_pitch, Kd_pitch, Kp_yaw, Ki_yaw, Kd_yaw, integral_max);
+                    printf("PID parameters set successfully");
+                } else {
+                    printf("CRC mismatch, PID data corrupted");
+                }
             }
         } else {
-            Serial.println("Failed to parse data");
+            printf("Failed to parse data");
         }
     }
 

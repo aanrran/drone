@@ -2,6 +2,8 @@
 #define CONTROLLER_MODULE_H
 
 
+void state_machine_restart();
+
 void setPIDParameters(float Kp_roll, float Ki_roll, float Kd_roll,
                       float Kp_pitch, float Ki_pitch, float Kd_pitch,
                       float Kp_yaw, float Ki_yaw, float Kd_yaw, float integral_max);

@@ -1,0 +1,2 @@
+Kp_roll,Ki_roll,Kd_roll,Kp_pitch,Ki_pitch,Kd_pitch,Kp_yaw,Ki_yaw,Kd_yaw,integral_max
+1,1,1,1,1,1,1,1,1,30
