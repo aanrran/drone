@@ -3,7 +3,7 @@
 
 #include "MPU.hpp"  // Main file, provides the class itself
 #include <math.h>
-#include "esp_dsp.h"
+
 
 // Define RESTRICT_PITCH as default
 #define RESTRICT_PITCH
@@ -20,6 +20,10 @@ public:
      * @param scl_pin SCL pin for I2C.
      */
     IMU_MPU6050(gpio_num_t sda_pin, gpio_num_t scl_pin);
+
+    float roll = 0.0f;   ///< Roll angle
+    float pitch = 0.0f;  ///< Pitch angle
+    float yaw = 0.0f;    ///< Yaw angle
 
     /**
      * @brief Function to initialize the MPU6050 sensor.
@@ -50,15 +54,11 @@ private:
     mpud::float_axes_t accelG;  ///< Converted data structure for accelerometer in g
     mpud::float_axes_t gyroDPS; ///< Converted data structure for gyroscope in degrees per second
 
-    float roll;   ///< Roll angle
-    float pitch;  ///< Pitch angle
-    float yaw;    ///< Yaw angle
+    float imu_roll = 0.0f;
+    float imu_pitch = 0.0f;
+    float imu_yaw = 0.0f;
 
-    float imu_roll;
-    float imu_pitch;
-    float imu_yaw;
-
-    float prev_time;  ///< Previous time for delta time calculation
+    float prev_time = 0.0f;  ///< Previous time for delta time calculation
 };
 
 #endif // IMU_MPU6050_H

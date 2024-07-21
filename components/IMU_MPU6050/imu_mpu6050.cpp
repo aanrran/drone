@@ -16,7 +16,7 @@ const float sin_phy = -sqrt(2) / 2.0;
  * @param scl_pin SCL pin for I2C.
  */
 IMU_MPU6050::IMU_MPU6050(gpio_num_t sda_pin, gpio_num_t scl_pin)
-    : sda_pin(sda_pin), scl_pin(scl_pin), roll(0), pitch(0), yaw(0), prev_time(0) {
+    : sda_pin(sda_pin), scl_pin(scl_pin){
 }
 
 /**
@@ -98,15 +98,15 @@ void IMU_MPU6050::mpu6050_updateAngles(float dt) {
     imu_pitch = gyroPitch * 0.95f + accelPitch * 0.05f;
     imu_yaw   = gyroYaw;
 
+    // Correct yaw to stay within -180 to 180 degrees
+    if (imu_yaw > 180.f) imu_yaw -= 360.f;
+    else if (imu_yaw < -180.f) imu_yaw += 360.f;
+
     // convert the angles to the drone orientation using the rotation matrix
     roll = cos_phy * imu_roll - sin_phy * imu_pitch;
     pitch = -sin_phy * imu_roll - cos_phy * imu_pitch;
     yaw = - imu_yaw;
 
-    
-    // Correct yaw to stay within -180 to 180 degrees
-    if (yaw > 180.f) yaw -= 360.f;
-    else if (yaw < -180.f) yaw += 360.f;
 }
 
 /**

@@ -5,32 +5,175 @@
 #include "driver/gptimer.h"
 #include "joysticks_console.h"
 #include "dc_motor_driver.h"
-
+#include "imu_mpu6050.h"
 
 // Timer configuration
 #define TIMER_INTERVAL_US 10000  // Timer interval in microseconds
 
 static gptimer_handle_t timer = NULL;  // Timer handle
 
+// Create an instance of the IMU_MPU6050 class
+static IMU_MPU6050 imu6050(GPIO_NUM_48, GPIO_NUM_45);
+
+struct PID {
+    float Kp;          // Proportional gain
+    float Ki;          // Integral gain
+    float Kd;          // Derivative gain
+    float integral;    // Integral term
+    float prev_error;  // Previous error for derivative term
+    float integral_max; // Maximum integral value to prevent windup
+};
+
+// Initialize PID parameters for roll, pitch, and yaw
+static PID pid_roll = {1.0, 0.1, 0.05, 0, 0, 50};   // PID parameters for roll
+static PID pid_pitch = {1.2, 0.1, 0.06, 0, 0, 50};  // PID parameters for pitch
+static PID pid_yaw = {0.8, 0.1, 0.04, 0, 0, 50};    // PID parameters for yaw
 
 /**
- * @brief Placeholder PID control function
- * This function reads the static joystick data and prints them if they are not all zero.
+ * @brief check if joysticks are pushed
+ * This function reads the static joystick data and check if they are not all zero.
  */
-void PID_control() {
+bool joystick_pushed() {
     // Read joystick data
     float x1 = joystickData[0];
     float y1 = joystickData[1];
     float x2 = joystickData[2];
     float y2 = joystickData[3];
-
-    // Check if the joystick data is not all zero. if not zero, print the reading
+        // Check if the joystick data is not all zero. if not zero, print the reading
     if (x1 > 0.01 || y1 > 0.01 || x2 > 0.01 || y2 > 0.01||
         x1 < -0.01 || y1 < -0.01 || x2 < -0.01 || y2 < -0.01) {
-        // printf("PID Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n",x1, y1, x2, y2);
+        return true;
     }
-    // set_motor_pwm_duty((x1*100), (y1*100), (x2*100), (y2*100));
+    return false;
+}
 
+/**
+ * @brief Sets the PID parameters for roll, pitch, and yaw
+ * 
+ * @param Kp_roll Proportional gain for roll
+ * @param Ki_roll Integral gain for roll
+ * @param Kd_roll Derivative gain for roll
+ * @param Kp_pitch Proportional gain for pitch
+ * @param Ki_pitch Integral gain for pitch
+ * @param Kd_pitch Derivative gain for pitch
+ * @param Kp_yaw Proportional gain for yaw
+ * @param Ki_yaw Integral gain for yaw
+ * @param Kd_yaw Derivative gain for yaw
+ * @param integral_max Maximum integral value to prevent windup
+ */
+void setPIDParameters(float Kp_roll, float Ki_roll, float Kd_roll,
+                      float Kp_pitch, float Ki_pitch, float Kd_pitch,
+                      float Kp_yaw, float Ki_yaw, float Kd_yaw, float integral_max) {
+    pid_roll.Kp = Kp_roll;
+    pid_roll.Ki = Ki_roll;
+    pid_roll.Kd = Kd_roll;
+    pid_roll.integral_max = integral_max;
+
+    pid_pitch.Kp = Kp_pitch;
+    pid_pitch.Ki = Ki_pitch;
+    pid_pitch.Kd = Kd_pitch;
+    pid_pitch.integral_max = integral_max;
+
+    pid_yaw.Kp = Kp_yaw;
+    pid_yaw.Ki = Ki_yaw;
+    pid_yaw.Kd = Kd_yaw;
+    pid_yaw.integral_max = integral_max;
+}
+
+/**
+ * @brief Computes the PID output
+ * 
+ * @param pid The PID structure containing parameters and state
+ * @param error The current error
+ * @param dt Delta time
+ * @return The PID output, clamped between -100 and 100
+ */
+float computePID(PID &pid, float error, float dt) {
+    // Update integral term with clamping to prevent windup
+    pid.integral += error * dt;
+    if (pid.integral > pid.integral_max) {
+        pid.integral = pid.integral_max;
+    } else if (pid.integral < -pid.integral_max) {
+        pid.integral = -pid.integral_max;
+    }
+    
+    // Compute derivative term
+    float derivative = (error - pid.prev_error) / dt;
+    
+    // Update previous error
+    pid.prev_error = error;
+    
+    // Compute PID output
+    float output = pid.Kp * error + pid.Ki * pid.integral + pid.Kd * derivative;
+    
+    // Clamp output to -100 to 100
+    return fmax(fmin(output, 100), -100);
+}
+
+/**
+ * @brief PID control function
+ * This function reads the static joystick data and prints them if they are not all zero.
+ */
+void PID_control() {
+    // Read joystick data
+    float x1 = joystickData[0]; // + move right, - move left
+    float y1 = joystickData[1]; // from -0.5 to + 1.0 move up, at -0.5 motor zero speed, -1 to -0.5 keep previous y1 reading  
+    float x2 = joystickData[2]; // + turn right, - turn left
+    float y2 = joystickData[3]; // + move front, - move back
+
+    // Scale joystick data to command values (pitch_cmd, roll_cmd, yaw_cmd)
+    float roll_cmd = x1 * 10.0; // Scale to -10 to 10 degrees
+    float pitch_cmd = y2 * 10.0; // Scale to -10 to 10 degrees
+    float yaw_cmd = x2 * 10.0; // Scale to -10 to 10 degrees
+
+    // Calculate delta time (dt)
+    const float current_time = xthal_get_ccount(); // Get current time
+    float dt = 0;
+    static float prev_time = 0;  // Previous time for delta time calculation
+
+    if (current_time > prev_time) {
+        dt = (current_time - prev_time) / 240000000.0; // Convert to seconds
+    } else {
+        dt = 1.0 / 240000000.0; // Default dt value in case of error
+    }
+    prev_time = current_time; // Update previous time
+
+    imu6050.mpu6050_updateAngles(dt); // Update and print roll, pitch, and yaw angles
+
+    // Calculate errors
+    float roll_err = roll_cmd - imu6050.roll;   // Roll error
+    float pitch_err = pitch_cmd - imu6050.pitch; // Pitch error
+    float yaw_err = yaw_cmd - imu6050.yaw;      // Yaw error
+
+    // Initialize PID parameters for roll, pitch, and yaw
+    static PID pid_roll = {1.0, 0.1, 0.05, 0, 0, 50};   // PID parameters for roll
+    static PID pid_pitch = {1.2, 0.1, 0.06, 0, 0, 50};  // PID parameters for pitch
+    static PID pid_yaw = {0.8, 0.1, 0.04, 0, 0, 50};    // PID parameters for yaw
+
+    // Compute PID outputs
+    float roll_output = computePID(pid_roll, roll_err, dt);   // Roll PID output
+    float pitch_output = computePID(pid_pitch, pitch_err, dt); // Pitch PID output
+    float yaw_output = computePID(pid_yaw, yaw_err, dt);      // Yaw PID output
+
+    // Base motor speed logic
+    static float previous_y1 = 0;  // Previous y1 value to maintain speed when y1 < -0.5
+    float base_speed = 0;
+
+    if (y1 >= -0.5 && y1 <= 1.0) {
+        base_speed = (y1 + 0.5) * 100.0 / 1.5; // Scale from -0.5 to 1.0 to 0 to 100
+    } else if (y1 < -0.5 && y1 >= -1.0) {
+        base_speed = previous_y1; // Keep previous y1 reading
+    }
+    previous_y1 = base_speed; // Update previous y1 value
+
+    // Calculate motor duty cycles based on base speed and PID outputs
+    float duty_cycle1 = base_speed - pitch_output + roll_output + yaw_output; // Motor 1
+    float duty_cycle2 = base_speed - pitch_output - roll_output - yaw_output; // Motor 2
+    float duty_cycle3 = base_speed + pitch_output - roll_output + yaw_output; // Motor 3
+    float duty_cycle4 = base_speed + pitch_output + roll_output - yaw_output; // Motor 4
+
+    // Set motor PWM duty cycles
+    set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
 }
 
 /**
@@ -68,6 +211,10 @@ void controller_task(void *pvParameters) {
     while (true) {
         joysticks_read();
 
+        if(joystick_pushed()) {
+
+        }
+
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
@@ -82,7 +229,8 @@ void startControllerTask() {
     // Initialize the joystick filters
     joysticks_init();    
 
-    // Initialize the IMU
+    // Initialize the MPU6050 sensor
+    imu6050.mpu6050_init();
 
     // Create the controller task pinned to core 2
     xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 0);
