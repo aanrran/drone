@@ -9,14 +9,14 @@
     },
     "idf.espIdfPathWin": "C:\\Users\\aanrr\\esp\\v5.1.4\\esp-idf",
     "idf.openOcdConfigs": [
-        "interface/ftdi/esp32_devkitj_v1.cfg",
-        "target/esp32s3.cfg"
+        "board/esp32s3-builtin.cfg"
     ],
-    "idf.portWin": "COM4",
+    "idf.portWin": "COM11",
     "idf.pythonBinPathWin": "C:\\esp\\tools\\Espressif\\python_env\\idf5.1_py3.11_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "C:\\esp\\tools\\Espressif",
-    "idf.flashType": "UART",
+    "idf.flashType": "JTAG",
     "files.associations": {
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "complex": "cpp"
     }
 }

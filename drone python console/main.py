@@ -123,8 +123,8 @@ class VideoStreamApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    stream_url = "http://192.168.50.141/"  # Replace with your ESP32 stream URL
-    tcp_ip = "192.168.50.141"  # Replace with your ESP32 IP address
+    stream_url = "http://192.168.50.149/"  # Replace with your ESP32 stream URL
+    tcp_ip = "192.168.50.149"  # Replace with your ESP32 IP address
     tcp_port = 3333  # Replace with your TCP port
 
     # Create and run the video stream application

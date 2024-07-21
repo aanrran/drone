@@ -8,6 +8,7 @@
 // Define RESTRICT_PITCH as default
 #define RESTRICT_PITCH
 
+
 /**
  * @brief IMU_MPU6050 class for handling MPU6050 sensor.
  */
@@ -31,7 +32,11 @@ public:
     void mpu6050_printReadings();
 
     /**
-     * @brief Function to calculate and print roll, pitch, and yaw angles.
+     * @brief Function to calculate roll, pitch, and yaw angles.
+     */
+    void mpu6050_updateAngles(float dt);
+    /**
+     * @brief Function to print roll, pitch, and yaw angles.
      */
     void mpu6050_printAngles();
 
@@ -48,6 +53,10 @@ private:
     float roll;   ///< Roll angle
     float pitch;  ///< Pitch angle
     float yaw;    ///< Yaw angle
+
+    float imu_roll;
+    float imu_pitch;
+    float imu_yaw;
 
     float prev_time;  ///< Previous time for delta time calculation
 };

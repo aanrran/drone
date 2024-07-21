@@ -12,7 +12,7 @@ void IMU_ICM20948::icm20948_init() {
     i2c0.begin(sda_pin, scl_pin, 10000);  // initialize the I2C bus
              
     setBus(i2c0);  // set communication bus, for SPI -> pass 'hspi'
-    setAddr(mpud::MPU_I2CADDRESS_AD0_LOW);  // set address or handle, for SPI -> pass 'mpu_spi_handle'
+    setAddr(mpud::MPU_I2CADDRESS_AD0_HIGH);  // set address or handle, for SPI -> pass 'mpu_spi_handle'
     testConnection(); // test connection with the chip, return is a error code
     initialize();  // this will initialize the chip and set default configurations
 

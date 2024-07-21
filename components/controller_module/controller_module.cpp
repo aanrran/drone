@@ -6,6 +6,7 @@
 #include "joysticks_console.h"
 #include "dc_motor_driver.h"
 
+
 // Timer configuration
 #define TIMER_INTERVAL_US 10000  // Timer interval in microseconds
 
@@ -28,7 +29,7 @@ void PID_control() {
         x1 < -0.01 || y1 < -0.01 || x2 < -0.01 || y2 < -0.01) {
         // printf("PID Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n",x1, y1, x2, y2);
     }
-    set_motor_pwm_duty((x1*100), (y1*100), (x2*100), (y2*100));
+    // set_motor_pwm_duty((x1*100), (y1*100), (x2*100), (y2*100));
 
 }
 
@@ -80,6 +81,8 @@ void startControllerTask() {
 
     // Initialize the joystick filters
     joysticks_init();    
+
+    // Initialize the IMU
 
     // Create the controller task pinned to core 2
     xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 0);

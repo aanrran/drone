@@ -23,10 +23,11 @@ void app_main(void) {
     Serial.println("Starting setup...");
 
     dc_motor_init();
-    set_motor_pwm_duty(50,40,30,20);
-
+    set_motor_pwm_duty(0,0,0,0);
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    // set_motor_pwm_duty(50,50,50,50);
     // Create an instance of the IMU_MPU6050 class
-    IMU_MPU6050 imu(GPIO_NUM_3, GPIO_NUM_46);
+    IMU_MPU6050 imu(GPIO_NUM_48, GPIO_NUM_45);
     // Initialize the MPU6050 sensor
     imu.mpu6050_init();
 
@@ -37,9 +38,9 @@ void app_main(void) {
 
     while (true) {
 
-        imu.mpu6050_printReadings();
+        // imu.mpu6050_printReadings();
         imu.mpu6050_printAngles();
 
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(50));
     }
 }
