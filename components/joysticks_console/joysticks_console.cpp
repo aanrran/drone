@@ -8,8 +8,8 @@
 #include <algorithm> // For std::min and std::max in C++
 
 // Define the FIR filter order and coefficients
-#define FIR_ORDER 3
-std::array<float, FIR_ORDER + 1> fir_coefficients = {0.5, 0.5, 0.5, 0.5};
+#define FIR_ORDER 1
+std::array<float, FIR_ORDER + 1> fir_coefficients = {0.5, 0.5};
 
 // Joysticks delay lines for each data stream
 std::array<int8_t, FIR_ORDER + 1> delayLineX1 = {0};
