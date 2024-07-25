@@ -195,10 +195,10 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
             } 
             else if (len == 5) { // Expecting 4 bytes of joystick data and 1 byte of CRC
                 // Parse the joystick data
-                int8_t x1 = buffer[0];
-                int8_t y1 = buffer[1];
-                int8_t x2 = buffer[2];
-                int8_t y2 = buffer[3];
+                uint8_t x1 = buffer[0];
+                uint8_t y1 = buffer[1];
+                uint8_t x2 = buffer[2];
+                uint8_t y2 = buffer[3];
                 uint8_t received_crc = buffer[4];
 
                 // Calculate CRC-8
@@ -318,7 +318,7 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     Serial.println("Wi-Fi server started.");
 
     // Start TCP task to receive joystick data
-    xTaskCreatePinnedToCore(tcp_task, "tcpTask", 4096, NULL, 2, NULL, 0);
+    xTaskCreatePinnedToCore(tcp_task, "tcpTask", 4096, NULL, 2, NULL, 1);
 
     return ESP_OK;
 }

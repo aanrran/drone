@@ -8,19 +8,19 @@
 #include <algorithm> // For std::min and std::max in C++
 
 // Define the FIR filter order and coefficients
-#define FIR_ORDER 0
-std::array<float, FIR_ORDER + 1> fir_coefficients = {1.0};
+#define FIR_ORDER 3
+std::array<float, FIR_ORDER + 1> fir_coefficients = {0.5, 0.5, 0.5, 0.5};
 
 // Joysticks delay lines for each data stream
-std::array<float, FIR_ORDER + 1> delayLineX1 = {0};
-std::array<float, FIR_ORDER + 1> delayLineY1 = {0};
-std::array<float, FIR_ORDER + 1> delayLineX2 = {0};
-std::array<float, FIR_ORDER + 1> delayLineY2 = {0};
+std::array<int8_t, FIR_ORDER + 1> delayLineX1 = {0};
+std::array<int8_t, FIR_ORDER + 1> delayLineY1 = {0};
+std::array<int8_t, FIR_ORDER + 1> delayLineX2 = {0};
+std::array<int8_t, FIR_ORDER + 1> delayLineY2 = {0};
 
 // Define a queue to communicate joystick data between tasks
 QueueHandle_t joystickQueue;
 
-float joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
+int8_t joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
 
 /**
  * @brief Initialize joystick filters.
@@ -30,7 +30,7 @@ float joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
  */
 void joysticks_init() {
     // Create a queue to hold joystick data
-    joystickQueue = xQueueCreate(5, sizeof(float[4]));
+    joystickQueue = xQueueCreate(20, sizeof(int8_t[4]));
 }
 
 /**
@@ -39,8 +39,8 @@ void joysticks_init() {
  * @param value The value to clamp.
  * @return The clamped value.
  */
-float clamp(float value) {
-    return std::max(-1.0f, std::min(1.0f, value));
+int8_t clamp(int8_t value) {
+    return std::max(static_cast<int8_t>(-20), std::min(static_cast<int8_t>(20), value));
 }
 
 /**
@@ -50,17 +50,17 @@ float clamp(float value) {
  * @param delayLine The delay line array.
  * @return The filtered data point.
  */
-float applyFIRFilter(float input, std::array<float, FIR_ORDER + 1>& delayLine) {
+int8_t applyFIRFilter(int8_t input, std::array<int8_t, FIR_ORDER + 1>& delayLine) {
     // Shift delay line values
-    for (int i = FIR_ORDER; i > 0; i--) {
+    for (int8_t i = FIR_ORDER; i > 0; i--) {
         delayLine[i] = delayLine[i - 1];
     }
     delayLine[0] = input;
 
     // Apply FIR filter
-    float output = 0.0;
-    for (int i = 0; i <= FIR_ORDER; i++) {
-        output += fir_coefficients[i] * delayLine[i];
+    int8_t output = 0.0;
+    for (int8_t i = 0; i <= FIR_ORDER; i++) {
+        output += static_cast<int8_t>(fir_coefficients[i] * delayLine[i]);
     }
 
     return output;
@@ -75,7 +75,7 @@ float applyFIRFilter(float input, std::array<float, FIR_ORDER + 1>& delayLine) {
  * @param joystickRawData An array of 4 raw joystick data points.
  * @param filteredJoystickData An array to store the 4 filtered joystick data points.
  */
-void filterJoystickData(float joystickRawData[4], float filteredJoystickData[4]) {
+void filterJoystickData(int8_t joystickRawData[4], int8_t filteredJoystickData[4]) {
     // Apply FIR filter to each data point
     filteredJoystickData[0] = clamp(applyFIRFilter(joystickRawData[0], delayLineX1));
     filteredJoystickData[1] = clamp(applyFIRFilter(joystickRawData[1], delayLineY1));
@@ -89,10 +89,10 @@ void filterJoystickData(float joystickRawData[4], float filteredJoystickData[4])
  */
 void joysticks_read() {
         
-    float receivedData[4];  // Array to hold received joystick data
-    float filteredJoystickData[4];
+    int8_t receivedData[4];  // Array to hold received joystick data
+    int8_t filteredJoystickData[4];
     // Wait for joystick data from the queue with a timeout of 10 milliseconds
-    if (xQueueReceive(joystickQueue, &receivedData, pdMS_TO_TICKS(10)) == pdPASS) {
+    if (xQueueReceive(joystickQueue, &receivedData, pdMS_TO_TICKS(100)) == pdPASS) {
         // Filter the joystick data
         filterJoystickData(receivedData, filteredJoystickData);
     } else {
@@ -110,13 +110,13 @@ void joysticks_read() {
         joystickData[i] = filteredJoystickData[i];
     }
     // Check if the joystick data is not all zero. if not zero, print the reading
-    if (filteredJoystickData[0] > 0.01 || filteredJoystickData[1] > 0.01 || filteredJoystickData[2] > 0.01 || filteredJoystickData[3] > 0.01||
-        filteredJoystickData[0] < -0.01 || filteredJoystickData[1] < -0.01 || filteredJoystickData[2] < -0.01 || filteredJoystickData[3] < -0.01
+    if (joystickData[0] >= 1 || joystickData[1] >= 1 || joystickData[2] >= 1 || joystickData[3] >= 1||
+        joystickData[0] <= -1 || joystickData[1] <= -1 || joystickData[2] <= -1 || joystickData[3] <= -1
     ) {
-        printf("Joysticks raw Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)receivedData[0], (float)receivedData[1], (float)receivedData[2], (float)receivedData[3]);
-
-        printf("Joysticks fil Reading: x1: %.2f, y1: %.2f, x2: %.2f, y2: %.2f\n", (float)filteredJoystickData[0], (float)filteredJoystickData[1], (float)filteredJoystickData[2], (float)filteredJoystickData[3]);
+        // printf("Joysticks fil Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
     }
+    printf("Joysticks Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
+
 }
 
 /**
@@ -127,8 +127,13 @@ void joysticks_read() {
  * @param x2 Second joystick X-axis
  * @param y2 Second joystick Y-axis
  */
-void processJoystickData(int x1, int y1, int x2, int y2) {
+void processJoystickData(int8_t x1, int8_t y1, int8_t x2, int8_t y2) {
     // Send joystick data to the queue
-    float data[4] = {x1*0.1f, y1*0.1f, x2*0.1f, y2*0.1f};
+    int8_t data[4] = {
+        static_cast<int8_t>(x1 - 20),
+        static_cast<int8_t>(y1 - 20),
+        static_cast<int8_t>(x2 - 20),
+        static_cast<int8_t>(y2 - 20)
+    };
     xQueueSend(joystickQueue, &data, portMAX_DELAY);
 }

@@ -7,9 +7,10 @@
 #include "dc_motor_driver.h"
 
 // Wi-Fi credentials
-const char* ssid = "acer1664";
-const char* password = "sdys3.14";
-
+// const char* ssid = "acer1664";
+// const char* password = "sdys3.14";
+const char* ssid = "drone_driver";
+const char* password = "z46809(W";
 extern "C" {
     void app_main(void);
 }

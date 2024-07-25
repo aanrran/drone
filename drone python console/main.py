@@ -84,7 +84,7 @@ class VideoStreamApp:
             self.video_label.imgtk = imgtk
             self.video_label.configure(image=imgtk)
 
-        self.master.after(10, self.update_frame)  # Schedule the next frame update
+        self.master.after(65, self.update_frame)  # Schedule the next frame update
 
     def update_joystick_status(self):
         """Update the joystick status and send data if there's any movement."""
@@ -95,15 +95,16 @@ class VideoStreamApp:
             x_axis_2 = -self.joystick.get_axis(2)  # Second joystick X-axis (invert sign)
             y_axis_2 = -self.joystick.get_axis(3)  # Second joystick Y-axis (invert sign)
 
-            # Scale the joystick values to range from -10 to 10
-            x_axis_1_int = int(x_axis_1 * 10)
-            y_axis_1_int = int(y_axis_1 * 10)
-            x_axis_2_int = int(x_axis_2 * 10)
-            y_axis_2_int = int(y_axis_2 * 10)
-
             # Update the status label with the joystick readings
             self.status_label.config(
-                text=f"Joystick 1: X={x_axis_1_int}, Y={y_axis_1_int} | Joystick 2: X={x_axis_2_int}, Y={y_axis_2_int}")
+                text=f"Joystick 1: X={int(x_axis_1*10)}, Y={int(y_axis_1*10)} | Joystick 2: X={int(x_axis_2*10)}, Y={int(y_axis_2*10)}")
+
+            # Scale the joystick values to range from 0 to 40
+            x_axis_1_int = int(x_axis_1 * 20) + 20
+            y_axis_1_int = int(y_axis_1 * 20) + 20
+            x_axis_2_int = int(x_axis_2 * 20) + 20
+            y_axis_2_int = int(y_axis_2 * 20) + 20
+
 
             # Check if any axis exceeds the threshold
             if (abs(x_axis_1) > self.threshold or abs(y_axis_1) > self.threshold or
@@ -121,7 +122,7 @@ class VideoStreamApp:
                 self.socket.sendall(message)
                 print(f"Sent: {x_axis_1_int}, {y_axis_1_int}, {x_axis_2_int}, {y_axis_2_int}, CRC: {crc_value}")
 
-            if self.joystick.get_button(2):  # X button 
+            if self.joystick.get_button(2):  # X button
                 print("X button pressed.")
                 self.command_drone_restart()
             if self.joystick.get_button(1):  # B button
@@ -132,7 +133,7 @@ class VideoStreamApp:
             # Update the status label if no joystick is connected
             self.status_label.config(text="No joystick connected")
 
-        self.master.after(50, self.update_joystick_status)  # Schedule the next joystick update
+        self.master.after(200, self.update_joystick_status)  # Schedule the next joystick update
 
     def command_drone_restart(self):
         """Send a command to the drone to restart."""

@@ -44,14 +44,14 @@ static PID pid_yaw = {0.8, 0.1, 0.04, 0, 0, 50};    // PID parameters for yaw
  */
 bool joystick_pushed() {
     // Read joystick data
-    float x1 = joystickData[0];
-    float y1 = joystickData[1];
-    float x2 = joystickData[2];
-    float y2 = joystickData[3];
+    int8_t x1 = joystickData[0];
+    int8_t y1 = joystickData[1];
+    int8_t x2 = joystickData[2];
+    int8_t y2 = joystickData[3];
     static int8_t counter = 0;
         // Check if the joystick data is not all zero. if not zero, print the reading
-    if (x1 > 0.01 || y1 > 0.01 || x2 > 0.01 || y2 > 0.01||
-        x1 < -0.01 || y1 < -0.01 || x2 < -0.01 || y2 < -0.01) {
+    if (x1 >= 1 || y1 >= 1 || x2 >= 1 || y2 >= 1||
+        x1 <= -1 || y1 <= -1 || x2 <= -1 || y2 <= -1) {
             counter ++;
             if(counter > 2) { // check if the joysticks has moved for a while
                 counter = 0;
@@ -100,6 +100,7 @@ void setPIDParameters(float Kp_roll, float Ki_roll, float Kd_roll,
     pid_yaw.Ki = Ki_yaw;
     pid_yaw.Kd = Kd_yaw;
     pid_yaw.integral_max = integral_max;
+    printf("%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f \n", Kp_roll, Ki_roll, Kd_roll, Kp_pitch, Ki_pitch, Kd_pitch, Kp_yaw, Ki_yaw, Kd_yaw, integral_max);
 }
 
 /**
@@ -142,15 +143,15 @@ void PID_control() {
         return;
     }
     // Read joystick data
-    float x1 = joystickData[0]; // + move right, - move left
-    float y1 = joystickData[1]; // from -0.5 to + 1.0 move up, at -0.5 motor zero speed, -1 to -0.5 keep previous y1 reading  
-    float x2 = joystickData[2]; // + turn right, - turn left
-    float y2 = joystickData[3]; // + move front, - move back
+    int8_t x1 = joystickData[0]; // + move right, - move left
+    int8_t y1 = joystickData[1]; // from -0.5 to + 1.0 move up, at -0.5 motor zero speed, -1 to -0.5 keep previous y1 reading  
+    int8_t x2 = joystickData[2]; // + turn right, - turn left
+    int8_t y2 = joystickData[3]; // + move front, - move back
 
     // Scale joystick data to command values (pitch_cmd, roll_cmd, yaw_cmd)
-    float roll_cmd = x1 * 10.0; // Scale to -10 to 10 degrees
-    float pitch_cmd = y2 * 10.0; // Scale to -10 to 10 degrees
-    float yaw_cmd = x2 * 10.0; // Scale to -10 to 10 degrees
+    float roll_cmd = (float) x1 * 0.5f; // Scale to -10 to 10 degrees
+    float pitch_cmd = (float) y2 * 0.5f; // Scale to -10 to 10 degrees
+    float yaw_cmd = (float) x2 * 0.5f; // Scale to -10 to 10 degrees
 
     // Calculate delta time (dt)
     const float current_time = xthal_get_ccount(); // Get current time
@@ -180,9 +181,9 @@ void PID_control() {
     float base_speed = 0;
 
     if (y1 >= 0) {
-        base_speed = y1 * (100.0 - 30.0) + 30.0; // Scale from 0 to 1.0 as 30 to 100
+        base_speed = (float) y1 * (100.0f - 30.0f) /20.0f+ 30.0f; // Scale from 0 to 1.0 as 30 to 100
     } else {
-        base_speed = (y1 + 1.0) * 30.0; // Scale from -1.0 to 0 as 0 to 30
+        base_speed = ((float) y1 + 20.0f) * 30.0f/20.0f; // Scale from -1.0 to 0 as 0 to 30
     }
 
     // Calculate motor duty cycles based on base speed and PID outputs
@@ -192,7 +193,7 @@ void PID_control() {
     float duty_cycle4 = base_speed + pitch_output + roll_output - yaw_output; // Motor 4
 
     // Set motor PWM duty cycles
-    set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
+    // set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
 }
 
 /**
@@ -232,9 +233,10 @@ void controller_task(void *pvParameters) {
 
         switch (current_state) {
             case STATE_START:
-                // printf("State: START\n");
+                printf("State: START\n");
                 // Perform actions for the START state  
                 current_state = STATE_START;  // repeat if below events not happening
+                set_motor_pwm_duty(0,0,0,0);
 
                 if(joystick_pushed()) {
                     current_state = STATE_OPERATE;
@@ -253,7 +255,7 @@ void controller_task(void *pvParameters) {
                 break;
         }
 
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(200));
     }
 }
 
