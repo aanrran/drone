@@ -227,7 +227,6 @@ void PID_control_task(void *pvParameters) {
  */
 void controller_task(void *pvParameters) {
     Serial.println("Controller task started on core 2");
-
     while (true) {
         joysticks_read();
 
@@ -255,7 +254,7 @@ void controller_task(void *pvParameters) {
                 break;
         }
 
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 

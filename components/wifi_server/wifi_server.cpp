@@ -20,8 +20,11 @@ static const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" 
 static const char* _STREAM_BOUNDARY = "\r\n--" PART_BOUNDARY "\r\n";
 static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n";
 
-// TCP server port for receiving joystick data
+// TCP server port for video streaming
 #define TCP_PORT 3333
+// UDP server port for joysticks updates
+#define UDP_PORT 4444
+
 #define RESTART_COMMAND "RESTART"
 
 /**
@@ -138,26 +141,25 @@ esp_err_t IRAM_ATTR  jpg_stream_httpd_handler(httpd_req_t *req) {
 }
 
 /**
- * @brief TCP task function to receive joystick data
- * Sets up a TCP server to receive joystick data and processes it.
+ * @brief UDP task function to receive joystick data
+ * Sets up a UDP server to receive joystick data and processes it.
  * 
  * @param pvParameters Task parameters (not used).
  */
-void IRAM_ATTR tcp_task(void *pvParameters) {
-    Serial.println("Starting TCP task");
+void IRAM_ATTR udp_task(void *pvParameters) {
+    Serial.println("Starting UDP task");
 
-    // Create a TCP socket
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    // Create a UDP socket
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock < 0) {
         printf("Failed to create socket");
         vTaskDelete(NULL);
     }
-
-    // Bind the socket to any IP address and TCP_PORT
+    // Bind the socket to any IP address and UDP_PORT
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_addr.sin_port = htons(TCP_PORT);
+    server_addr.sin_port = htons(UDP_PORT);
 
     if (bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         printf("Failed to bind socket");
@@ -165,23 +167,11 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
         vTaskDelete(NULL);
     }
 
-    if (listen(sock, 1) < 0) {
-        printf("Failed to listen on socket");
-        close(sock);
-        vTaskDelete(NULL);
-    }
-
-    Serial.println("Waiting for a connection...");
-    int client_sock = accept(sock, NULL, NULL);
-    if (client_sock < 0) {
-        printf("Failed to accept connection");
-        close(sock);
-        vTaskDelete(NULL);
-    }
-
     char buffer[256];  // Buffer to hold received data
     while (true) {
-        int len = recv(client_sock, buffer, sizeof(buffer), 0);
+        struct sockaddr_in client_addr;
+        socklen_t client_addr_len = sizeof(client_addr);
+        int len = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr *)&client_addr, &client_addr_len);
         if (len < 0) {
             printf("Failed to receive data");
             break;
@@ -241,7 +231,6 @@ void IRAM_ATTR tcp_task(void *pvParameters) {
         }
     }
 
-    close(client_sock);
     close(sock);
     vTaskDelete(NULL);
 }
@@ -317,8 +306,8 @@ esp_err_t wifi_server_init(const char* ssid, const char* password) {
     startWiFiServer();
     Serial.println("Wi-Fi server started.");
 
-    // Start TCP task to receive joystick data
-    xTaskCreatePinnedToCore(tcp_task, "tcpTask", 4096, NULL, 2, NULL, 1);
+    // Start UDP task to receive joystick data
+    xTaskCreatePinnedToCore(udp_task, "udpTask", 4096, NULL, 2, NULL, 1);
 
     return ESP_OK;
 }

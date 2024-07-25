@@ -30,7 +30,7 @@ int8_t joystickData[4] = {0, 0, 0, 0}; // Define and initialize the array
  */
 void joysticks_init() {
     // Create a queue to hold joystick data
-    joystickQueue = xQueueCreate(20, sizeof(int8_t[4]));
+    joystickQueue = xQueueCreate(5, sizeof(int8_t[4]));
 }
 
 /**

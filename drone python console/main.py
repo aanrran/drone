@@ -10,11 +10,11 @@ import csv
 
 
 class VideoStreamApp:
-    def __init__(self, master, stream_url, tcp_ip, tcp_port):
+    def __init__(self, master, stream_url, udp_ip, udp_port):
         self.master = master
         self.stream_url = stream_url
-        self.tcp_ip = tcp_ip
-        self.tcp_port = tcp_port
+        self.udp_ip = udp_ip
+        self.udp_port = udp_port
         self.threshold = 0.1  # Sensitivity threshold
 
         # Set up the main window
@@ -43,9 +43,8 @@ class VideoStreamApp:
             self.joystick = pygame.joystick.Joystick(0)
             self.joystick.init()
 
-        # Set up a TCP socket for sending joystick data
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connect_to_server()
+        # Set up a UDP socket for sending joystick data
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # Send CSV data a few times to initialize the drone
         for _ in range(3):  # Adjust the number of times as needed
@@ -54,21 +53,6 @@ class VideoStreamApp:
         # Start the frame update and joystick update using `after`
         self.master.after(0, self.update_frame)
         self.master.after(0, self.update_joystick_status)
-
-    def connect_to_server(self):
-        """Attempt to connect to the TCP server with retry logic."""
-        attempts = 0
-        while attempts < 5:
-            try:
-                self.socket.connect((self.tcp_ip, self.tcp_port))
-                print("Connected to server.")
-                return
-            except ConnectionRefusedError:
-                attempts += 1
-                print(f"Connection attempt {attempts} failed. Retrying in 2 seconds...")
-                self.master.after(2000, self.connect_to_server)
-        print("Failed to connect to server after multiple attempts.")
-        self.master.quit()  # Exit the application if connection fails
 
     def update_frame(self):
         """Update the video frame from the stream."""
@@ -84,7 +68,7 @@ class VideoStreamApp:
             self.video_label.imgtk = imgtk
             self.video_label.configure(image=imgtk)
 
-        self.master.after(65, self.update_frame)  # Schedule the next frame update
+        self.master.after(50, self.update_frame)  # Schedule the next frame update
 
     def update_joystick_status(self):
         """Update the joystick status and send data if there's any movement."""
@@ -119,8 +103,8 @@ class VideoStreamApp:
                 message = packed_data + struct.pack('B', crc_value)
 
                 # Send the data
-                self.socket.sendall(message)
-                print(f"Sent: {x_axis_1_int}, {y_axis_1_int}, {x_axis_2_int}, {y_axis_2_int}, CRC: {crc_value}")
+                self.socket.sendto(message, (self.udp_ip, self.udp_port))
+                print(f"Sent: {x_axis_1_int, y_axis_1_int, x_axis_2_int, y_axis_2_int}, CRC: {crc_value}")
 
             if self.joystick.get_button(2):  # X button
                 print("X button pressed.")
@@ -133,12 +117,12 @@ class VideoStreamApp:
             # Update the status label if no joystick is connected
             self.status_label.config(text="No joystick connected")
 
-        self.master.after(200, self.update_joystick_status)  # Schedule the next joystick update
+        self.master.after(50, self.update_joystick_status)  # Schedule the next joystick update
 
     def command_drone_restart(self):
         """Send a command to the drone to restart."""
         command = b'RESTART'
-        self.socket.sendall(command)
+        self.socket.sendto(command, (self.udp_ip, self.udp_port))
         print("Sent: RESTART")
 
     def send_csv_data(self):
@@ -170,7 +154,7 @@ class VideoStreamApp:
                         message = packed_data + struct.pack('B', crc_value)
 
                         # Send the data
-                        self.socket.sendall(message)
+                        self.socket.sendto(message, (self.udp_ip, self.udp_port))
                         print(f"Sent CSV data: {data}, CRC: {crc_value}")
                     except KeyError as e:
                         print(f"Missing parameter in CSV: {e}")
@@ -182,17 +166,17 @@ class VideoStreamApp:
     def close(self):
         """Close the application, releasing the resources."""
         self.cap.release()  # Release the video capture
-        self.socket.close()  # Close the TCP socket
+        self.socket.close()  # Close the UDP socket
         self.master.destroy()  # Close the GUI window
 
 
 if __name__ == "__main__":
     root = tk.Tk()
     stream_url = "http://192.168.50.149/"  # Replace with your ESP32 stream URL
-    tcp_ip = "192.168.50.149"  # Replace with your ESP32 IP address
-    tcp_port = 3333  # Replace with your TCP port
+    udp_ip = "192.168.50.149"  # Replace with your ESP32 IP address
+    udp_port = 4444  # Replace with your UDP port
 
     # Create and run the video stream application
-    app = VideoStreamApp(root, stream_url, tcp_ip, tcp_port)
+    app = VideoStreamApp(root, stream_url, udp_ip, udp_port)
     root.protocol("WM_DELETE_WINDOW", app.close)  # Ensure proper cleanup on close
     root.mainloop()
