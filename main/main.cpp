@@ -5,6 +5,7 @@
 #include "nvs_flash.h"
 
 #include "dc_motor_driver.h"
+#include "battery_monitor.h"
 
 // Wi-Fi credentials
 // const char* ssid = "acer1664";
@@ -27,12 +28,19 @@ void app_main(void) {
     set_motor_pwm_duty(0,0,0,0);
     vTaskDelay(pdMS_TO_TICKS(1000));
 
+    // Initialize ADC for battery monitoring
+    init_adc();
+
     // Start Wi-Fi task on core 1
     xTaskCreatePinnedToCore(wifi_task, "wifiTask", 20480, NULL, 24, NULL, 1);
     // Start the controller task on core 0
     startControllerTask();
 
     while (true) {
+        
+        update_battery_level();
+        // Print battery level
+        printf("Battery Level: %d\n", battery_level);
 
         vTaskDelay(pdMS_TO_TICKS(500));
     }

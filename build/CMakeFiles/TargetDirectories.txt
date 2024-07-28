@@ -821,6 +821,13 @@ C:/Users/aanrr/drone/build/esp-idf/ai_camera/CMakeFiles/list_install_components.
 C:/Users/aanrr/drone/build/esp-idf/ai_camera/CMakeFiles/install.dir
 C:/Users/aanrr/drone/build/esp-idf/ai_camera/CMakeFiles/install/local.dir
 C:/Users/aanrr/drone/build/esp-idf/ai_camera/CMakeFiles/install/strip.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/__idf_battery_monitor.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/edit_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/rebuild_cache.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/list_install_components.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/install.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/install/local.dir
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/CMakeFiles/install/strip.dir
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/__idf_controller_module.dir
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/edit_cache.dir
 C:/Users/aanrr/drone/build/esp-idf/controller_module/CMakeFiles/rebuild_cache.dir

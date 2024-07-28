@@ -209,7 +209,7 @@ static bool IRAM_ATTR onTimer(gptimer_handle_t timer, const gptimer_alarm_event_
 
 /**
  * @brief PID control task function
- * This function runs on core 2 and handles the PID control.
+ * This function runs on core 0 and handles the PID control.
  */
 void PID_control_task(void *pvParameters) {
     Serial.println("PID control task started on core 2");
@@ -221,7 +221,7 @@ void PID_control_task(void *pvParameters) {
 
 /**
  * @brief Controller task function
- * This function runs on core 2 and continuously reads joystick data from the queue.
+ * This function runs on core 0 and continuously reads joystick data from the queue.
  * If new data is received, it updates the static joystick data array.
  * If no new data is received, it resets the joystick data to zero.
  */
@@ -232,7 +232,7 @@ void controller_task(void *pvParameters) {
 
         switch (current_state) {
             case STATE_START:
-                printf("State: START\n");
+                // printf("State: START\n");
                 // Perform actions for the START state  
                 current_state = STATE_START;  // repeat if below events not happening
                 set_motor_pwm_duty(0,0,0,0);
@@ -253,8 +253,10 @@ void controller_task(void *pvParameters) {
                 printf("Unknown state!\n");
                 break;
         }
+        // Note, this wait period need to be less than the python joystick update rates. 
+        // Otherwise, joysticks_read() doesn't get enough inputs in queue, and then, it will wait for an interally preset timeout period.
+        vTaskDelay(pdMS_TO_TICKS(10)); 
 
-        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 
@@ -271,10 +273,10 @@ void startControllerTask() {
     // Initialize the MPU6050 sensor
     imu6050.mpu6050_init();
 
-    // Create the controller task pinned to core 2
+    // Create the controller task pinned to core 0
     xTaskCreatePinnedToCore(controller_task, "ControllerTask", 4096, NULL, 1, NULL, 0);
 
-    // Create the PID control task pinned to core 2
+    // Create the PID control task pinned to core 0
     TaskHandle_t PIDControlTaskHandle;
     xTaskCreatePinnedToCore(PID_control_task, "PIDControlTask", 4096, NULL, 23, &PIDControlTaskHandle, 0);
 

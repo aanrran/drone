@@ -88,6 +88,7 @@ C:/Users/aanrr/drone/build/esp-idf/espressif__qrcode/libespressif__qrcode.a
 C:/Users/aanrr/drone/build/esp-idf/joltwallet__littlefs/libjoltwallet__littlefs.a
 C:/Users/aanrr/drone/build/esp-idf/arduino/libarduino.a
 C:/Users/aanrr/drone/build/esp-idf/ai_camera/libai_camera.a
+C:/Users/aanrr/drone/build/esp-idf/battery_monitor/libbattery_monitor.a
 C:/Users/aanrr/drone/build/esp-idf/controller_module/libcontroller_module.a
 C:/Users/aanrr/drone/build/esp-idf/dc_motor_driver/libdc_motor_driver.a
 C:/Users/aanrr/drone/build/esp-idf/joysticks_console/libjoysticks_console.a

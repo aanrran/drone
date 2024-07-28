@@ -8,6 +8,8 @@
 #include <algorithm> // For std::min and std::max in C++
 
 // Define the FIR filter order and coefficients
+// Note the coefficient is always 0.5 no matter how many orders
+// more FIR orders will have smoother reading but the reading has a longer tail.
 #define FIR_ORDER 1
 std::array<float, FIR_ORDER + 1> fir_coefficients = {0.5, 0.5};
 
@@ -91,7 +93,7 @@ void joysticks_read() {
         
     int8_t receivedData[4];  // Array to hold received joystick data
     int8_t filteredJoystickData[4];
-    // Wait for joystick data from the queue with a timeout of 10 milliseconds
+    // Wait for joystick data from the queue with a timeout of 100 milliseconds
     if (xQueueReceive(joystickQueue, &receivedData, pdMS_TO_TICKS(100)) == pdPASS) {
         // Filter the joystick data
         filterJoystickData(receivedData, filteredJoystickData);
@@ -110,12 +112,12 @@ void joysticks_read() {
         joystickData[i] = filteredJoystickData[i];
     }
     // Check if the joystick data is not all zero. if not zero, print the reading
-    if (joystickData[0] >= 1 || joystickData[1] >= 1 || joystickData[2] >= 1 || joystickData[3] >= 1||
-        joystickData[0] <= -1 || joystickData[1] <= -1 || joystickData[2] <= -1 || joystickData[3] <= -1
-    ) {
-        // printf("Joysticks fil Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
-    }
-    printf("Joysticks Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
+    // if (joystickData[0] >= 1 || joystickData[1] >= 1 || joystickData[2] >= 1 || joystickData[3] >= 1||
+    //     joystickData[0] <= -1 || joystickData[1] <= -1 || joystickData[2] <= -1 || joystickData[3] <= -1
+    // ) {
+    //     printf("Joysticks fil Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
+    // }
+    // printf("Joysticks Reading: x1: %d, y1: %d, x2: %d, y2: %d\n", joystickData[0], joystickData[1], joystickData[2], joystickData[3]);
 
 }
 
