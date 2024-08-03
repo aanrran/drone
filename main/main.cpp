@@ -26,7 +26,6 @@ void app_main(void) {
 
     dc_motor_init();
     set_motor_pwm_duty(0,0,0,0);
-    vTaskDelay(pdMS_TO_TICKS(1000));
 
     // Initialize ADC for battery monitoring
     init_adc();
@@ -35,13 +34,12 @@ void app_main(void) {
     xTaskCreatePinnedToCore(wifi_task, "wifiTask", 20480, NULL, 24, NULL, 1);
     // Start the controller task on core 0
     startControllerTask();
-
+    // low priority staff
     while (true) {
         
         update_battery_level();
         // Print battery level
-        printf("Battery Level: %d\n", battery_level);
-
+        // printf("Battery Level: %d\n", battery_level);
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }

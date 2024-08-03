@@ -95,7 +95,7 @@ class VideoStreamApp:
             self.video_label.imgtk = imgtk
             self.video_label.configure(image=imgtk)
 
-        self.master.after(50, self.process_frame_queue)  # Schedule the next frame update
+        self.master.after(20, self.process_frame_queue)  # Schedule the next frame update
 
     def update_joystick_status(self):
         """Update the joystick status and send data if there's any movement."""

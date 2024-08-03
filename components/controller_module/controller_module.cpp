@@ -15,7 +15,8 @@ static gptimer_handle_t timer = NULL;  // Timer handle
 // Define the states
 typedef enum {
     STATE_START,
-    STATE_OPERATE
+    STATE_OPERATE,
+    STATE_RESTART
 } controller_state_t;
 
 // Create and initialize the state
@@ -66,7 +67,7 @@ bool joystick_pushed() {
  * This function reset the state machine status to restart
  */
 void state_machine_restart() {
-    current_state = STATE_START;
+    current_state = STATE_RESTART;
 }
 
 /**
@@ -139,7 +140,6 @@ float computePID(PID &pid, float error, float dt) {
  */
 void PID_control() {
     if(current_state != STATE_OPERATE) { // check to make sure drone is in operation.
-        set_motor_pwm_duty(0,0,0,0); // stop the motor
         return;
     }
     // Read joystick data
@@ -193,7 +193,7 @@ void PID_control() {
     float duty_cycle4 = base_speed + pitch_output + roll_output - yaw_output; // Motor 4
 
     // Set motor PWM duty cycles
-    // set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
+    set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
 }
 
 /**
@@ -238,6 +238,7 @@ void controller_task(void *pvParameters) {
                 set_motor_pwm_duty(0,0,0,0);
 
                 if(joystick_pushed()) {
+                    reboot_motor(); // start the motor and prepare for operation
                     current_state = STATE_OPERATE;
                 }                      
                 break;
@@ -247,6 +248,12 @@ void controller_task(void *pvParameters) {
                 current_state = STATE_OPERATE; // repeat if below events not happening
                 // Perform actions for the OPERATE state
 
+                break;
+            
+            case STATE_RESTART:
+                // printf("State: RESTART\n");
+                soft_stop_motor();
+                current_state = STATE_START;
                 break;
 
             default:

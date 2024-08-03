@@ -63,3 +63,19 @@ void set_motor_pwm_duty(float duty1, float duty2, float duty3, float duty4) {
     mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_OPR_B, duty4);
     mcpwm_set_duty_type(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_OPR_B, MCPWM_DUTY_MODE_0);
 }
+
+
+void reboot_motor() {
+    set_motor_pwm_duty(50,50,50,50); // boost speed to reach back emf
+    vTaskDelay(pdMS_TO_TICKS(2000)); // let the motor reach close loop speed
+    set_motor_pwm_duty(30,30,30,30);
+}
+
+void soft_stop_motor() {
+    int8_t speed_drop = 5; // percentage of speed drop each time
+    int8_t init_speed = 50;
+    for(int8_t offset = 0; offset <= init_speed; offset += speed_drop) {
+        set_motor_pwm_duty(init_speed - offset,init_speed - offset,init_speed - offset,init_speed - offset); // reduce the speed slowly
+        vTaskDelay(pdMS_TO_TICKS(500)); // wait the motor to react
+    }
+}
