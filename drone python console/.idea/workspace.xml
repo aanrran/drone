@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/../build/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../build/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/git-data/head-ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/bootloader/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/bootloader/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../build/bootloader/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../build/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/compile_commands.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/../build/config.env" afterDir="false" />
@@ -25,25 +24,17 @@
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/arduino/libarduino.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/controller_module/CMakeFiles/__idf_controller_module.dir/controller_module.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/controller_module/CMakeFiles/__idf_controller_module.dir/controller_module.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/controller_module/libcontroller_module.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/controller_module/libcontroller_module.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/dc_motor_driver/CMakeFiles/__idf_dc_motor_driver.dir/dc_motor_driver.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/dc_motor_driver/CMakeFiles/__idf_dc_motor_driver.dir/dc_motor_driver.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/dc_motor_driver/libdc_motor_driver.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/dc_motor_driver/libdc_motor_driver.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/esp_app_format/libesp_app_format.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_insights/CMakeFiles/git-data/head-ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/espressif__esp_rainmaker/CMakeFiles/git-data/head-ref" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/esp-idf/main/libmain.a" beforeDir="false" afterPath="$PROJECT_DIR$/../build/esp-idf/main/libmain.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/kconfigs.in" beforeDir="false" afterPath="$PROJECT_DIR$/../build/kconfigs.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/project_description.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/project_description.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/MPUdriver" beforeDir="false" afterPath="$PROJECT_DIR$/../components/MPUdriver" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/arduino" beforeDir="false" afterPath="$PROJECT_DIR$/../components/arduino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../components/controller_module/controller_module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/controller_module/controller_module.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/dc_motor_driver/dc_motor_driver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../components/dc_motor_driver/dc_motor_driver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../components/dc_motor_driver/dc_motor_driver.h" beforeDir="false" afterPath="$PROJECT_DIR$/../components/dc_motor_driver/dc_motor_driver.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parameters.csv" beforeDir="false" afterPath="$PROJECT_DIR$/parameters.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../main/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../sdkconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../sdkconfig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

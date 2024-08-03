@@ -187,10 +187,16 @@ void PID_control() {
     }
 
     // Calculate motor duty cycles based on base speed and PID outputs
-    float duty_cycle1 = base_speed - pitch_output + roll_output + yaw_output; // Motor 1
-    float duty_cycle2 = base_speed - pitch_output - roll_output - yaw_output; // Motor 2
-    float duty_cycle3 = base_speed + pitch_output - roll_output + yaw_output; // Motor 3
-    float duty_cycle4 = base_speed + pitch_output + roll_output - yaw_output; // Motor 4
+    float duty_cycle1 = base_speed - pitch_output - roll_output + yaw_output; // Motor 1
+    float duty_cycle2 = base_speed - pitch_output + roll_output - yaw_output; // Motor 2
+    float duty_cycle3 = base_speed + pitch_output + roll_output + yaw_output; // Motor 3
+    float duty_cycle4 = base_speed + pitch_output - roll_output - yaw_output; // Motor 4
+
+    // clamp the motor control to the reasonable range
+    duty_cycle1 = fmax(fmin(duty_cycle1, 100), 10);
+    duty_cycle2 = fmax(fmin(duty_cycle2, 100), 10);
+    duty_cycle3 = fmax(fmin(duty_cycle3, 100), 10);
+    duty_cycle4 = fmax(fmin(duty_cycle4, 100), 10);
 
     // Set motor PWM duty cycles
     set_motor_pwm_duty(duty_cycle1, duty_cycle2, duty_cycle3, duty_cycle4);
