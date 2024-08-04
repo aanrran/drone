@@ -8,7 +8,7 @@
 #include "imu_mpu6050.h"
 
 // Timer configuration
-#define TIMER_INTERVAL_US 10000  // Timer interval in microseconds
+#define TIMER_INTERVAL_US 30  // Timer interval in microseconds
 
 static gptimer_handle_t timer = NULL;  // Timer handle
 
@@ -35,9 +35,9 @@ struct PID {
 };
 
 // Initialize PID parameters for roll, pitch, and yaw
-static PID pid_roll = {1.0, 0.1, 0.05, 0, 0, 50};   // PID parameters for roll
-static PID pid_pitch = {1.2, 0.1, 0.06, 0, 0, 50};  // PID parameters for pitch
-static PID pid_yaw = {0.8, 0.1, 0.04, 0, 0, 50};    // PID parameters for yaw
+static PID pid_roll = {0.2, 0.1, 0.05, 0, 0, 50};   // PID parameters for roll
+static PID pid_pitch = {0.2, 0.1, 0.05, 0, 0, 50};  // PID parameters for pitch
+static PID pid_yaw = {0.2, 0.1, 0.05, 0, 0, 50};    // PID parameters for yaw
 
 /**
  * @brief check if joysticks are pushed
@@ -149,8 +149,8 @@ void PID_control() {
     int8_t y2 = joystickData[3]; // + move front, - move back
 
     // Scale joystick data to command values (pitch_cmd, roll_cmd, yaw_cmd)
-    float roll_cmd = (float) x1 * 0.5f; // Scale to -10 to 10 degrees
-    float pitch_cmd = (float) y2 * 0.5f; // Scale to -10 to 10 degrees
+    float roll_cmd = (float) x1 * 0.75f; // Scale to -15 to 15 degrees
+    float pitch_cmd = (float) y2 * 0.75f; // Scale to -15 to 15 degrees
     float yaw_cmd = (float) x2 * 0.5f; // Scale to -10 to 10 degrees
 
     // Calculate delta time (dt)
@@ -181,9 +181,9 @@ void PID_control() {
     float base_speed = 0;
 
     if (y1 >= 0) {
-        base_speed = (float) y1 * (100.0f - 30.0f) /20.0f+ 30.0f; // Scale from 0 to 1.0 as 30 to 100
+        base_speed = (float) y1 * (100.0f - 40.0f) /20.0f+ 40.0f; // Scale from 0 to 1.0 as 40 to 100
     } else {
-        base_speed = ((float) y1 + 20.0f) * 30.0f/20.0f; // Scale from -1.0 to 0 as 0 to 30
+        base_speed = ((float) y1 + 20.0f) * 40.0f/20.0f; // Scale from -1.0 to 0 as 0 to 40
     }
 
     // Calculate motor duty cycles based on base speed and PID outputs
@@ -218,7 +218,7 @@ static bool IRAM_ATTR onTimer(gptimer_handle_t timer, const gptimer_alarm_event_
  * This function runs on core 0 and handles the PID control.
  */
 void PID_control_task(void *pvParameters) {
-    Serial.println("PID control task started on core 2");
+    Serial.println("PID control task started on core 0");
     while (true) {
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Wait for the notification from ISR
         PID_control();  // Call the PID control function

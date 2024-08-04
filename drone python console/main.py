@@ -102,10 +102,10 @@ class VideoStreamApp:
         while not self.stop_event.is_set():
             if self.joystick:
                 pygame.event.pump()
-                x_axis_1 = -self.joystick.get_axis(0)  # First joystick X-axis (invert sign)
+                x_axis_1 = self.joystick.get_axis(0)  # First joystick X-axis (invert sign)
                 y_axis_1 = -self.joystick.get_axis(1)  # First joystick Y-axis (invert sign)
                 x_axis_2 = -self.joystick.get_axis(2)  # Second joystick X-axis (invert sign)
-                y_axis_2 = -self.joystick.get_axis(3)  # Second joystick Y-axis (invert sign)
+                y_axis_2 = self.joystick.get_axis(3)  # Second joystick Y-axis (invert sign)
 
                 # Update the status label with the joystick readings
                 status_text = f"Joystick 1: X={int(x_axis_1 * 10)}, Y={int(y_axis_1 * 10)} | Joystick 2: X={int(x_axis_2 * 10)}, Y={int(y_axis_2 * 10)}"

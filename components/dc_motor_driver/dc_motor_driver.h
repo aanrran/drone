@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#define PWM_FREQUENCY 5000  // PWM frequency in Hz
+#define PWM_FREQUENCY 15000  // PWM frequency in Hz
 
 /**
  * @brief Initialize the DC motor driver using MCPWM.
